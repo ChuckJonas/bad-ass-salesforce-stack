@@ -8,13 +8,14 @@ const PATHS = {
   nodeModules: path.resolve(__dirname, '../node_modules'),
   src: path.resolve(__dirname, '../src'),
   dist: path.resolve(__dirname, '../dist'),
+  styles: path.resolve(__dirname, '../src/styles'),
 };
 
 
 //for ant overrides
 const fs = require('fs');
 const lessToJs = require('less-vars-to-js');
-const themeVariables = lessToJs(fs.readFileSync(path.join(PATHS.root, './ant-theme-vars.less'), 'utf8'));
+const themeVariables = lessToJs(fs.readFileSync(path.join(PATHS.styles, './ant-theme-vars.less'), 'utf8'));
 
 
 const DEV_SERVER = {
@@ -34,7 +35,7 @@ module.exports = (env = {}) => {
   const isDev = !env.build;
   const isSourceMap = !!env.sourceMap || isDev;
 
-  if(isDev){
+  if (isDev) {
     var child_process = require('child_process');
     var orgInfo = JSON.parse(child_process.execSync("sfdx force:org:display --json").toString('utf8'));
   }
@@ -55,9 +56,8 @@ module.exports = (env = {}) => {
     },
     output: {
       path: PATHS.dist,
-      filename: isDev ? '[name].js' : '[name].[hash].js',
+      filename: '[name].js',
       publicPath: '/',
-      // chunkFilename: '[id].chunk.js',
     },
 
     resolve: {
@@ -75,34 +75,19 @@ module.exports = (env = {}) => {
         {
           test: /\.(ts|tsx)$/,
           include: PATHS.src,
-          use: (env.awesome ?
-            [
-              { loader: 'react-hot-loader/webpack' },
-              {
-                loader: 'awesome-typescript-loader',
-                options: {
-                  useBabel: true,
-                  transpileOnly: true,
-                  useTranspileModule: false,
-                  sourceMap: isSourceMap,
-                },
+          use:
+          [
+            { loader: 'react-hot-loader/webpack' },
+            {
+              loader: 'awesome-typescript-loader',
+              options: {
+                useBabel: true,
+                transpileOnly: true,
+                useTranspileModule: false,
+                sourceMap: isSourceMap,
               },
-            ] : [
-              { loader: 'react-hot-loader/webpack' },
-              {
-                loader: 'ts-loader',
-                options: {
-                  transpileOnly: true,
-                  compilerOptions: {
-                    'sourceMap': isSourceMap,
-                    'target': isDev ? 'es2015' : 'es5',
-                    'isolatedModules': true,
-                    'noEmitOnError': false,
-                  },
-                },
-              },
-            ]
-          ),
+            },
+          ]
         },
         //antd
         {
@@ -171,22 +156,20 @@ module.exports = (env = {}) => {
     },
 
     plugins: [
-      new DashboardPlugin(),
-      new webpack.DefinePlugin({
-        'process.env': {
-          NODE_ENV: JSON.stringify(isDev ? 'development' : 'production'),
-        },
-      }),
       ...(isDev ? [
+        new DashboardPlugin(),
         new webpack.HotModuleReplacementPlugin({
           // multiStep: true, // better performance with many files
         }),
         new webpack.NamedModulesPlugin(),
         new webpack.DefinePlugin( //inject global
-            {
-                '__ACCESSTOKEN__': JSON.stringify(orgInfo.result.accessToken),
-                '__RESTHOST__': JSON.stringify('https://dry-taiga-29622.herokuapp.com')
-            }),
+          {
+            '__ACCESSTOKEN__': JSON.stringify(orgInfo.result.accessToken),
+            '__RESTHOST__': JSON.stringify('https://dry-taiga-29622.herokuapp.com'),
+            'process.env': {
+              NODE_ENV: JSON.stringify(isDev ? 'development' : 'production'),
+            },
+          }),
       ] : []),
       ...(isBuild ? [
         new webpack.LoaderOptionsPlugin({

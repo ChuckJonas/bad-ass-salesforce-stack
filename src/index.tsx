@@ -1,9 +1,10 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import { AppContainer } from 'react-hot-loader';
-import {App} from './app';
-
-import { Rest } from 'ts-force';
+// entry to allow for HMR.
+//  DON'T TOUCH THIS UNLESS YOU KNOW WHAT YOURE DOING
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import { AppContainer } from "react-hot-loader";
+import { Rest } from "ts-force";
+import { App } from "./app";
 
 // globals. set on page window
 declare var __RESTHOST__: string;
@@ -13,19 +14,15 @@ declare var __ACCOUNTID__: string;
 Rest.config = {
   accessToken: __ACCESSTOKEN__,
   instanceUrl:  __RESTHOST__,
-  version: 40
+  version: 40,
 };
 
 ReactDOM.render(
     <AppContainer>
         <App />
     </AppContainer>,
-    document.getElementById('root') as HTMLElement
+    document.getElementById("root") as HTMLElement,
 );
-
-interface RequireImport {
-    default: any;
-}
 
 if (module.hot) {
     module.hot.accept();

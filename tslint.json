@@ -12,6 +12,7 @@
     ],
     "jsdoc-format": false,
     "no-trailing-whitespace": false,
-    "semicolon": [true, "always"]
+    "semicolon": [true, "always"],
+    "no-submodule-imports": [true, "antd"]
   }
 }
