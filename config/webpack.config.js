@@ -27,17 +27,35 @@ const DEV_SERVER = {
   // proxy: {
   //   '/api': 'http://localhost:3000'
   // },
+  // headers: {
+  //     'Access-Control-Allow-Origin': '*'
+  // }
 };
 
 module.exports = (env = {}) => {
   console.log({ env });
   const isBuild = !!env.build;
   const isDev = !env.build;
+  const isLocal = env.local;
   const isSourceMap = !!env.sourceMap || isDev;
 
-  if (isDev) {
+  let orgInfo;
+  let instanceUrl;
+
+  let GLOBAL_DEFINES =
+  {
+    'process.env': {
+      NODE_ENV: JSON.stringify(isDev ? 'development' : 'production'),
+    }
+  }
+
+  //Setup varibles for communications with Salesforce locally
+  if (isLocal) {
+    //get access token from sfdx
     var child_process = require('child_process');
-    var orgInfo = JSON.parse(child_process.execSync("sfdx force:org:display --json").toString('utf8'));
+    orgInfo = JSON.parse(child_process.execSync("sfdx force:org:display --json").toString('utf8'));
+    GLOBAL_DEFINES.__ACCESSTOKEN__ = JSON.stringify(orgInfo.result.accessToken);
+    GLOBAL_DEFINES.__RESTHOST__ = JSON.stringify(orgInfo.result.instanceUrl);
   }
 
   return {
@@ -163,13 +181,7 @@ module.exports = (env = {}) => {
         }),
         new webpack.NamedModulesPlugin(),
         new webpack.DefinePlugin( //inject global
-          {
-            '__ACCESSTOKEN__': JSON.stringify(orgInfo.result.accessToken),
-            '__RESTHOST__': JSON.stringify('https://dry-taiga-29622.herokuapp.com'),
-            'process.env': {
-              NODE_ENV: JSON.stringify(isDev ? 'development' : 'production'),
-            },
-          }),
+          GLOBAL_DEFINES),
       ] : []),
       ...(isBuild ? [
         new webpack.LoaderOptionsPlugin({
