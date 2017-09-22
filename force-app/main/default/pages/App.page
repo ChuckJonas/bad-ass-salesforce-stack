@@ -1,0 +1,17 @@
+<apex:page showHeader="true" sidebar="false">
+    <script type="text/javascript">
+        //rest details
+        const __ACCESSTOKEN__ = '{!$Api.Session_ID}';
+        const __RESTHOST__ = '';
+</script>
+<apex:stylesheet value="https://npmcdn.com/antd/dist/antd.css"/>
+
+    <div id="root"></div>
+    <apex:outputPanel layout="none" rendered="{!$CurrentPage.parameters.local != '1'}">
+        <script src="{!$Resource.App}" />
+    </apex:outputPanel>
+
+    <apex:outputPanel layout="none" rendered="{!$CurrentPage.parameters.local == '1'}">
+        <script src="https://localhost:3000/app.js" />
+    </apex:outputPanel>
+</apex:page>

@@ -1,0 +1,7 @@
+{
+  "auth": {
+    "username": "dev"
+  },
+  "sObjects": ["Account", "Sponsorship__c", "Dr_Spotlight__c","Treatment__c", "Region__c"],
+  "outPath": "./src/generated/sobs.ts"
+}
