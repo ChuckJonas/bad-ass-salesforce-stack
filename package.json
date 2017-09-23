@@ -11,8 +11,8 @@
   "scripts": {
     "start": "webpack-dashboard -m -- webpack-dev-server --config config/webpack.config.js --open --env.local",
     "start-remote": "webpack-dashboard -m -- webpack-dev-server --config config/webpack.config.js --https",
-    "enable-cors": "sfdx force:mdapi:deploy -d ./config/sfdc-cors-enable -w 10000",
-    "disable-cors": "sfdx force:mdapi:deploy -d ./config/sfdc-cors-disable -w 10000",
+    "cors-enable": "sfdx force:mdapi:deploy -d ./config/sfdc-cors-enable -w 10000",
+    "cors-disable": "sfdx force:mdapi:deploy -d ./config/sfdc-cors-disable -w 10000",
     "clean": "rimraf dist",
     "compile-dev": "npm run clean && webpack --config config/webpack.config.js --env.build --env.sourceMap",
     "compile-prod": "npm run clean && webpack --config config/webpack.config.js --env.build --env.sourceMap",

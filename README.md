@@ -65,11 +65,11 @@ npm run make-prod-default
 
 Hot module reloading means that your updates will injected into your app without having to refresh the page or even lose state (in some cases)
 
-1. whitelist localhost CORS on the target ORG: `npm enable-cors`
+1. whitelist localhost CORS on the target ORG: `npm cors-enable`
 
 1. `npm start`
 
-* WARNING: if you do this on production make sure to disable it when done with `npm enable-cors`! [why?](https://stackoverflow.com/questions/39042799/cors-localhost-as-allowed-origin-in-production)*
+* WARNING: if you do this on production make sure to disable it when done with `npm cors-disable`! [why?](https://stackoverflow.com/questions/39042799/cors-localhost-as-allowed-origin-in-production)*
 
 ### dev/scratch org with local asset
 
@@ -87,14 +87,11 @@ npm run deploy-prod
 
 ```
 
-## OTHER CONFIGURATION
-
-
+## OTHER CONFIGURATIONs
 
 ### antd theming
 
 You can change the antd theme less varibles by editing `/styles/ant-theme-vars.less`.  Unforuntely changes require a webpack restart to show up :(
-
 
 ### ts-force configuration
 
@@ -104,6 +101,15 @@ You can do this by editing `ts-force-config.json`.  Make sure to `auth: {usernam
 
 For more details on configuration, see ts-force [documenation](https://github.com/ChuckJonas/ts-force).
 
+
+### changing localhost port
+
+Unforuntely the port isn't currently managed from a single point and must be updated in 2 places:
+
+1. `/config/webpack.config.json` on the `DEV_SERVER` object
+1. in `/config/sfdc-cors-enable` update it on both files.
+
+if you change the port, don't forget to update salesforce w/ `npm run cors-enable`
 
 ## OTHER USEFUL STUFF
 
@@ -119,9 +125,8 @@ plugins:
 
 ### linkies
 
-* React with Typescript example
-* sfdx cli reference
-
+* [react-redux-typescript-guide](https://github.com/piotrwitek/react-redux-typescript-guide)
+* [sfdx cli reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
 
 ## The MIT License (MIT)
 

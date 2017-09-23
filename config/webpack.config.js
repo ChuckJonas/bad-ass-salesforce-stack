@@ -23,6 +23,8 @@ const DEV_SERVER = {
   hotOnly: true,
   historyApiFallback: true,
   overlay: true,
+  port:8080 //should match ./config/sfdc-cors-enable
+
   // stats: 'verbose',
   // proxy: {
   //   '/api': 'http://localhost:3000'

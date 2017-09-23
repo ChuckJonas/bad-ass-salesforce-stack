@@ -2,8 +2,8 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
   <types>
     <name>CorsWhitelistOrigin</name>
-    <members>http_localhost_8080</members>
-    <members>https_localhost_8080</members>
+    <members>http_localhost</members>
+    <members>https_localhost</members>
   </types>
   <version>40.0</version>
 </Package>
