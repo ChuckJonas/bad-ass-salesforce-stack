@@ -13,6 +13,6 @@
     "jsdoc-format": false,
     "no-trailing-whitespace": false,
     "semicolon": [true, "always"],
-    "no-submodule-imports": [true, "antd"]
+    "no-submodule-imports": [true, "antd", "@src/generated"]
   }
 }

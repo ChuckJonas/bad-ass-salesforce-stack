@@ -3,8 +3,13 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { AppContainer } from "react-hot-loader";
+import { Provider } from "react-redux";
 import { Rest } from "ts-force";
 import { App } from "./app";
+
+import { applyMiddleware, createStore } from "redux";
+import thunk from "redux-thunk";
+import reducer from "./reducers/index";
 
 // globals. set on page window
 declare var __RESTHOST__: string;
@@ -17,9 +22,12 @@ Rest.config = {
   version: 40,
 };
 
+const store = createStore(reducer, {}, applyMiddleware(thunk));
 ReactDOM.render(
     <AppContainer>
+      <Provider store={store}>
         <App />
+      </Provider>
     </AppContainer>,
     document.getElementById("root") as HTMLElement,
 );
@@ -27,11 +35,11 @@ ReactDOM.render(
 if (module.hot) {
     module.hot.accept();
 
-    // // reducers
-    // module.hot.accept('../modules/root-reducer', () => {
-    //   const newRootReducer = require('./root-reducer').default;
-    //   store.replaceReducer(newRootReducer);
-    // });
+    // reducers
+    module.hot.accept("./reducers/index", () => {
+      const nextRootReducer = require("./reducers/index");
+      store.replaceReducer(nextRootReducer);
+    });
 
     // // epics
     // module.hot.accept('../modules/root-epic', () => {

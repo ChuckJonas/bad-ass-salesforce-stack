@@ -3,6 +3,8 @@ import { RestObject, SObject, sField } from "ts-force";
  * Immutable Property Interface for Account
  */
 export interface AccountFields {
+    readonly contacts?: Contact[];
+    readonly tasks?: Task[];
     readonly id?: string;
     readonly isDeleted?: boolean;
     readonly masterRecord?: Account;
@@ -90,6 +92,7 @@ export interface AccountFields {
     readonly profileLink?: string;
     readonly stateFull?: string;
     readonly daysSinceDCAActivity?: number;
+    readonly decisionMakerMainInfluencer?: Contact;
     readonly decisionMakerMainInfluencerId?: string;
     readonly currentMarketingChannels?: string;
     readonly boardCertifications?: string;
@@ -126,6 +129,7 @@ export interface AccountFields {
     readonly mgrAccount?: boolean;
     readonly cClink?: string;
     readonly industryDesignations?: string;
+    readonly billingContact?: Contact;
     readonly billingContactId?: string;
     readonly invoiceFrequency?: string;
     readonly advisorTitle?: string;
@@ -203,6 +207,7 @@ export interface AccountFields {
     readonly candidateMember?: boolean;
     readonly realSelfGoals?: string;
     readonly cosmetic?: string;
+    readonly mainRSContact?: Contact;
     readonly mainRSContactId?: string;
     readonly qAD90?: boolean;
     readonly oldModel?: number;
@@ -222,6 +227,7 @@ export interface AccountFields {
     readonly x90DayCutoffDate?: Date;
     readonly divisionId?: string;
     readonly numberofRegions?: number;
+    readonly financialDecisionMaker?: Contact;
     readonly financialDecisionMakerId?: string;
     readonly engagementOpptys?: number;
     readonly advisorExtension?: string;
@@ -253,6 +259,10 @@ export interface AccountFields {
  * Generated class for Account
  */
 export class Account extends RestObject  implements AccountFields {
+    @sField({ apiName: 'Contacts', readOnly: true, required: false, reference: () => { return Contact; }, childRelationship: true, salesforceType: 'undefined' })
+    contacts: Contact[];
+    @sField({ apiName: 'Tasks', readOnly: true, required: false, reference: () => { return Task; }, childRelationship: true, salesforceType: 'undefined' })
+    tasks: Task[];
     @sField({ apiName: 'Id', readOnly: true, required: false, reference: undefined, childRelationship: false, salesforceType: 'id' })
     id: string;
     @sField({ apiName: 'IsDeleted', readOnly: true, required: false, reference: undefined, childRelationship: false, salesforceType: 'boolean' })
@@ -433,6 +443,8 @@ export class Account extends RestObject  implements AccountFields {
     stateFull: string;
     @sField({ apiName: 'Days_Since_DCA_Activity__c', readOnly: true, required: false, reference: undefined, childRelationship: false, salesforceType: 'double' })
     daysSinceDCAActivity: number;
+    @sField({ apiName: 'Decision_Maker_Main_Influencer__r', readOnly: true, required: false, reference: () => { return Contact; }, childRelationship: false, salesforceType: 'undefined' })
+    decisionMakerMainInfluencer: Contact;
     @sField({ apiName: 'Decision_Maker_Main_Influencer__c', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'reference' })
     decisionMakerMainInfluencerId: string;
     @sField({ apiName: 'Current_Marketing_Channels__c', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'textarea' })
@@ -523,6 +535,8 @@ export class Account extends RestObject  implements AccountFields {
      */
     @sField({ apiName: 'Industry_Designations__c', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'multipicklist' })
     industryDesignations: string;
+    @sField({ apiName: 'Billing_Contact__r', readOnly: true, required: false, reference: () => { return Contact; }, childRelationship: false, salesforceType: 'undefined' })
+    billingContact: Contact;
     @sField({ apiName: 'Billing_Contact__c', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'reference' })
     billingContactId: string;
     @sField({ apiName: 'Invoice_Frequency__c', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'picklist' })
@@ -698,6 +712,8 @@ export class Account extends RestObject  implements AccountFields {
     realSelfGoals: string;
     @sField({ apiName: 'Cosmetic__c', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'percent' })
     cosmetic: string;
+    @sField({ apiName: 'Main_RS_Contact__r', readOnly: true, required: false, reference: () => { return Contact; }, childRelationship: false, salesforceType: 'undefined' })
+    mainRSContact: Contact;
     @sField({ apiName: 'Main_RS_Contact__c', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'reference' })
     mainRSContactId: string;
     @sField({ apiName: 'QAD_90__c', readOnly: true, required: false, reference: undefined, childRelationship: false, salesforceType: 'boolean' })
@@ -748,6 +764,8 @@ export class Account extends RestObject  implements AccountFields {
      */
     @sField({ apiName: 'Number_of_Regions__c', readOnly: true, required: false, reference: undefined, childRelationship: false, salesforceType: 'double' })
     numberofRegions: number;
+    @sField({ apiName: 'Financial_Decision_Maker__r', readOnly: true, required: false, reference: () => { return Contact; }, childRelationship: false, salesforceType: 'undefined' })
+    financialDecisionMaker: Contact;
     @sField({ apiName: 'Financial_Decision_Maker__c', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'reference' })
     financialDecisionMakerId: string;
     @sField({ apiName: 'Engagement_Opptys__c', readOnly: true, required: false, reference: undefined, childRelationship: false, salesforceType: 'double' })
@@ -841,6 +859,8 @@ export class Account extends RestObject  implements AccountFields {
     tier: string;
     constructor(fields?: AccountFields) {
         super('Account');
+        this.contacts = void 0;
+        this.tasks = void 0;
         this.id = void 0;
         this.isDeleted = void 0;
         this.masterRecord = void 0;
@@ -928,6 +948,7 @@ export class Account extends RestObject  implements AccountFields {
         this.profileLink = void 0;
         this.stateFull = void 0;
         this.daysSinceDCAActivity = void 0;
+        this.decisionMakerMainInfluencer = void 0;
         this.decisionMakerMainInfluencerId = void 0;
         this.currentMarketingChannels = void 0;
         this.boardCertifications = void 0;
@@ -964,6 +985,7 @@ export class Account extends RestObject  implements AccountFields {
         this.mgrAccount = void 0;
         this.cClink = void 0;
         this.industryDesignations = void 0;
+        this.billingContact = void 0;
         this.billingContactId = void 0;
         this.invoiceFrequency = void 0;
         this.advisorTitle = void 0;
@@ -1041,6 +1063,7 @@ export class Account extends RestObject  implements AccountFields {
         this.candidateMember = void 0;
         this.realSelfGoals = void 0;
         this.cosmetic = void 0;
+        this.mainRSContact = void 0;
         this.mainRSContactId = void 0;
         this.qAD90 = void 0;
         this.oldModel = void 0;
@@ -1060,6 +1083,7 @@ export class Account extends RestObject  implements AccountFields {
         this.x90DayCutoffDate = void 0;
         this.divisionId = void 0;
         this.numberofRegions = void 0;
+        this.financialDecisionMaker = void 0;
         this.financialDecisionMakerId = void 0;
         this.engagementOpptys = void 0;
         this.advisorExtension = void 0;
@@ -1096,15 +1120,17 @@ export class Account extends RestObject  implements AccountFields {
     }
 }
 /**
- * Immutable Property Interface for contact
+ * Immutable Property Interface for Contact
  */
-export interface contactFields {
+export interface ContactFields {
     readonly accounts1?: Account[];
     readonly accounts?: Account[];
     readonly accounts3?: Account[];
     readonly accounts2?: Account[];
+    readonly tasks?: Task[];
     readonly id?: string;
     readonly isDeleted?: boolean;
+    readonly masterRecord?: Contact;
     readonly masterRecordIdId?: string;
     readonly account?: Account;
     readonly accountIdId?: string;
@@ -1136,6 +1162,7 @@ export interface contactFields {
     readonly homePhone?: string;
     readonly otherPhone?: string;
     readonly assistantPhone?: string;
+    readonly reportsTo?: Contact;
     readonly reportsToIdId?: string;
     readonly email?: string;
     readonly title?: string;
@@ -1244,9 +1271,9 @@ export interface contactFields {
     readonly impliedMarketingConsentDate?: Date;
 }
 /**
- * Generated class for contact
+ * Generated class for Contact
  */
-export class contact extends RestObject  implements contactFields {
+export class Contact extends RestObject  implements ContactFields {
     @sField({ apiName: 'Accounts1__r', readOnly: true, required: false, reference: () => { return Account; }, childRelationship: true, salesforceType: 'undefined' })
     accounts1: Account[];
     @sField({ apiName: 'Accounts__r', readOnly: true, required: false, reference: () => { return Account; }, childRelationship: true, salesforceType: 'undefined' })
@@ -1255,10 +1282,14 @@ export class contact extends RestObject  implements contactFields {
     accounts3: Account[];
     @sField({ apiName: 'Accounts2__r', readOnly: true, required: false, reference: () => { return Account; }, childRelationship: true, salesforceType: 'undefined' })
     accounts2: Account[];
+    @sField({ apiName: 'Tasks', readOnly: true, required: false, reference: () => { return Task; }, childRelationship: true, salesforceType: 'undefined' })
+    tasks: Task[];
     @sField({ apiName: 'Id', readOnly: true, required: false, reference: undefined, childRelationship: false, salesforceType: 'id' })
     id: string;
     @sField({ apiName: 'IsDeleted', readOnly: true, required: false, reference: undefined, childRelationship: false, salesforceType: 'boolean' })
     isDeleted: boolean;
+    @sField({ apiName: 'MasterRecord', readOnly: true, required: false, reference: () => { return Contact; }, childRelationship: false, salesforceType: 'undefined' })
+    masterRecord: Contact;
     @sField({ apiName: 'MasterRecordId', readOnly: true, required: false, reference: undefined, childRelationship: false, salesforceType: 'reference' })
     masterRecordIdId: string;
     @sField({ apiName: 'Account', readOnly: true, required: false, reference: () => { return Account; }, childRelationship: false, salesforceType: 'undefined' })
@@ -1321,6 +1352,8 @@ export class contact extends RestObject  implements contactFields {
     otherPhone: string;
     @sField({ apiName: 'AssistantPhone', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'phone' })
     assistantPhone: string;
+    @sField({ apiName: 'ReportsTo', readOnly: true, required: false, reference: () => { return Contact; }, childRelationship: false, salesforceType: 'undefined' })
+    reportsTo: Contact;
     @sField({ apiName: 'ReportsToId', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'reference' })
     reportsToIdId: string;
     @sField({ apiName: 'Email', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'email' })
@@ -1557,14 +1590,16 @@ export class contact extends RestObject  implements contactFields {
     impliedMarketingConsent: boolean;
     @sField({ apiName: 'Implied_Marketing_Consent_Date__c', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'datetime' })
     impliedMarketingConsentDate: Date;
-    constructor(fields?: contactFields) {
-        super('contact');
+    constructor(fields?: ContactFields) {
+        super('Contact');
         this.accounts1 = void 0;
         this.accounts = void 0;
         this.accounts3 = void 0;
         this.accounts2 = void 0;
+        this.tasks = void 0;
         this.id = void 0;
         this.isDeleted = void 0;
+        this.masterRecord = void 0;
         this.masterRecordIdId = void 0;
         this.account = void 0;
         this.accountIdId = void 0;
@@ -1596,6 +1631,7 @@ export class contact extends RestObject  implements contactFields {
         this.homePhone = void 0;
         this.otherPhone = void 0;
         this.assistantPhone = void 0;
+        this.reportsTo = void 0;
         this.reportsToIdId = void 0;
         this.email = void 0;
         this.title = void 0;
@@ -1704,10 +1740,210 @@ export class contact extends RestObject  implements contactFields {
         this.impliedMarketingConsentDate = void 0;
         Object.assign(this, fields);
     }
-    static async retrieve(qry: string): Promise<contact[]> {
-        return await RestObject.query<contact>(contact, qry);
+    static async retrieve(qry: string): Promise<Contact[]> {
+        return await RestObject.query<Contact>(Contact, qry);
     }
-    toImmutable(): contactFields {
+    toImmutable(): ContactFields {
+        return this.clone();
+    }
+}
+/**
+ * Immutable Property Interface for Task
+ */
+export interface TaskFields {
+    readonly id?: string;
+    readonly who?: Name;
+    readonly whoIdId?: string;
+    readonly whatIdId?: string;
+    readonly whoCount?: string;
+    readonly whatCount?: string;
+    readonly subject?: string;
+    readonly activityDate?: Date;
+    readonly status?: string;
+    readonly priority?: string;
+    readonly isHighPriority?: boolean;
+    readonly ownerIdId?: string;
+    readonly description?: string;
+    readonly isDeleted?: boolean;
+    readonly account?: Account;
+    readonly accountIdId?: string;
+    readonly isClosed?: boolean;
+    readonly createdDate?: Date;
+    readonly createdByIdId?: string;
+    readonly lastModifiedDate?: Date;
+    readonly lastModifiedByIdId?: string;
+    readonly systemModstamp?: Date;
+    readonly isArchived?: boolean;
+    readonly callDurationInSeconds?: string;
+    readonly callType?: string;
+    readonly callDisposition?: string;
+    readonly callObject?: string;
+    readonly reminderDateTime?: Date;
+    readonly isReminderSet?: boolean;
+    readonly recurrenceActivityIdId?: string;
+    readonly isRecurrence?: boolean;
+    readonly recurrenceStartDateOnly?: Date;
+    readonly recurrenceEndDateOnly?: Date;
+    readonly recurrenceTimeZoneSidKey?: string;
+    readonly recurrenceType?: string;
+    readonly recurrenceInterval?: string;
+    readonly recurrenceDayOfWeekMask?: string;
+    readonly recurrenceDayOfMonth?: string;
+    readonly recurrenceInstance?: string;
+    readonly recurrenceMonthOfYear?: string;
+    readonly recurrenceRegeneratedType?: string;
+    readonly taskSubtype?: string;
+    readonly ringCentralCallRecording?: string;
+    readonly ringCentralRCLoggingType?: string;
+    readonly ringCentralRecordingInformation?: string;
+}
+/**
+ * Generated class for Task
+ */
+export class Task extends RestObject  implements TaskFields {
+    @sField({ apiName: 'Id', readOnly: true, required: false, reference: undefined, childRelationship: false, salesforceType: 'id' })
+    id: string;
+    @sField({ apiName: 'Who', readOnly: true, required: false, reference: () => { return Name; }, childRelationship: false, salesforceType: 'undefined' })
+    who: Name;
+    @sField({ apiName: 'WhoId', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'reference' })
+    whoIdId: string;
+    @sField({ apiName: 'WhatId', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'reference' })
+    whatIdId: string;
+    @sField({ apiName: 'WhoCount', readOnly: true, required: false, reference: undefined, childRelationship: false, salesforceType: 'int' })
+    whoCount: string;
+    @sField({ apiName: 'WhatCount', readOnly: true, required: false, reference: undefined, childRelationship: false, salesforceType: 'int' })
+    whatCount: string;
+    @sField({ apiName: 'Subject', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'combobox' })
+    subject: string;
+    @sField({ apiName: 'ActivityDate', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'date' })
+    activityDate: Date;
+    @sField({ apiName: 'Status', readOnly: false, required: true, reference: undefined, childRelationship: false, salesforceType: 'picklist' })
+    status: string;
+    @sField({ apiName: 'Priority', readOnly: false, required: true, reference: undefined, childRelationship: false, salesforceType: 'picklist' })
+    priority: string;
+    @sField({ apiName: 'IsHighPriority', readOnly: true, required: false, reference: undefined, childRelationship: false, salesforceType: 'boolean' })
+    isHighPriority: boolean;
+    @sField({ apiName: 'OwnerId', readOnly: false, required: true, reference: undefined, childRelationship: false, salesforceType: 'reference' })
+    ownerIdId: string;
+    @sField({ apiName: 'Description', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'textarea' })
+    description: string;
+    @sField({ apiName: 'IsDeleted', readOnly: true, required: false, reference: undefined, childRelationship: false, salesforceType: 'boolean' })
+    isDeleted: boolean;
+    @sField({ apiName: 'Account', readOnly: true, required: false, reference: () => { return Account; }, childRelationship: false, salesforceType: 'undefined' })
+    account: Account;
+    @sField({ apiName: 'AccountId', readOnly: true, required: false, reference: undefined, childRelationship: false, salesforceType: 'reference' })
+    accountIdId: string;
+    @sField({ apiName: 'IsClosed', readOnly: true, required: false, reference: undefined, childRelationship: false, salesforceType: 'boolean' })
+    isClosed: boolean;
+    @sField({ apiName: 'CreatedDate', readOnly: true, required: false, reference: undefined, childRelationship: false, salesforceType: 'datetime' })
+    createdDate: Date;
+    @sField({ apiName: 'CreatedById', readOnly: true, required: false, reference: undefined, childRelationship: false, salesforceType: 'reference' })
+    createdByIdId: string;
+    @sField({ apiName: 'LastModifiedDate', readOnly: true, required: false, reference: undefined, childRelationship: false, salesforceType: 'datetime' })
+    lastModifiedDate: Date;
+    @sField({ apiName: 'LastModifiedById', readOnly: true, required: false, reference: undefined, childRelationship: false, salesforceType: 'reference' })
+    lastModifiedByIdId: string;
+    @sField({ apiName: 'SystemModstamp', readOnly: true, required: false, reference: undefined, childRelationship: false, salesforceType: 'datetime' })
+    systemModstamp: Date;
+    @sField({ apiName: 'IsArchived', readOnly: true, required: false, reference: undefined, childRelationship: false, salesforceType: 'boolean' })
+    isArchived: boolean;
+    @sField({ apiName: 'CallDurationInSeconds', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'int' })
+    callDurationInSeconds: string;
+    @sField({ apiName: 'CallType', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'picklist' })
+    callType: string;
+    @sField({ apiName: 'CallDisposition', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'string' })
+    callDisposition: string;
+    @sField({ apiName: 'CallObject', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'string' })
+    callObject: string;
+    @sField({ apiName: 'ReminderDateTime', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'datetime' })
+    reminderDateTime: Date;
+    @sField({ apiName: 'IsReminderSet', readOnly: false, required: true, reference: undefined, childRelationship: false, salesforceType: 'boolean' })
+    isReminderSet: boolean;
+    @sField({ apiName: 'RecurrenceActivityId', readOnly: true, required: false, reference: undefined, childRelationship: false, salesforceType: 'reference' })
+    recurrenceActivityIdId: string;
+    @sField({ apiName: 'IsRecurrence', readOnly: false, required: true, reference: undefined, childRelationship: false, salesforceType: 'boolean' })
+    isRecurrence: boolean;
+    @sField({ apiName: 'RecurrenceStartDateOnly', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'date' })
+    recurrenceStartDateOnly: Date;
+    @sField({ apiName: 'RecurrenceEndDateOnly', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'date' })
+    recurrenceEndDateOnly: Date;
+    @sField({ apiName: 'RecurrenceTimeZoneSidKey', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'picklist' })
+    recurrenceTimeZoneSidKey: string;
+    @sField({ apiName: 'RecurrenceType', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'picklist' })
+    recurrenceType: string;
+    @sField({ apiName: 'RecurrenceInterval', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'int' })
+    recurrenceInterval: string;
+    @sField({ apiName: 'RecurrenceDayOfWeekMask', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'int' })
+    recurrenceDayOfWeekMask: string;
+    @sField({ apiName: 'RecurrenceDayOfMonth', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'int' })
+    recurrenceDayOfMonth: string;
+    @sField({ apiName: 'RecurrenceInstance', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'picklist' })
+    recurrenceInstance: string;
+    @sField({ apiName: 'RecurrenceMonthOfYear', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'picklist' })
+    recurrenceMonthOfYear: string;
+    @sField({ apiName: 'RecurrenceRegeneratedType', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'picklist' })
+    recurrenceRegeneratedType: string;
+    @sField({ apiName: 'TaskSubtype', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'picklist' })
+    taskSubtype: string;
+    @sField({ apiName: 'RingCentral__Call_Recording__c', readOnly: true, required: false, reference: undefined, childRelationship: false, salesforceType: 'string' })
+    ringCentralCallRecording: string;
+    @sField({ apiName: 'RingCentral__RC_Logging_Type__c', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'string' })
+    ringCentralRCLoggingType: string;
+    @sField({ apiName: 'RingCentral__Recording_Information__c', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: 'string' })
+    ringCentralRecordingInformation: string;
+    constructor(fields?: TaskFields) {
+        super('Task');
+        this.id = void 0;
+        this.who = void 0;
+        this.whoIdId = void 0;
+        this.whatIdId = void 0;
+        this.whoCount = void 0;
+        this.whatCount = void 0;
+        this.subject = void 0;
+        this.activityDate = void 0;
+        this.status = void 0;
+        this.priority = void 0;
+        this.isHighPriority = void 0;
+        this.ownerIdId = void 0;
+        this.description = void 0;
+        this.isDeleted = void 0;
+        this.account = void 0;
+        this.accountIdId = void 0;
+        this.isClosed = void 0;
+        this.createdDate = void 0;
+        this.createdByIdId = void 0;
+        this.lastModifiedDate = void 0;
+        this.lastModifiedByIdId = void 0;
+        this.systemModstamp = void 0;
+        this.isArchived = void 0;
+        this.callDurationInSeconds = void 0;
+        this.callType = void 0;
+        this.callDisposition = void 0;
+        this.callObject = void 0;
+        this.reminderDateTime = void 0;
+        this.isReminderSet = void 0;
+        this.recurrenceActivityIdId = void 0;
+        this.isRecurrence = void 0;
+        this.recurrenceStartDateOnly = void 0;
+        this.recurrenceEndDateOnly = void 0;
+        this.recurrenceTimeZoneSidKey = void 0;
+        this.recurrenceType = void 0;
+        this.recurrenceInterval = void 0;
+        this.recurrenceDayOfWeekMask = void 0;
+        this.recurrenceDayOfMonth = void 0;
+        this.recurrenceInstance = void 0;
+        this.recurrenceMonthOfYear = void 0;
+        this.recurrenceRegeneratedType = void 0;
+        this.taskSubtype = void 0;
+        this.ringCentralCallRecording = void 0;
+        this.ringCentralRCLoggingType = void 0;
+        this.ringCentralRecordingInformation = void 0;
+        Object.assign(this, fields);
+    }
+    static async retrieve(qry: string): Promise<Task[]> {
+        return await RestObject.query<Task>(Task, qry);
+    }
+    toImmutable(): TaskFields {
         return this.clone();
     }
 }

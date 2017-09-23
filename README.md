@@ -125,6 +125,7 @@ plugins:
 
 ### linkies
 
+* [typescript deep dive](https://basarat.gitbooks.io/typescript/content/)
 * [react-redux-typescript-guide](https://github.com/piotrwitek/react-redux-typescript-guide)
 * [sfdx cli reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
 
