@@ -4,18 +4,25 @@ import * as React from "react";
 interface ItemProps {
         text: string;
         index: number;
-        click?(action: any): void;
+        icon: string;
+        iconColor: string;
+        onClick(index: number): void;
     }
 
 export class TodoItem extends React.Component<ItemProps, {}> {
     public markCompleteClick = (evt: React.FormEvent<any>) => {
-      this.props.click(this.props.index);
+      this.props.onClick(this.props.index);
     }
 
     public render() {
         return (
             <li style={styles.lineItemStyle}>
-              <Button onClick={this.markCompleteClick} style={{ color: "green", marginRight: 7 }} shape="circle" icon="check" />
+              <Button
+                onClick={this.markCompleteClick}
+                style={{ color: this.props.iconColor, marginRight: 7 }}
+                shape="circle"
+                icon={this.props.icon}
+              />
               {this.props.text}
             </li>
         );

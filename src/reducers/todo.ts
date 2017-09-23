@@ -1,5 +1,5 @@
+import {DONE_STATUS} from "@src/actions";
 import { Task } from "@src/generated/sobs";
-
 // type defnition for what the state should be
 export type TodoState = Task[];
 
@@ -34,7 +34,7 @@ const todo = (state: Task[] = initState, action: Action): Task[] => {
             return [...state, action.add];
         case "REMOVE_TODO":
             // Have Reducer remove Task
-            state[action.index].status = "closed";
+            state[action.index].status = DONE_STATUS;
             state[action.index].update();
             // why not some slices here?
             // array slice modifices the current object (state) instead of generating a new one

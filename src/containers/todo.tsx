@@ -19,13 +19,15 @@ class Todo extends React.Component<ITodoProps, {}> {
   public renderTodos() {
     if (this.props.todos) {
       return this.props.todos.map((t, i) => {
-        console.log(i);
         return (
           <TodoItem
             text={t.description}
             key={i}
             index={i}
-            click={this.markAsDone} />
+            icon="check"
+            iconColor="#a3d666"
+            onClick={this.markAsDone}
+          />
         );
       });
     }

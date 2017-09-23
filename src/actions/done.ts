@@ -2,6 +2,8 @@ import { Task } from "@src/generated/sobs";
 import { Dispatch } from "redux";
 import { AddDoneAction, GetDoneAction, RemoveDoneAction } from "../reducers/done";
 
+export const DONE_STATUS = "closed";
+
 export const addDone = (done: Task): AddDoneAction => {
     return {
         type: "ADD_DONE",
@@ -15,11 +17,12 @@ export const removeDone = (index: number): RemoveDoneAction => {
         index,
     };
 };
+
 export const getDone = (): Dispatch<GetDoneAction> => {
-    return function(dispatch: Dispatch<GetDoneAction>){
-      const doneStatus = "done";
-      Task.retrieve(`SELECT Id, Description, Status FROM Task WHERE Status='${doneStatus}'`).then((tasks) => {
-            dispatch({
+    return (dispatch: Dispatch<GetDoneAction>) => {
+      Task.retrieve(`SELECT Id, Description, Status FROM Task WHERE Status='${DONE_STATUS}'`).then((tasks) => {
+        console.log(tasks);
+        dispatch({
                 type: "GET_DONE",
                 done: tasks,
             });

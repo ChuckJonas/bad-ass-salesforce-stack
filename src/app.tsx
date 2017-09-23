@@ -18,7 +18,7 @@ export class App extends React.Component<{}, {}> {
               <Card title="B.A.S.S. Starter">
               <Tabs defaultActiveKey="1">
                 <Tabs.TabPane tab="COUNTER" key="1" >
-                    <Counter/>
+                     <Counter/>
                  </Tabs.TabPane >
                 <Tabs.TabPane tab="TODO" key="2" >
                   <Todo />

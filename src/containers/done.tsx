@@ -1,4 +1,5 @@
 import { getDone, removeDone } from "@src/actions";
+import { TodoItem } from "@src/components";
 import { Task } from "@src/generated/sobs";
 import {styles} from "@src/styles";
 import {Button, Card, Icon} from "antd";
@@ -6,25 +7,29 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 interface IDoneProps {
-    done: Task[];
+    doneList: Task[];
     dispatch(action: any): any;
 }
 
 class Done extends React.Component<IDoneProps, {}> {
 
-    public componentWillMount(){
+    public componentWillMount() {
         // mountin component, load dones
         this.props.dispatch(getDone());
     }
 
-    public renderDone(){
-        if (this.props.done){
-            return this.props.done.map((d, i) => {
+    public renderDone() {
+        if (this.props.doneList) {
+            return this.props.doneList.map((done, i) => {
                 return (
-                    <li style={styles.lineItemStyle} key={i}>
-                      <Button onClick={(e) => { this.removeFromDone(i); }} style={{ color: "red", marginRight: 7 }} shape="circle" icon="close" />
-                      {d.description}
-                    </li>
+                  <TodoItem
+                    text={done.description}
+                    key={i}
+                    index={i}
+                    icon="close"
+                    iconColor="#d67866"
+                    onClick={this.removeFromDone}
+                  />
                 );
             });
         }
@@ -36,7 +41,7 @@ class Done extends React.Component<IDoneProps, {}> {
     }
     public render() {
         return (
-            <Card title={`${this.props.done.length} todo${this.props.done.length > 1 ? "s" : ""} remaining`}>
+            <Card title={`${this.props.doneList.length} todo${this.props.doneList.length > 1 ? "s" : ""} done`}>
               <ul id="done-items" className="list-unstyled">
                   {this.renderDone()}
               </ul>
@@ -45,5 +50,5 @@ class Done extends React.Component<IDoneProps, {}> {
 }
 
 export default connect((state) => {
-   return { done: state.done };
+   return { doneList: state.done };
 })(Done);
