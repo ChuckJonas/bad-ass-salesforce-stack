@@ -13,17 +13,15 @@
 ## FEATURES
 
 * develop on localhost with Hot Module Reloading and "Real" salesforce data
-* develop locally on visualforce page (what does that even mean)
+* develop w/ local asset on visualforce page
 * 1 step build & prompt to orgs
 * works with for developer, sandbox, scratch and even production orgs
-* buildscripts for predefined targets
 * type safey and completion when working with SF objects
-
 
 ## SETUP
 
 1. `clone -> npm install`
-1. [configure 1 or more target orgs](#org-configuration)
+1. [authinicate 1 or more target orgs](#authinication)
 1. [develop!](#development)
 
 ### ORG configuration
@@ -39,9 +37,11 @@ This workflow uses [sfdx-cli](https://developer.salesforce.com/tools/sfdxcli) to
 
 The following aliases are predefined:
 
-    * `dev`: to develop against a traditional salesforce org.  Developer or Sandbox
-    * `scratch` allows development against a "scratch org" using the Salesforce DX flow.  Must authinciate a `hub org`
-    * `prod`: to release your app.  Can also be used to hotfix with live production data.  Don't be dumb and develop against production!
+* `dev`: to develop against a traditional salesforce org.  Developer or Sandbox
+* `scratch` allows development against a "scratch org" using the Salesforce DX flow.  Must authinciate a `hub org`
+* `prod`: to release your app.  Can also be used to hotfix with live production data.  Don't be dumb and develop against production!
+
+##### Authinication
 
 For `dev` and `prod` you can authinicate using `sfdx force:auth:web:login -a [dev|prod] --setdefaultusername`.
 
