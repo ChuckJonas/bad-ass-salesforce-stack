@@ -35,7 +35,7 @@ export const addTodo = (description: string): Dispatch<AddTodoAction> => {
 };
 
 export const removeTodo = (todo: Task): Dispatch<RemoveTodoAction> => {
-  return (dispatch: Dispatch<RemoveTodoAction>) => {
+  return (dispatch: Dispatch<RemoveTodoAction>): Promise<void> => {
     // don't mutate origional.... clone
     const newTodo = Object.assign({}, todo);
     newTodo.status = TASK_DONE_STATUS;

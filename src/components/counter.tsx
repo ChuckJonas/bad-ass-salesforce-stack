@@ -1,12 +1,13 @@
-import {Progress, Slider} from "antd";
+import { Button, Popconfirm, Progress, Slider } from "antd";
 import * as React from "react";
 interface ICounterState {
   count: number;
   timeout: number;
+  run: boolean;
 }
 
 export class Counter extends React.Component<{}, ICounterState> {
-  public state = { count: 0, timeout: 300};
+  public state = { count: 0, timeout: 300, run: true };
   private interval: any;
 
   constructor(props) {
@@ -20,12 +21,14 @@ export class Counter extends React.Component<{}, ICounterState> {
   }
 
   public incrementCounter = () => {
-      this.setState({ count: this.state.count + 1 });
+    this.setState({ count: this.state.count + 1 });
+    if (this.state.run) {
       this.interval = setTimeout(this.incrementCounter, this.state.timeout);
     }
+  }
 
   public onChange = (value: number) => {
-    this.setState({timeout: (100 - value) * 10 });
+    this.setState({ timeout: (100 - value) * 10 });
   }
 
   public componentWillUnmount() {
@@ -33,6 +36,7 @@ export class Counter extends React.Component<{}, ICounterState> {
   }
 
   public render() {
+
     return (
       <div>
         <Progress
@@ -42,6 +46,17 @@ export class Counter extends React.Component<{}, ICounterState> {
         />
         <Progress type="line" showInfo={false} percent={(this.state.count % 100)} />
         <h3>Behold the mighty counter!</h3>
+        <p>He cannot be
+          <Popconfirm
+            okText="start"
+            onConfirm={() => this.setState({run: true}, () => {clearInterval(this.interval); this.incrementCounter(); })}
+            cancelText="stop"
+            onCancel={() => this.setState({run: false})}
+            title="Stop/Start"
+          >
+          <span> stopped</span>
+          </Popconfirm>!
+        </p>
         <p>You are no match for his powers...</p>
         <p>Your updates cannot destory him...</p>
         <p>Admire his will to survive...</p>

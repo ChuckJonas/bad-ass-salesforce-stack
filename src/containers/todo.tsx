@@ -37,7 +37,9 @@ class Todo extends React.Component<ITodoProps, {}> {
 
   public markAsDone = (index: number) => {
     const todo = this.props.todos[index];
-    this.props.dispatch(removeTodo(todo)).then(() => {
+
+    this.props.dispatch(removeTodo(todo))
+    .then(() => {
       this.props.dispatch(addDone(todo));
     });
   }
