@@ -1,29 +1,47 @@
+import { TASK_DONE_STATUS } from "@src/constants";
 import { Task } from "@src/generated/sobs";
 import { Dispatch } from "redux";
-import { AddDoneAction, GetDoneAction, RemoveDoneAction } from "../reducers/done";
+import { TypeKeys } from "./";
 
-export const DONE_STATUS = "closed";
+export interface AddDoneAction {
+    type: TypeKeys.ADD_DONE;
+    add: Task;
+}
+export interface RemoveDoneAction {
+    type: TypeKeys.REMOVE_DONE;
+    done: Task;
+}
+export interface LoadDoneAction {
+    type: TypeKeys.LOAD_DONE;
+    done: Task[];
+}
 
 export const addDone = (done: Task): AddDoneAction => {
     return {
-        type: "ADD_DONE",
+        type: TypeKeys.ADD_DONE,
         add: done,
     };
 };
+
 // takes the index and removes it
-export const removeDone = (index: number): RemoveDoneAction => {
-    return {
-        type: "REMOVE_DONE",
-        index,
+export const removeDone = (done: Task): Dispatch<RemoveDoneAction> => {
+    return (dispatch: Dispatch<RemoveDoneAction>) => {
+      return done.delete().then(() => {
+        const action: RemoveDoneAction = {
+          type: TypeKeys.REMOVE_DONE,
+          done,
+        };
+        dispatch(action);
+      });
     };
 };
 
-export const getDone = (): Dispatch<GetDoneAction> => {
-    return (dispatch: Dispatch<GetDoneAction>) => {
-      Task.retrieve(`SELECT Id, Description, Status FROM Task WHERE Status='${DONE_STATUS}'`).then((tasks) => {
-        console.log(tasks);
+export const loadDone = (): Dispatch<LoadDoneAction> => {
+    return (dispatch: Dispatch<LoadDoneAction>) => {
+      return Task.retrieve(`SELECT Id, Description, Status FROM Task WHERE Status='${TASK_DONE_STATUS}'`)
+      .then((tasks) => {
         dispatch({
-                type: "GET_DONE",
+                type: TypeKeys.LOAD_DONE,
                 done: tasks,
             });
         });

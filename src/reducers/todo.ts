@@ -1,53 +1,27 @@
-import {DONE_STATUS} from "@src/actions";
+import {AddTodoAction, LoadTodoAction, RemoveTodoAction, TypeKeys} from "@src/actions";
 import { Task } from "@src/generated/sobs";
 // type defnition for what the state should be
 export type TodoState = Task[];
 
-// action reducer types
-
-export interface AddTodoAction {
-    type: "ADD_TODO";
-    add: Task;
-}
-export interface RemoveTodoAction {
-    type: "REMOVE_TODO";
-    index: number;
-}
-export interface ClearTodoAction {
-    type: "CLEAR_TODO";
-}
-export interface GetTodoAction {
-    type: "GET_TODO";
-    todo: Task[];
-}
-
-type Action = AddTodoAction | RemoveTodoAction | ClearTodoAction | GetTodoAction;
+type Action = AddTodoAction | RemoveTodoAction | LoadTodoAction;
 
 const initState: TodoState = [];
 
-const todo = (state: Task[] = initState, action: Action): Task[] => {
+const todoReducer = (state: Task[] = initState, action: Action): Task[] => {
     switch (action.type) {
-        case "ADD_TODO":
+        case TypeKeys.ADD_TODO:
             // why not array push? because each state has to be a completely new object
             // array push modifiys the current object (state) instead of generating a new one
-            // this is shorthand for state.concat([action.payload])
-            return [...state, action.add];
-        case "REMOVE_TODO":
-            // Have Reducer remove Task
-            state[action.index].status = DONE_STATUS;
-            state[action.index].update();
-            // why not some slices here?
-            // array slice modifices the current object (state) instead of generating a new one
-            // this one takes the sate, splits it into two arrays based on the index given
-            // and then concats them, which returns a brand new array object
-            return [...state.slice(0, action.index), ...state.slice(action.index + 1)];
-        case "CLEAR_TODO":
-            return [];
-        case "GET_TODO":
-            return action.todo;
+            // this is shorthand for state.concat([action.payload])2
+            return [...state, action.todo];
+        case TypeKeys.REMOVE_TODO:
+            let newTodos = state.filter((todo) => todo.id !== action.todo.id);
+            return newTodos;
+        case TypeKeys.LOAD_TODO:
+            return action.todos;
         default:
             return state;
     }
 };
 
-export default todo;
+export default todoReducer;

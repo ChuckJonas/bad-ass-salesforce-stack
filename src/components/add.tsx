@@ -1,15 +1,15 @@
-import { addTodoAsync } from "@src/actions";
+import { addTodo } from "@src/actions";
 import {Form, Input} from "antd";
 import * as React from "react";
-interface IAddProps{
+interface IAddProps {
     dispatch(action: any): any;
 }
 
 export class Add extends React.Component<IAddProps, {}> {
     public handleChange = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.keyCode === 13){
-            if (event.currentTarget.value){
-                this.props.dispatch(addTodoAsync(event.currentTarget.value));
+        if (event.keyCode === 13) {
+            if (event.currentTarget.value) {
+                this.props.dispatch(addTodo(event.currentTarget.value));
             }
             event.currentTarget.value = "";
         }

@@ -5,10 +5,11 @@ import { Task } from "@src/generated/sobs";
 import { Card, Timeline } from "antd";
 import * as React from "react";
 import { connect } from "react-redux";
+import { Dispatch } from "redux";
 
 interface ITodoProps {
   todos: Task[];
-  dispatch(action: any): any;
+  dispatch: Dispatch<{}>;
 }
 
 class Todo extends React.Component<ITodoProps, {}> {
@@ -36,8 +37,9 @@ class Todo extends React.Component<ITodoProps, {}> {
 
   public markAsDone = (index: number) => {
     const todo = this.props.todos[index];
-    this.props.dispatch(removeTodo(index));
-    this.props.dispatch(addDone(todo));
+    this.props.dispatch(removeTodo(todo)).then(() => {
+      this.props.dispatch(addDone(todo));
+    });
   }
 
   public render() {
@@ -46,8 +48,7 @@ class Todo extends React.Component<ITodoProps, {}> {
         <Card title="add new todo">
           <Add dispatch={this.props.dispatch} />
         </Card>
-        <Card
-          title={`${this.props.todos.length} todo${this.props.todos.length > 1 ? "s" : ""} remaining`} >
+        <Card title={`${this.props.todos.length} todo${this.props.todos.length > 1 ? "s" : ""} remaining`}>
         <ul>
           {this.renderTodos()}
         </ul>

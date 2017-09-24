@@ -1,4 +1,4 @@
-import { getDone, removeDone } from "@src/actions";
+import { loadDone, removeDone } from "@src/actions";
 import { TodoItem } from "@src/components";
 import { Task } from "@src/generated/sobs";
 import {styles} from "@src/styles";
@@ -15,7 +15,7 @@ class Done extends React.Component<IDoneProps, {}> {
 
     public componentWillMount() {
         // mountin component, load dones
-        this.props.dispatch(getDone());
+        this.props.dispatch(loadDone());
     }
 
     public renderDone() {
@@ -37,7 +37,8 @@ class Done extends React.Component<IDoneProps, {}> {
     }
 
     public removeFromDone = (index: number) => {
-        this.props.dispatch(removeDone(index));
+
+        this.props.dispatch(removeDone(this.props.doneList[index]));
     }
     public render() {
         return (

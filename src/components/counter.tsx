@@ -11,17 +11,15 @@ export class Counter extends React.Component<{}, ICounterState> {
 
   constructor(props) {
     super(props);
-    console.log("running constructor");
   }
 
   public componentWillMount() {
-    if (!this.interval){
+    if (!this.interval) {
       this.incrementCounter();
     }
   }
 
   public incrementCounter = () => {
-      console.log(`${this.state.timeout} ${this.state.count}`);
       this.setState({ count: this.state.count + 1 });
       this.interval = setTimeout(this.incrementCounter, this.state.timeout);
     }
@@ -40,7 +38,8 @@ export class Counter extends React.Component<{}, ICounterState> {
         <Progress
           type="circle"
           format={(percent) => String(Math.floor(percent * 500))}
-          percent={this.state.count / 500} />
+          percent={this.state.count / 500}
+        />
         <Progress type="line" showInfo={false} percent={(this.state.count % 100)} />
         <h3>Behold the mighty counter!</h3>
         <p>You are no match for his powers...</p>

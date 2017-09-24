@@ -1,19 +1,17 @@
-export * from "./todos";
+export * from "./todo";
 export * from "./done";
 
-// import { DecrementAction, IncrementAction } from "./counterActions";
+export enum TypeKeys {
+  ADD_TODO = "ADD_TODO",
+  REMOVE_TODO = "REMOVE_TODO",
+  LOAD_TODO = "LOAD_TODO",
+  ADD_DONE = "ADD_DONE",
+  REMOVE_DONE = "REMOVE_DONE",
+  LOAD_DONE = "LOAD_DONE",
+  OTHER_ACTION = "__any_other_action_type__",
+}
 
-// export enum TypeKeys {
-//     INC = "INC",
-//     DEC = "DEC",
-//     OTHER_ACTION = "__any_other_action_type__",
-//   }
-
-// export interface OtherAction {
-//     type: TypeKeys.OTHER_ACTION;
-//   }
-
-// export type ActionTypes =
-//     | IncrementAction
-//     | DecrementAction
-//     | OtherAction;
+// use to prevent fallthrough on reducer?
+export interface OtherAction {
+    type: TypeKeys.OTHER_ACTION;
+}
