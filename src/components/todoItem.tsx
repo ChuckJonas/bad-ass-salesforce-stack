@@ -4,10 +4,10 @@ import * as React from "react";
 
 interface ITodoItemProps {
   text: string;
-  index: number;
+  id: string;
   icon: string;
   iconColor: string;
-  onClick(index: number): void;
+  onClick(id: string): void;
 }
 
 interface ITodoItemState {
@@ -25,8 +25,13 @@ export class TodoItem extends React.Component<ITodoItemProps, ITodoItemState> {
   }
 
   public markCompleteClick = (evt: React.FormEvent<any>) => {
+    // don't call twice
+    if (this.state.loading) {
+      return;
+    }
+
     this.setState({loading: true});
-    this.props.onClick(this.props.index);
+    this.props.onClick(this.props.id);
   }
 
   public render() {

@@ -1,7 +1,7 @@
 // import actions
-import { addDone, getTodos, removeTodo } from "@src/actions";
+import { addDone, addTodo, getTodos, removeTodo } from "@src/actions";
 import { Add, TodoItem } from "@src/components";
-import { Task } from "@src/generated/sobs";
+import { TaskFields } from "@src/generated/sobs";
 import { GlobalState } from "@src/reducers";
 import { Card, Timeline } from "antd";
 import * as React from "react";
@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import { Dispatch } from "redux";
 
 interface ITodoProps {
-  todos: Task[];
+  todos: TaskFields[];
   dispatch: Dispatch<GlobalState>;
 }
 
@@ -20,12 +20,12 @@ class Todo extends React.Component<ITodoProps, {}> {
 
   public renderTodos() {
     if (this.props.todos) {
-      return this.props.todos.map((t, i) => {
+      return this.props.todos.map((todo, i) => {
         return (
           <TodoItem
-            text={t.description}
-            key={i}
-            index={i}
+            text={todo.description}
+            key={todo.id}
+            id={todo.id}
             icon="check"
             iconColor="#a3d666"
             onClick={this.markAsDone}
@@ -36,8 +36,10 @@ class Todo extends React.Component<ITodoProps, {}> {
     return "";
   }
 
-  public markAsDone = (index: number) => {
-    const todo = this.props.todos[index];
+  public markAsDone = (id: string) => {
+    const todo = this.props.todos.find((t) => {
+      return t.id === id;
+    });
 
     this.props.dispatch(removeTodo(todo))
     .then(() => {
@@ -45,11 +47,15 @@ class Todo extends React.Component<ITodoProps, {}> {
     });
   }
 
+  public addTodo = (descr: string) => {
+    return this.props.dispatch(addTodo(descr));
+  }
+
   public render() {
     return (
       <div>
         <Card title="add new todo">
-          <Add dispatch={this.props.dispatch} />
+          <Add onAdd={this.addTodo}  />
         </Card>
         <Card title={`${this.props.todos.length} todo${this.props.todos.length > 1 ? "s" : ""} remaining`}>
         <ul>

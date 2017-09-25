@@ -1,13 +1,13 @@
 import { AddDoneAction, LoadDoneAction, RemoveDoneAction, TypeKeys } from "@src/actions";
-import { Task } from "@src/generated/sobs";
+import { TaskFields } from "@src/generated/sobs";
 // done state for global state
-export type DoneState = Task[];
+export type DoneState = TaskFields[];
 
 type Action = AddDoneAction | RemoveDoneAction | LoadDoneAction;
 
 const initState: DoneState = [];
 
-const doneReducer = (state: Task[] = initState, action: Action): Task[] => {
+const doneReducer = (state: TaskFields[] = initState, action: Action): TaskFields[] => {
     switch (action.type) {
         case TypeKeys.ADD_DONE:
             // why not array push? because each state has to be a completely new object

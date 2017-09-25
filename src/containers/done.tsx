@@ -1,6 +1,6 @@
 import { loadDone, removeDone } from "@src/actions";
 import { TodoItem } from "@src/components";
-import { Task } from "@src/generated/sobs";
+import { TaskFields } from "@src/generated/sobs";
 import { GlobalState } from "@src/reducers";
 import { styles } from "@src/styles";
 import { Button, Card, Icon } from "antd";
@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import { Dispatch } from "redux";
 
 interface IDoneProps {
-  doneList: Task[];
+  doneList: TaskFields[];
   dispatch: Dispatch<GlobalState>;
 }
 
@@ -20,8 +20,10 @@ class Done extends React.Component<IDoneProps, {}> {
     this.props.dispatch(loadDone());
   }
 
-  public removeFromDone = (index: number) => {
-    const todo = this.props.doneList[index];
+  public removeFromDone = (id: string) => {
+    const todo = this.props.doneList.find((t) => {
+      return t.id === id;
+    });
     this.props.dispatch(removeDone(todo));
   }
 
@@ -30,8 +32,8 @@ class Done extends React.Component<IDoneProps, {}> {
       return (
         <TodoItem
           text={done.description}
-          key={i}
-          index={i}
+          key={done.id}
+          id={done.id}
           icon="close"
           iconColor="#d67866"
           onClick={this.removeFromDone}

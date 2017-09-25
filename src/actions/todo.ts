@@ -1,22 +1,22 @@
 import { TASK_DONE_STATUS, TASK_TODO_STATUS } from "@src/constants";
-import { Task } from "@src/generated/sobs";
+import { Task, TaskFields } from "@src/generated/sobs";
 import { Dispatch } from "redux";
 import { PromiseThunk, TypeKeys } from "./";
 
 // action reducer types
 export interface AddTodoAction {
   type: TypeKeys.ADD_TODO;
-  todo: Task;
+  todo: TaskFields;
 }
 
 export interface RemoveTodoAction {
   type: TypeKeys.REMOVE_TODO;
-  todo: Task;
+  todo: TaskFields;
 }
 
 export interface LoadTodoAction {
   type: TypeKeys.LOAD_TODO;
-  todos: Task[];
+  todos: TaskFields[];
 }
 
 export const addTodo = (description: string): PromiseThunk<void> =>
@@ -34,10 +34,10 @@ export const addTodo = (description: string): PromiseThunk<void> =>
     });
   };
 
-export const removeTodo = (todo: Task): PromiseThunk<void> =>
+export const removeTodo = (todo: TaskFields): PromiseThunk<void> =>
   (dispatch) => {
     // don't mutate origional.... clone
-    const newTodo = Object.assign(new Task(), todo);
+    const newTodo = new Task(todo);
     newTodo.status = TASK_DONE_STATUS;
     const action: RemoveTodoAction = {
       type: TypeKeys.REMOVE_TODO,
