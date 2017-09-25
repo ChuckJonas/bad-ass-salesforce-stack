@@ -2,6 +2,7 @@
 import { addDone, getTodos, removeTodo } from "@src/actions";
 import { Add, TodoItem } from "@src/components";
 import { Task } from "@src/generated/sobs";
+import { GlobalState } from "@src/reducers";
 import { Card, Timeline } from "antd";
 import * as React from "react";
 import { connect } from "react-redux";
@@ -9,7 +10,7 @@ import { Dispatch } from "redux";
 
 interface ITodoProps {
   todos: Task[];
-  dispatch: Dispatch<{}>;
+  dispatch: Dispatch<GlobalState>;
 }
 
 class Todo extends React.Component<ITodoProps, {}> {

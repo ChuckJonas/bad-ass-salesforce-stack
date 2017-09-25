@@ -9,7 +9,7 @@ import { App } from "./app";
 
 import { applyMiddleware, createStore } from "redux";
 import thunk from "redux-thunk";
-import reducer from "./reducers/index";
+import reducer, {GlobalState} from "./reducers/index";
 
 // globals. set on page window
 declare var __RESTHOST__: string;
@@ -22,7 +22,9 @@ Rest.config = {
   version: 40,
 };
 
-const store = createStore(reducer, {}, applyMiddleware(thunk));
+const initState: GlobalState = {todo: [], done: []};
+const store = createStore<GlobalState>(reducer, initState, applyMiddleware(thunk.withExtraArgument(Rest.Instance)));
+
 ReactDOM.render(
     <AppContainer>
       <Provider store={store}>

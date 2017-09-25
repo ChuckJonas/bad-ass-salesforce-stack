@@ -1,3 +1,4 @@
+// most badass counter ever.  Does not use redux
 import { Button, Popconfirm, Progress, Slider } from "antd";
 import * as React from "react";
 interface ICounterState {

@@ -13,7 +13,7 @@ const doneReducer = (state: Task[] = initState, action: Action): Task[] => {
             // why not array push? because each state has to be a completely new object
             // array push modifiys the current object (state) instead of generating a new one
             // this is shorthand for state.concat([action.add])
-            return [...state, action.add];
+          return [...state, action.add];
         case TypeKeys.REMOVE_DONE:
             return state.filter((element) => element.id !== action.done.id);
         case TypeKeys.LOAD_DONE:

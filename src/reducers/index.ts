@@ -1,14 +1,14 @@
 import { combineReducers } from "redux";
 import done, { DoneState } from "./done";
 // Import reducers
-import todos, { TodoState } from "./todo";
+import todo, { TodoState } from "./todo";
 
 export interface GlobalState {
     todo: TodoState;
     done: DoneState;
 }
 
-export default combineReducers({
-    todos,
+export default combineReducers<GlobalState>({
+    todo,
     done,
 });

@@ -1,3 +1,6 @@
+import { GlobalState } from "@src/reducers";
+import { ThunkAction } from "redux-thunk";
+
 export * from "./todo";
 export * from "./done";
 
@@ -15,3 +18,7 @@ export enum TypeKeys {
 export interface OtherAction {
     type: TypeKeys.OTHER_ACTION;
 }
+
+// Shorthand thunk to return a promise.
+// adding this type here will help simplify imports and code
+export type PromiseThunk<T> = ThunkAction<Promise<T>, GlobalState, void>;
