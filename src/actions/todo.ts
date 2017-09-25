@@ -37,7 +37,7 @@ export const addTodo = (description: string): PromiseThunk<void> =>
 export const removeTodo = (todo: Task): PromiseThunk<void> =>
   (dispatch) => {
     // don't mutate origional.... clone
-    const newTodo = Object.assign({}, todo);
+    const newTodo = Object.assign(new Task(), todo);
     newTodo.status = TASK_DONE_STATUS;
     const action: RemoveTodoAction = {
       type: TypeKeys.REMOVE_TODO,
@@ -45,7 +45,7 @@ export const removeTodo = (todo: Task): PromiseThunk<void> =>
     };
 
     // return promise so we can chain action
-    return todo.update().then((r) => {
+    return newTodo.update().then((r) => {
       dispatch(action);
     });
   };
