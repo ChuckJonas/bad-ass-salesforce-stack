@@ -23,7 +23,7 @@ Rest.config = {
 };
 
 const initState: GlobalState = {todo: [], done: []};
-const store = createStore<GlobalState>(reducer, initState, applyMiddleware(thunk.withExtraArgument(Rest.Instance)));
+const store = createStore<GlobalState>(reducer, initState, applyMiddleware(thunk));
 
 ReactDOM.render(
     <AppContainer>
