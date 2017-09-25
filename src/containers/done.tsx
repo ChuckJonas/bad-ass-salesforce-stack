@@ -47,6 +47,6 @@ class Done extends React.Component<IDoneProps, {}> {
   }
 }
 
-export default connect((state) => {
+export default connect((state: GlobalState) => {
   return { doneList: state.done };
 })(Done);

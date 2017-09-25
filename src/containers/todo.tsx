@@ -60,6 +60,6 @@ class Todo extends React.Component<ITodoProps, {}> {
     );
   }
 }
-export default connect((state) => {
-  return { todos: state.todos };
+export default connect((state: GlobalState) => {
+  return { todos: state.todo };
 })(Todo);

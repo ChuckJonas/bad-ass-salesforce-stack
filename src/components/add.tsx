@@ -1,8 +1,10 @@
 import { addTodo } from "@src/actions";
+import {GlobalState} from "@src/reducers";
 import {Form, Input} from "antd";
 import * as React from "react";
+import {Dispatch} from "redux";
 interface IAddProps {
-    dispatch(action: any): any;
+    dispatch: Dispatch<GlobalState>;
 }
 
 export class Add extends React.Component<IAddProps, {}> {
