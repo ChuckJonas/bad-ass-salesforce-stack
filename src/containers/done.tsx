@@ -1,6 +1,6 @@
 import { loadDone, removeDone } from "@src/actions";
 import { TodoItem } from "@src/components";
-import { TaskFields } from "@src/generated/sobs";
+import { TodoFields } from "@src/generated/sobs";
 import { GlobalState } from "@src/reducers";
 import { styles } from "@src/styles";
 import { Button, Card, Icon } from "antd";
@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import { Dispatch } from "redux";
 
 interface IDoneProps {
-  doneList: TaskFields[];
+  doneList: TodoFields[];
   dispatch: Dispatch<GlobalState>;
 }
 
@@ -31,7 +31,7 @@ class Done extends React.Component<IDoneProps, {}> {
     const items = this.props.doneList.map((done, i) => {
       return (
         <TodoItem
-          text={done.description}
+          text={done.task}
           key={done.id}
           id={done.id}
           icon="close"

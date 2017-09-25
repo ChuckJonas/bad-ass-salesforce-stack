@@ -1,7 +1,7 @@
 // import actions
 import { addDone, addTodo, getTodos, removeTodo } from "@src/actions";
 import { Add, TodoItem } from "@src/components";
-import { TaskFields } from "@src/generated/sobs";
+import { TodoFields } from "@src/generated/sobs";
 import { GlobalState } from "@src/reducers";
 import { Card, Timeline } from "antd";
 import * as React from "react";
@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import { Dispatch } from "redux";
 
 interface ITodoProps {
-  todos: TaskFields[];
+  todos: TodoFields[];
   dispatch: Dispatch<GlobalState>;
 }
 
@@ -23,7 +23,7 @@ class Todo extends React.Component<ITodoProps, {}> {
       return this.props.todos.map((todo, i) => {
         return (
           <TodoItem
-            text={todo.description}
+            text={todo.task}
             key={todo.id}
             id={todo.id}
             icon="check"

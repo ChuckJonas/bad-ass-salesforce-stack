@@ -1,13 +1,13 @@
 import {AddTodoAction, LoadTodoAction, RemoveTodoAction, TypeKeys} from "@src/actions";
-import { TaskFields } from "@src/generated/sobs";
+import { TodoFields } from "@src/generated/sobs";
 // type defnition for what the state should be
-export type TodoState = TaskFields[];
+export type TodoState = TodoFields[];
 
 type Action = AddTodoAction | RemoveTodoAction | LoadTodoAction;
 
 const initState: TodoState = [];
 
-const todoReducer = (state: TaskFields[] = initState, action: Action): TaskFields[] => {
+const todoReducer = (state: TodoFields[] = initState, action: Action): TodoFields[] => {
     switch (action.type) {
         case TypeKeys.ADD_TODO:
             // why not array push? because each state has to be a completely new object

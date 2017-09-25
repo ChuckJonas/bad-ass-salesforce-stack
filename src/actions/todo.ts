@@ -1,29 +1,29 @@
 import { TASK_DONE_STATUS, TASK_TODO_STATUS } from "@src/constants";
-import { Task, TaskFields } from "@src/generated/sobs";
+import { Todo, TodoFields } from "@src/generated/sobs";
 import { Dispatch } from "redux";
 import { PromiseThunk, TypeKeys } from "./";
 
 // action reducer types
 export interface AddTodoAction {
   type: TypeKeys.ADD_TODO;
-  todo: TaskFields;
+  todo: TodoFields;
 }
 
 export interface RemoveTodoAction {
   type: TypeKeys.REMOVE_TODO;
-  todo: TaskFields;
+  todo: TodoFields;
 }
 
 export interface LoadTodoAction {
   type: TypeKeys.LOAD_TODO;
-  todos: TaskFields[];
+  todos: TodoFields[];
 }
 
 export const addTodo = (description: string): PromiseThunk<void> =>
   (dispatch) => {
-    const todo = new Task();
-    todo.description = description;
-    todo.status = TASK_TODO_STATUS;
+    const todo = new Todo();
+    todo.task = description;
+    todo.done = false;
 
     const action: AddTodoAction = {
       type: TypeKeys.ADD_TODO,
@@ -34,11 +34,11 @@ export const addTodo = (description: string): PromiseThunk<void> =>
     });
   };
 
-export const removeTodo = (todo: TaskFields): PromiseThunk<void> =>
+export const removeTodo = (todo: TodoFields): PromiseThunk<void> =>
   (dispatch) => {
     // don't mutate origional.... clone
-    const newTodo = new Task(todo);
-    newTodo.status = TASK_DONE_STATUS;
+    const newTodo = new Todo(todo);
+    newTodo.done = true;
     const action: RemoveTodoAction = {
       type: TypeKeys.REMOVE_TODO,
       todo: newTodo,
@@ -53,8 +53,8 @@ export const removeTodo = (todo: TaskFields): PromiseThunk<void> =>
 // load all todos
 export const getTodos = (): PromiseThunk<void> =>
   (dispatch) => {
-    return Task.retrieve(`SELECT Id, Description, Status
-              FROM Task WHERE Status='${TASK_TODO_STATUS}'`)
+    return Todo.retrieve(`SELECT Id, Task__c
+              FROM Todo__c WHERE Done__c = false`)
       .then((todos) => {
         const action: LoadTodoAction = {
           type: TypeKeys.LOAD_TODO,
