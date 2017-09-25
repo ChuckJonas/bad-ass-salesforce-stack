@@ -19,8 +19,6 @@ const themeVariables = lessToJs(fs.readFileSync(path.join(PATHS.styles, './ant-t
 
 
 const DEV_SERVER = {
-  hot: true,
-  hotOnly: true,
   historyApiFallback: true,
   overlay: true,
   port:8080 //should match ./config/sfdc-cors-enable
@@ -58,6 +56,9 @@ module.exports = (env = {}) => {
     orgInfo = JSON.parse(child_process.execSync("sfdx force:org:display --json").toString('utf8'));
     GLOBAL_DEFINES.__ACCESSTOKEN__ = JSON.stringify(orgInfo.result.accessToken);
     GLOBAL_DEFINES.__RESTHOST__ = JSON.stringify(orgInfo.result.instanceUrl);
+
+    DEV_SERVER.hot = true;
+    DEV_SERVER.hotOnly = true;
   }
 
   return {
