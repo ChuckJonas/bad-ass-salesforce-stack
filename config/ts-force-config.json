@@ -2,6 +2,6 @@
   "auth": {
     "username": "dev"
   },
-  "sObjects": ["Account", "contact"],
+  "sObjects": ["Account", "Contact", "Task"],
   "outPath": "./src/generated/sobs.ts"
 }

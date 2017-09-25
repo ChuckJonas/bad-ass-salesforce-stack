@@ -123,10 +123,14 @@ plugins:
 * sfdx plugins: gives your code completion on your `force-app` and ability to excute commands against the CLI
 * autoclose tag
 
-### linkies
+### helpful linkies
 
+* [typescript deep dive](https://basarat.gitbooks.io/typescript/content/)
 * [react-redux-typescript-guide](https://github.com/piotrwitek/react-redux-typescript-guide)
 * [sfdx cli reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+* [React-Redux: put API calls in the correct place](https://github.com/reactjs/redux/issues/291)
+* [Redux: How to chain async actions](https://github.com/reactjs/redux/issues/1676)
+* [a-redux-typescript-setup](http://blog.krawaller.se/posts/a-redux-typescript-setup/)
 
 ## The MIT License (MIT)
 

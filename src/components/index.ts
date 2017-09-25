@@ -1,2 +1,3 @@
 export { Counter } from "./counter";
-export { AccountView } from "./accountView";
+export { Add } from "./add";
+export { TodoItem } from "./todoitem";
