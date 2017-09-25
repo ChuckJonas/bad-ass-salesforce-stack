@@ -89,7 +89,17 @@ npm run deploy-prod
 
 ```
 
-## OTHER CONFIGURATIONs
+## Starting your own project
+
+If you want to use this project as a template for your own simply:
+
+1. `git checkout blank`
+1. `rm -r -f .git` (WARNING: no going back!)
+1. `git init`
+1. optionally add [git remote](https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/)
+1. configure & run ts-force gen
+
+## OTHER CONFIGURATIONS
 
 ### antd theming
 
