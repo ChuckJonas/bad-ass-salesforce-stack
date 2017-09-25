@@ -2,6 +2,8 @@
 
 ***BAD ASS SALESFORCE STACK***
 
+![alt text](https://raw.githubusercontent.com/ChuckJonas/bad-ass-salesforce-stack/master/images/bass-no-software.jpg)
+
 * [react](https://facebook.github.io/react/): all the cool kids are doing it
 * [redux](http://redux.js.org/): wizard state managment
 * [typescript](https://www.typescriptlang.org/): business in the front, party in the back
