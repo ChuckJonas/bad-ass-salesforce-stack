@@ -1,9 +1,12 @@
-import { AddDoneAction, LoadDoneAction, RemoveDoneAction, TypeKeys } from "@src/actions";
+import { AddDoneAction, LoadDoneAction, OtherAction, RemoveDoneAction, TypeKeys } from "@src/actions";
 import { TodoFields } from "@src/generated/sobs";
 // done state for global state
 export type DoneState = TodoFields[];
 
-type Action = AddDoneAction | RemoveDoneAction | LoadDoneAction;
+type Action = AddDoneAction
+              | RemoveDoneAction
+              | LoadDoneAction
+              | OtherAction; // other action is used for ensure default condition is present!
 
 const initState: DoneState = [];
 

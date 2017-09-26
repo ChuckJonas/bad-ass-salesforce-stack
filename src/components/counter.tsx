@@ -1,11 +1,13 @@
 // most badass counter ever.  Does not use redux
-import { Button, Popconfirm, Progress, Slider } from "antd";
+import { Popconfirm, Progress, Slider } from "antd";
 import * as React from "react";
 interface ICounterState {
   count: number;
   timeout: number;
   run: boolean;
 }
+
+const counterGoal = 50000;
 
 export class Counter extends React.Component<{}, ICounterState> {
   public state = { count: 0, timeout: 300, run: true };
@@ -28,7 +30,7 @@ export class Counter extends React.Component<{}, ICounterState> {
     }
   }
 
-  public onChange = (value: number) => {
+  public onRateChange = (value: number) => {
     this.setState({ timeout: (100 - value) * 10 });
   }
 
@@ -36,34 +38,26 @@ export class Counter extends React.Component<{}, ICounterState> {
     clearInterval(this.interval);
   }
 
-  public render() {
+  public formatProgress(percent) {
+    return String(Math.floor(percent * (counterGoal / 100)));
+  }
 
+  public render() {
     return (
       <div>
         <Progress
           type="circle"
-          format={(percent) => String(Math.floor(percent * 500))}
-          percent={this.state.count / 500}
+          format={this.formatProgress}
+          percent={this.state.count / (counterGoal / 100)}
         />
         <Progress type="line" showInfo={false} percent={(this.state.count % 100)} />
         <h3>Behold the mighty counter!</h3>
-        <p>He cannot be
-          <Popconfirm
-            okText="start"
-            onConfirm={() => this.setState({run: true}, () => {clearInterval(this.interval); this.incrementCounter(); })}
-            cancelText="stop"
-            onCancel={() => this.setState({run: false})}
-            title="Stop/Start"
-          >
-          <span> stopped</span>
-          </Popconfirm>!
-        </p>
         <p>You are no match for his powers...</p>
         <p>Your updates cannot destory him...</p>
         <p>Admire his will to survive...</p>
         <p>You find yourself helplessly falling in love...</p>
 
-        <Slider defaultValue={100 - (this.state.timeout / 10)} onChange={this.onChange} />
+        <Slider defaultValue={100 - (this.state.timeout / 10)} onChange={this.onRateChange} />
       </div>
     );
   }

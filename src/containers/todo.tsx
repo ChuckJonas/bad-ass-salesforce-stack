@@ -10,7 +10,7 @@ import { Dispatch } from "redux";
 
 interface ITodoProps {
   todos: TodoFields[];
-  dispatch: Dispatch<GlobalState>;
+  dispatch?: Dispatch<GlobalState>;
 }
 
 class Todo extends React.Component<ITodoProps, {}> {
@@ -66,6 +66,6 @@ class Todo extends React.Component<ITodoProps, {}> {
     );
   }
 }
-export default connect((state: GlobalState) => {
+export default connect((state: GlobalState): ITodoProps => {
   return { todos: state.todo };
 })(Todo);

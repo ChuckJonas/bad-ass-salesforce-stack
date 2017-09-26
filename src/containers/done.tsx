@@ -10,7 +10,7 @@ import { Dispatch } from "redux";
 
 interface IDoneProps {
   doneList: TodoFields[];
-  dispatch: Dispatch<GlobalState>;
+  dispatch?: Dispatch<GlobalState>;
 }
 
 class Done extends React.Component<IDoneProps, {}> {
@@ -49,6 +49,6 @@ class Done extends React.Component<IDoneProps, {}> {
   }
 }
 
-export default connect((state: GlobalState) => {
+export default connect((state: GlobalState): IDoneProps => {
   return { doneList: state.done };
 })(Done);

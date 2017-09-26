@@ -7,7 +7,7 @@ interface IAddProps {
   onAdd: (descr: string) => Promise<void>;
 }
 
-interface IAddState{
+interface IAddState {
   description: string;
   loading: boolean;
 }

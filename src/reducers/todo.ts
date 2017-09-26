@@ -1,9 +1,12 @@
-import {AddTodoAction, LoadTodoAction, RemoveTodoAction, TypeKeys} from "@src/actions";
+import {AddTodoAction, LoadTodoAction, OtherAction, RemoveTodoAction, TypeKeys} from "@src/actions";
 import { TodoFields } from "@src/generated/sobs";
 // type defnition for what the state should be
 export type TodoState = TodoFields[];
 
-type Action = AddTodoAction | RemoveTodoAction | LoadTodoAction;
+type Action = AddTodoAction
+              | RemoveTodoAction
+              | LoadTodoAction
+              | OtherAction; // other action is used for ensure default condition is present!;
 
 const initState: TodoState = [];
 
