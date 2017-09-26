@@ -22,6 +22,7 @@
 * 1 step build & prompt to orgs
 * works with for developer, sandbox, scratch and even production orgs
 * type safey and completion when working with SF objects
+* setup for
 
 ## SETUP
 
@@ -48,7 +49,7 @@ The following aliases are predefined:
 
 ##### Authinication
 
-For `dev` and `prod` you can authinicate using `sfdx force:auth:web:login -a [dev|prod] --setdefaultusername`.
+For `dev` and `prod` you can authinicate using `sfdx force:auth:web:login  --setdefaultusername -a dev|prod`.
 
 For scratch orgs use: `run new-scratch-org`
 
@@ -70,8 +71,8 @@ npm run make-prod-default
 
 Hot module reloading means that your updates will injected into your app without having to refresh the page or even lose state (in some cases)
 
+1. [Deploy to target](# deployment) (to setup objects)
 1. whitelist localhost CORS on the target ORG: `npm cors-enable`
-
 1. `npm start`
 
 * WARNING: if you do this on production make sure to disable it when done with `npm cors-disable`! [why?](https://stackoverflow.com/questions/39042799/cors-localhost-as-allowed-origin-in-production)*
@@ -145,6 +146,7 @@ plugins:
 * [jest reference](https://facebook.github.io/jest/docs/en/getting-started.html#content)
 * [sfdx cli reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
 * [React-Redux: put API calls in the correct place](https://github.com/reactjs/redux/issues/291)
+* [Where to Hold React Component Data: state, store, static, and this](https://medium.freecodecamp.org/where-do-i-belong-a-guide-to-saving-react-component-data-in-state-store-static-and-this-c49b335e2a00)
 * [Redux: How to chain async actions](https://github.com/reactjs/redux/issues/1676)
 * [a-redux-typescript-setup](http://blog.krawaller.se/posts/a-redux-typescript-setup/)
 
