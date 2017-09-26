@@ -73,11 +73,11 @@ npm run make-prod-default
 
 Hot module reloading means that your updates will injected into your app without having to refresh the page or even lose state (in some cases)
 
-1. [Deploy to target](# deployment) (to setup objects)
+1. [Deploy to target](#deployment) (to setup objects)
 1. whitelist localhost CORS on the target ORG: `npm cors-enable`
 1. `npm start`
 
-* WARNING: if you do this on production make sure to disable it when done with `npm cors-disable`! [why?](https://stackoverflow.com/questions/39042799/cors-localhost-as-allowed-origin-in-production)*
+* WARNING: if you do this on production make sure to disable cors when done with `npm cors-disable`! [why?](https://stackoverflow.com/questions/39042799/cors-localhost-as-allowed-origin-in-production)*
 
 ### dev/scratch org with local asset
 
