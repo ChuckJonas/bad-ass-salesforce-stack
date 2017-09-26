@@ -1,6 +1,9 @@
 # B . A . S . S .
 
+[![alt text](https://travis-ci.org/ChuckJonas/bad-ass-salesforce-stack.svg?branch=master)](https://travis-ci.org/ChuckJonas/bad-ass-salesforce-stack)
+
 ***BAD ASS SALESFORCE STACK***
+
 
 ![alt text](https://raw.githubusercontent.com/ChuckJonas/bad-ass-salesforce-stack/master/images/bass-no-software.jpg)
 

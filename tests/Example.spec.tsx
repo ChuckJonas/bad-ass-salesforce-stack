@@ -1,7 +1,7 @@
 import {mount, shallow} from "enzyme";
 import * as React from "react";
 import {Counter} from "../src/components/counter";
-import {TodoItem} from "../src/components/todoitem";
+import {TodoItem} from "../src/components/todoItem";
 
 test("Checkbox has things", () => {
   // Render a checkbox with label in the document
