@@ -2,8 +2,12 @@
   "compilerOptions": {
     "baseUrl": "./", // enables relative imports to root
     "paths": {
-      "@src/*": ["src/*"],
-      "@gen/*": ["src/generated/*"]
+      "@src/*": [
+        "src/*"
+      ],
+      "@gen/*": [
+        "src/generated/*"
+      ]
     },
     "outDir": "out/", // target for compiled files
     "allowSyntheticDefaultImports": true, // no errors on commonjs default import
@@ -39,6 +43,7 @@
     "src/**/*"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "dist"
   ]
 }
