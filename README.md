@@ -21,7 +21,8 @@
 * 1 step build & prompt to orgs
 * works with for developer, sandbox, scratch and even production orgs
 * type safey and completion when working with SF objects
-* setup for
+* jest test framework
+* setup for Redux Developer tools ([browser extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en))
 
 ## SETUP
 
