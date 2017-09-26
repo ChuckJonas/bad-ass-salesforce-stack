@@ -4,8 +4,11 @@
   "description": "React, Redux, Typescript, antd, ts-force, sfdx starter",
   "author": "Charlie Jonas",
   "homepage": "",
-  "repository": "",
-  "bugs": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChuckJonas/bad-ass-salesforce-stack.git"
+  },
+  "bugs": "https://github.com/ChuckJonas/bad-ass-salesforce-stack/issues",
   "license": "MIT",
   "main": "dist/app.js",
   "scripts": {
@@ -86,7 +89,6 @@
     "rimraf": "^2.6.1",
     "style-loader": "^0.18.2",
     "ts-jest": "^19.0.14",
-    "ts-loader": "^2.0.3",
     "tslint": "^5.1.0",
     "tslint-react": "^3.0.0",
     "typescript": "^2.5.2",
