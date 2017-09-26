@@ -21,7 +21,6 @@ export class Add extends React.Component<IAddProps, IAddState> {
       this.props.onAdd(this.state.description).then(() => {
         this.setState({loading: false, description: ""});
       }).catch((e) => {
-        console.log(e);
         message.error(e.toString());
         this.setState({loading: false});
       });
@@ -37,7 +36,7 @@ export class Add extends React.Component<IAddProps, IAddState> {
   public render() {
     return (
       <Form layout="inline">
-        <Form.Item label="Description">
+        <Form.Item label="Testubg">
           <Input
             readOnly={this.state.loading}
             value={this.state.description}

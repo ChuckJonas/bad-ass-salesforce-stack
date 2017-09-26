@@ -6,10 +6,7 @@ import { AppContainer } from "react-hot-loader";
 import { Provider } from "react-redux";
 import { Rest } from "ts-force";
 import { App } from "./app";
-
-import { applyMiddleware, createStore } from "redux";
-import thunk from "redux-thunk";
-import reducer, {GlobalState} from "./reducers/index";
+import createGlobalStore from "./store";
 
 // globals. set on page window
 declare var __RESTHOST__: string;
@@ -22,15 +19,15 @@ Rest.config = {
   version: 40,
 };
 
-const initState: GlobalState = {todo: [], done: []};
-const store = createStore<GlobalState>(reducer, initState, applyMiddleware(thunk));
+const store = createGlobalStore();
 
 ReactDOM.render(
     <AppContainer>
       <Provider store={store}>
         <App />
       </Provider>
-    </AppContainer>,
+    </AppContainer>
+    ,
     document.getElementById("root") as HTMLElement,
 );
 

@@ -1,4 +1,3 @@
-import { TASK_DONE_STATUS } from "@src/constants";
 import { Todo, TodoFields } from "@src/generated/sobs";
 import { Dispatch } from "redux";
 import { PromiseThunk, TypeKeys } from "./";
