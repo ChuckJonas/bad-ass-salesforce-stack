@@ -36,7 +36,7 @@ export class Add extends React.Component<IAddProps, IAddState> {
   public render() {
     return (
       <Form layout="inline">
-        <Form.Item label="Testubg">
+        <Form.Item label="Description">
           <Input
             readOnly={this.state.loading}
             value={this.state.description}

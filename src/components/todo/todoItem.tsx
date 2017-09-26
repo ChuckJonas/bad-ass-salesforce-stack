@@ -25,11 +25,6 @@ export class TodoItem extends React.Component<ITodoItemProps, ITodoItemState> {
   }
 
   public markCompleteClick = (evt: React.FormEvent<any>) => {
-    // don't call twice
-    if (this.state.loading) {
-      return;
-    }
-
     this.setState({loading: true});
     this.props.onClick(this.props.id);
   }
@@ -38,6 +33,7 @@ export class TodoItem extends React.Component<ITodoItemProps, ITodoItemState> {
     return (
       <li style={styles.lineItemStyle}>
         <Button
+          disabled={this.state.loading}
           loading={this.state.loading}
           onClick={this.markCompleteClick}
           style={{ color: this.props.iconColor, marginRight: 7 }}

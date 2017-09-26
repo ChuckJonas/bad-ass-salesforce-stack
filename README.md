@@ -1,11 +1,10 @@
 # B . A . S . S .
 
-[![alt text](https://travis-ci.org/ChuckJonas/bad-ass-salesforce-stack.svg?branch=master)](https://travis-ci.org/ChuckJonas/bad-ass-salesforce-stack)
+[![travis](https://travis-ci.org/ChuckJonas/bad-ass-salesforce-stack.svg?branch=master)](https://travis-ci.org/ChuckJonas/bad-ass-salesforce-stack)
 
 ***BAD ASS SALESFORCE STACK***
 
-
-![alt text](https://raw.githubusercontent.com/ChuckJonas/bad-ass-salesforce-stack/master/images/bass-no-software.jpg)
+![bass like fish](https://raw.githubusercontent.com/ChuckJonas/bad-ass-salesforce-stack/master/images/bass-no-software.jpg)
 
 * [react](https://facebook.github.io/react/): all the cool kids are doing it
 * [redux](http://redux.js.org/): wizard state managment
@@ -67,7 +66,9 @@ npm run make-prod-default
 
 ## DEVELOPMENT
 
-### localhost with HMR
+### localhost with HMR (hot module reloading)
+
+![HMR in action](http://i.imgur.com/j9NBbmf.gif)
 
 Hot module reloading means that your updates will injected into your app without having to refresh the page or even lose state (in some cases)
 

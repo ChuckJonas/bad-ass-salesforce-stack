@@ -1,3 +1,3 @@
-export { Counter } from "./counter";
-export { Add } from "./add";
-export { TodoItem } from "./todoitem";
+export { Counter } from "./counter/counter";
+export { Add } from "./todo/add";
+export { TodoItem } from "./todo/todoitem";
