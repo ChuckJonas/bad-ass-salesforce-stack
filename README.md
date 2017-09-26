@@ -68,7 +68,7 @@ npm run make-prod-default
 
 ### localhost with HMR (hot module reloading)
 
-![HMR in action](http://i.imgur.com/j9NBbmf.gif)
+[See HMR in action](http://i.imgur.com/j9NBbmf.gif)
 
 Hot module reloading means that your updates will injected into your app without having to refresh the page or even lose state (in some cases)
 

@@ -1,7 +1,7 @@
 import {mount, shallow} from "enzyme";
 import * as React from "react";
-import {Counter} from "../src/components/counter";
-import {TodoItem} from "../src/components/todoItem";
+import {Counter} from "../src/components/counter/counter";
+import {TodoItem} from "../src/components/todo/todoItem";
 
 it("test todo item button", () => {
   const mockCallback = jest.fn();
