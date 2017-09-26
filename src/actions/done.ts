@@ -25,24 +25,21 @@ export const addDone = (done: TodoFields): AddDoneAction => {
 // for async calls use thunk.  A thunk is a function that returns a function.
 // The inner return type can be promise to help chain actions together
 export const removeDone = (done: TodoFields): PromiseThunk<void> =>
-  (dispatch) => {
+  async (dispatch) => {
     const newDone = new Todo(done);
-    return newDone.delete().then(() => {
-      const action: RemoveDoneAction = {
+    await newDone.delete();
+    const action: RemoveDoneAction = {
         type: TypeKeys.REMOVE_DONE,
         done,
-      };
-      dispatch(action);
-    });
+    };
+    dispatch(action);
   };
 
 export const loadDone = (): PromiseThunk<void> =>
-  (dispatch) => {
-    return Todo.retrieve(`SELECT Id, Task__c FROM Todo__c WHERE Done__c = true`)
-      .then((tasks) => {
-        dispatch({
-          type: TypeKeys.LOAD_DONE,
-          done: tasks,
-        });
-      });
+  async (dispatch) => {
+    const done = await Todo.retrieve(`SELECT Id, Task__c FROM Todo__c WHERE Done__c = true`);
+    dispatch({
+      type: TypeKeys.LOAD_DONE,
+      done,
+    });
   };

@@ -19,46 +19,42 @@ export interface LoadTodoAction {
 }
 
 export const addTodo = (description: string): PromiseThunk<void> =>
-  (dispatch) => {
+  async (dispatch) => {
     const todo = new Todo();
     todo.task = description;
     todo.done = false;
 
+    await todo.insert();
     const action: AddTodoAction = {
       type: TypeKeys.ADD_TODO,
       todo,
     };
-    return todo.insert().then((r) => {
-      dispatch(action);
-    });
+    dispatch(action);
   };
 
 export const removeTodo = (todo: TodoFields): PromiseThunk<void> =>
-  (dispatch) => {
+  async (dispatch) => {
     // don't mutate origional.... clone
     const newTodo = new Todo(todo);
     newTodo.done = true;
+
+    // return promise so we can chain action
+    await newTodo.update();
     const action: RemoveTodoAction = {
       type: TypeKeys.REMOVE_TODO,
       todo: newTodo,
     };
-
-    // return promise so we can chain action
-    return newTodo.update().then((r) => {
-      dispatch(action);
-    });
+    dispatch(action);
   };
 
 // load all todos
 export const getTodos = (): PromiseThunk<void> =>
-  (dispatch) => {
-    return Todo.retrieve(`SELECT Id, Task__c
-              FROM Todo__c WHERE Done__c = false`)
-      .then((todos) => {
-        const action: LoadTodoAction = {
-          type: TypeKeys.LOAD_TODO,
-          todos,
-        };
-        dispatch(action);
-      });
+  async (dispatch) => {
+    const todos = await Todo.retrieve(`SELECT Id, Task__c
+              FROM Todo__c WHERE Done__c = false`);
+    const action: LoadTodoAction = {
+      type: TypeKeys.LOAD_TODO,
+      todos,
+    };
+    dispatch(action);
   };
