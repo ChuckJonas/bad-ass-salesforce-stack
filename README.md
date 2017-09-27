@@ -35,7 +35,7 @@
 While you could easily use this starter for a offplatform (eg. heroku) app,
 the intent if for the app to run directly on salesforce through a VF page.
 
-### sfdx cli
+#### sfdx cli
 
 This workflow uses [sfdx-cli](https://developer.salesforce.com/tools/sfdxcli) to manage authinication and deployment of meta data to orgs.  Download and install.  You don't need to authorize a hub org unless you plan on developing against "scratch orgs".
 
@@ -57,9 +57,9 @@ prod_alias=
 
 ```
 
-*NOTE: While `.npmrc` is committed here for setup purposes, you should remove it from your own source control, so each individual can manage these independantly. Failure to do so may result in people overwritting others work!*
+*NOTE: While `.npmrc` is committed here for setup convenience, you should remove it from your own source control, so each individual can manage these independantly. Failure to do so may result in people overwritting others work!*
 
-To see all currently authenicated orgs stored in sfdx, run `sfdx force:org:list`
+*TIP: To see all currently authenicated orgs stored in sfdx, run `sfdx force:org:list`*
 
 ##### Authentication
 
