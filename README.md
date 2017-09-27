@@ -27,7 +27,7 @@
 ## SETUP
 
 1. `clone -> npm install`
-1. [authinicate 1 or more target orgs](#authinication)
+1. [authinicate 1 or more target orgs](#authentication)
 1. [develop!](#development)
 
 ### ORG configuration
@@ -41,17 +41,31 @@ This workflow uses [sfdx-cli](https://developer.salesforce.com/tools/sfdxcli) to
 
 #### predefined target orgs
 
-The following aliases are predefined:
+The following "targets" are predefined:
 
 * `dev`: to develop against a traditional salesforce org.  Developer or Sandbox
-* `scratch` allows development against a "scratch org" using the Salesforce DX flow.  Must authinciate a `hub org`
+* `scratch` allows development against a "scratch org" using the Salesforce DX flow.  Must authenticate with a `hub org`
 * `prod`: to release your app.  Can also be used to hotfix with live production data.  Don't be dumb and develop against production!
 
-##### Authinication
+The associated sfdx org "alias" for each of these targets can be managed via config vars in `.npmrc`.
 
-For `dev` and `prod` you can authinicate using `sfdx force:auth:web:login  --setdefaultusername -a dev|prod`.
+```
 
-For scratch orgs use: `run new-scratch-org`
+dev_alias=
+scratch_alias=
+prod_alias=
+
+```
+
+*NOTE: While `.npmrc` is committed here for setup purposes, you should remove it from your own source control, so each individual can manage these independantly. Failure to do so may result in people overwritting others work!*
+
+To see all currently authenicated orgs stored in sfdx, run `sfdx force:org:list`
+
+##### Authentication
+
+For `dev` and `prod` targets you can authinicate using `sfdx force:auth:web:login  --setdefaultusername -a your-alias`.
+
+For new scratch orgs use: `sfdx force:org:create -a your-alias`
 
 *Note: if you are trying to connect to a sandbox, make sure to set the instance url with the `-r` arg*
 
