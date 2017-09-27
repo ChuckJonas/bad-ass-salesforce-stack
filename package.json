@@ -67,6 +67,7 @@
     "@types/react": "^15.0.6",
     "@types/react-dom": "^15.5.0",
     "@types/react-hot-loader": "^3.0.1",
+    "@types/react-redux": "^5.0.9",
     "@types/redux": "^3.6.0",
     "@types/redux-thunk": "^2.1.0",
     "@types/webpack": "^2.2.15",
