@@ -165,6 +165,7 @@ plugins:
 * [Where to Hold React Component Data: state, store, static, and this](https://medium.freecodecamp.org/where-do-i-belong-a-guide-to-saving-react-component-data-in-state-store-static-and-this-c49b335e2a00)
 * [Redux: How to chain async actions](https://github.com/reactjs/redux/issues/1676)
 * [a-redux-typescript-setup](http://blog.krawaller.se/posts/a-redux-typescript-setup/)
+* [Idiomatic Redux: Thoughts on Thunks, Sagas, Abstraction, and Reusability](http://blog.isquaredsoftware.com/2017/01/idiomatic-redux-thoughts-on-thunks-sagas-abstraction-and-reusability)
 
 ## The MIT License (MIT)
 
