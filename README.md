@@ -63,11 +63,9 @@ prod_alias=
 
 ##### Authentication
 
-For `dev` and `prod` targets you can authinicate using `sfdx force:auth:web:login  --setdefaultusername -a your-alias`.
+For authentication existings dev/sandbox orgs use `sfdx force:auth:web:login --setdefaultusername -r http://test.salesforce.com` to start ouath process. For `prod`  targets just drop the `-r` param, `sfdx force:auth:web:login  --setdefaultusername -a your-alias`.
 
 For new scratch orgs use: `sfdx force:org:create -a your-alias`
-
-*Note: if you are trying to connect to a sandbox, make sure to set the instance url with the `-r` arg*
 
 #### changing between orgs
 
