@@ -24,8 +24,6 @@
 * jest test framework
 * setup for Redux Developer tools ([browser extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en))
 
-
-
 ## SETUP
 
 ### Install SFDC-cli
@@ -55,7 +53,7 @@ scratch_alias=test_new_feature
 prod_alias=my_prod_org
 
 ```
-*NOTE: Don't track changes to `.npmrc`. Each contributor will manager this configuration separately and committing it could result in another user accidentally deploying to an unintended org.
+*NOTE: Don't track changes to `.npmrc`. Each contributor will manage this configuration separately and committing it could result in another user accidentally deploying to an unintended org.
 
 ### Existing Apps
 Before you can run a new app that isn't in your target org, you'll fire need to do a deploy to get the dependent salesforce metdata over there using `npm run deploy-dev`
