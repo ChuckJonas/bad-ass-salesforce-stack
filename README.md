@@ -26,80 +26,68 @@
 
 ## SETUP
 
-1. `clone -> npm install`
-1. [authinicate 1 or more target orgs](#authentication)
-1. [develop!](#development)
-
-### ORG configuration
-
-While you could easily use this starter for a offplatform (eg. heroku) app,
-the intent if for the app to run directly on salesforce through a VF page.
-
-#### sfdx cli
-
+### Install SFDC-cli
 This workflow uses [sfdx-cli](https://developer.salesforce.com/tools/sfdxcli) to manage authinication and deployment of meta data to orgs.  Download and install.  You don't need to authorize a hub org unless you plan on developing against "scratch orgs".
 
-#### predefined target orgs
+### Clone Starter Org
+1. `git clone https://github.com/ChuckJonas/bad-ass-salesforce-stack bass`
+1. `cd bass`
+1. `npm install`
 
-The following "targets" are predefined:
+### Authentication
+To do much of anything you'll need to connect to one or more orgs. Use `sfdx force:org:list` to see a list of orgs you're already authenticated with. Connect to an existing sandbox using `sfdx force:auth:web:login -sr http://test.salesforce.com -a client_dev_sandbox`. For production orgs, just drop the `r` param, `sfdx force:auth:web:login  -sa my_prod_org`. And of course, you can create a scratch org using: `sfdx force:org:create -a test_new_feature`.
 
+### Setup Target Orgs
+
+Several commands take advantage of the following predefined "targets"
 * `dev`: to develop against a traditional salesforce org.  Developer or Sandbox
 * `scratch` allows development against a "scratch org" using the Salesforce DX flow.  Must authenticate with a `hub org`
 * `prod`: to release your app.  Can also be used to hotfix with live production data.  Don't be dumb and develop against production!
 
-The associated sfdx org "alias" for each of these targets can be managed via config vars in `.npmrc`.
+You'll need to specific the associated alias each target in the `.npmrc` config file.
 
 ```
 
-dev_alias=
-scratch_alias=
-prod_alias=
+dev_alias=client_dev_sandbox
+scratch_alias=test_new_feature
+prod_alias=my_prod_org
 
 ```
+*NOTE: Don't track changes to `.npmrc`. Each contributor will manage this configuration separately and committing it could result in another user accidentally deploying to an unintended org.
 
-*NOTE: While `.npmrc` is committed here for setup convenience, you should remove it from your own source control, so each individual can manage these independantly. Failure to do so may result in people overwritting others work!*
+### Existing Apps
+Before you can run a new app that isn't in your target org, you'll fire need to do a deploy to get the dependent salesforce metdata over there using `npm run deploy-dev`
 
-*TIP: To see all currently authenicated orgs stored in sfdx, run `sfdx force:org:list`*
+#### Default Target
 
-##### Authentication
-
-For `dev` and `prod` targets you can authinicate using `sfdx force:auth:web:login  --setdefaultusername -a your-alias`.
-
-For new scratch orgs use: `sfdx force:org:create -a your-alias`
-
-*Note: if you are trying to connect to a sandbox, make sure to set the instance url with the `-r` arg*
-
-#### changing between orgs
-
-To change your default target, simply run one of the following commands:
-
-```npm
+Sever commands have a default target. Use the following commands to change the defaults to the desired alias listed in `.npmrc`
+```
 npm run make-dev-default
 npm run make-scratch-default
 npm run make-prod-default
 ```
 
 ## DEVELOPMENT
+Once your salesforce dependencies exist in your target org things get a bit more interesting.
 
-### localhost with HMR (hot module reloading)
+### Run Locally with HMR (hot module reloading)
+First you can host you're app on localhost and enjoy hot module reloading, and use salesforce data from the current default target. Any updates to your app will immediately show up without a pa ge refresh. Your state is also preserved in most cases.[See HMR in action](http://i.imgur.com/j9NBbmf.gif). This workflow is well suited for playing around with change without needing them to be live in your salesforce environment, i.e. if you're fixing a bug in sandbox while other users are current testing you app in different areas. By developing locally you don't have to worry about a mistake during your development impacting the users testing directly on Salesforce.
 
-[See HMR in action](http://i.imgur.com/j9NBbmf.gif)
+1. `npm run deploy-dev` (deploy salesforce dependencies if needed)
+1. `npm run cors-enable` (whitelist localhost CORS on the default target org) DANGER*
+1. `npm start` (start a local webserver with hot reload)
 
-Hot module reloading means that your updates will injected into your app without having to refresh the page or even lose state (in some cases)
+* DANGER: while allowing salesforce to accept request from a localhost server is awesome for hot reloading it has security risks. It's best if you don't do this in a prodcution or org with sensitive data. But if you did, be sure to disable cors when done with `npm run cors-disable` to disable the security hole!!! [why?](https://stackoverflow.com/questions/39042799/cors-localhost-as-allowed-origin-in-production)*
 
-1. [Deploy to target](#deployment) (to setup objects)
-1. whitelist localhost CORS on the target ORG: `npm cors-enable`
-1. `npm start`
-
-* WARNING: if you do this on production make sure to disable cors when done with `npm cors-disable`! [why?](https://stackoverflow.com/questions/39042799/cors-localhost-as-allowed-origin-in-production)*
-
-### dev/scratch org with local asset
+### Run Remotely With Local Assets (dev/scratch org only)
+Another option is to run you're app in Salesforce, but use local copies of the app assets. You'll be able to make changes to the app and test inside the salesforce container page, but your changes will only show for you and not impact any other users in that environment.
 
 1. `npm run start-remote`
 1. append `?local=1` to page query string
 1. browser may complain the first time.  Open up script url and tell browser to f-off
 
-## DEPLOYMENT
+### Deployment
+If you have changes to salesforce metadata, or you're ready to test everything fully hosted on salesforce do a deployment to the desired target with one of the following commands
 
 ```npm
 
