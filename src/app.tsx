@@ -1,5 +1,5 @@
-import {Counter} from "@src/components";
-import {Done, Todo} from "@src/containers";
+import { Counter } from "@src/components"
+import { Done, Todo} from "@src/containers";
 import { Card, Layout, LocaleProvider, Tabs } from "antd";
 import enUS from "antd/lib/locale-provider/en_US";
 import * as React from "react";
