@@ -74,17 +74,21 @@ Once your salesforce dependencies exist in your target org things get a bit more
 First you can host you're app on localhost and enjoy hot module reloading, and use salesforce data from the current default target. Any updates to your app will immediately show up without a pa ge refresh. Your state is also preserved in most cases.[See HMR in action](http://i.imgur.com/j9NBbmf.gif). This workflow is well suited for playing around with change without needing them to be live in your salesforce environment, i.e. if you're fixing a bug in sandbox while other users are current testing you app in different areas. By developing locally you don't have to worry about a mistake during your development impacting the users testing directly on Salesforce.
 
 1. `npm run deploy-dev` (deploy salesforce dependencies if needed)
-1. `npm run cors-enable` (whitelist localhost CORS on the default target org) DANGER*
+1. `npm run cors-enable` (whitelist localhost CORS on the default target org) DANGER (see "Danger Localhost CORS")*
 1. `npm start` (start a local webserver with hot reload)
 
-* DANGER: while allowing salesforce to accept request from a localhost server is awesome for hot reloading it has security risks. It's best if you don't do this in a prodcution or org with sensitive data. But if you did, be sure to disable cors when done with `npm run cors-disable` to disable the security hole!!! [why?](https://stackoverflow.com/questions/39042799/cors-localhost-as-allowed-origin-in-production)*
-
-### Run Remotely With Local Assets (dev/scratch org only)
+### Run Remotely With Local Assets
 Another option is to run you're app in Salesforce, but use local copies of the app assets. You'll be able to make changes to the app and test inside the salesforce container page, but your changes will only show for you and not impact any other users in that environment.
 
+1. `npm run deploy-dev` (deploy salesforce dependencies if needed)
+1. `npm run cors-enable` (whitelist localhost CORS on the default target org) DANGER (see "Danger Localhost CORS")*
 1. `npm run start-remote`
 1. append `?local=1` to page query string
 1. browser may complain the first time.  Open up script url and tell browser to f-off
+
+### Danger Localhost CORS
+
+* DANGER: while allowing salesforce to accept request from a localhost server is awesome for hot reloading it has security risks. It's best if you don't do this in a prodcution or org with sensitive data. But if you did, be sure to disable cors when done with `npm run cors-disable` to disable the security hole!!! [why?](https://stackoverflow.com/questions/39042799/cors-localhost-as-allowed-origin-in-production)*
 
 ### Deployment
 If you have changes to salesforce metadata, or you're ready to test everything fully hosted on salesforce do a deployment to the desired target with one of the following commands
