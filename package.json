@@ -25,7 +25,7 @@
     "make-prod-default": "sfdx force:config:set defaultusername=$npm_config_prod_alias",
     "bundle-app-dev": "npm run compile-dev && npm run copy-bundle",
     "bundle-app-prod": "webpack run compile-prod && npm run copy-bundle",
-    "copy-bundle": "cp ./dist/app.js ./force-app/main/default/staticresources/App.resource",
+    "copy-bundle": "zip -j ./force-app/main/default/staticresources/app.zip ./dist/app.js ./dist/app.js.map && mv ./force-app/main/default/staticresources/app.zip ./force-app/main/default/staticresources/app.resource",
     "package-sfdc": "sfdx force:source:convert -d ./dist/sfdc-package",
     "build-dev": "npm run bundle-app-dev && npm run package-sfdc",
     "build-prod": "npm run bundle-app-prod && npm run package-sfdc",
