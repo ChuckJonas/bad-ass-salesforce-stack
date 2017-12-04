@@ -1,11 +1,5 @@
 {
   "verbose": true,
-  "globals": {
-    "__TS_CONFIG__": {
-      "module": "commonjs",
-      "jsx": "react"
-    }
-  },
   "moduleFileExtensions": [
     "ts",
     "tsx",

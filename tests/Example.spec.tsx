@@ -1,7 +1,10 @@
-import {mount, shallow} from "enzyme";
+import {configure, mount} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
 import * as React from "react";
 import {Counter} from "../src/components/counter/counter";
 import {TodoItem} from "../src/components/todo/todoItem";
+
+configure({ adapter: new Adapter() });
 
 it("test todo item button", () => {
   const mockCallback = jest.fn();
@@ -17,9 +20,11 @@ it("test todo item button", () => {
     />
   ));
 
-  const btn = todoItem.find("Button");
+  let btn = todoItem.find("Button");
   expect(btn.prop("loading")).toEqual(false);
   btn.simulate("click");
+  todoItem.update();
+  btn = todoItem.find("Button");
   expect(mockCallback.mock.calls.length).toBe(1);
   expect(btn.prop("loading")).toEqual(true);
 });
