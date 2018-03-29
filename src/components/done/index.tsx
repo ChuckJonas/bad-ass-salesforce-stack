@@ -3,7 +3,6 @@ import { TodoItem } from "@src/components";
 import { TodoFields } from "@src/generated/sobs";
 import { GlobalState } from "@src/reducers";
 import { getDone } from "@src/selectors/todoSelector";
-import { styles } from "@src/styles";
 import { Button, Card, Icon, List } from "antd";
 import * as React from "react";
 import { connect } from "react-redux";

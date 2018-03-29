@@ -32,7 +32,7 @@ class Todo extends React.Component<ITodoProps, {}> {
   public render() {
     return (
       <div>
-        <Card title="Add new todo">
+        <Card className="add-header" title="Add new todo">
           <Add onAdd={this.addTodo}  />
         </Card>
         <Card title={`${this.props.todoList.length} todo${this.props.todoList.length > 1 ? "s" : ""} remaining`}>

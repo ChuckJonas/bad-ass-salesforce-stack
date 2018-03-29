@@ -9,6 +9,9 @@ import { Rest } from "ts-force";
 import { App } from "./app";
 import createGlobalStore from "./store";
 
+// add custom stylesheet
+require("@src/styles/styles.less");
+
 // globals. set on page window
 declare var __RESTHOST__: string;
 declare var __ACCESSTOKEN__: string;

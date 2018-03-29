@@ -102,6 +102,15 @@ module.exports = (env = {}) => {
             },
           ]
         },
+        // css
+        {
+          test: /\.css$/,
+          include: PATHS.styles,
+          use: [
+            { loader: "style-loader" },
+            { loader: "css-loader" },
+          ]
+        },
         //antd
         {
           test: /\.less$/,
@@ -122,15 +131,6 @@ module.exports = (env = {}) => {
           include: [PATHS.src],
           use: { loader: 'json-loader' },
         },
-        // // css
-        // {
-        //   test: /\.css$/,
-        //   include: [PATHS.STYLES],
-        //   loader: ExtractTextPlugin.extract([
-        //     'css-loader?{modules: false}',
-        //     'postcss-loader',
-        //   ]),
-        // },
         // // less
         // {
         //   test: /\.less$/,

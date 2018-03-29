@@ -1,4 +1,3 @@
-import { styles } from "@src/styles";
 import { Button, Icon, Timeline } from "antd";
 import * as React from "react";
 
@@ -31,7 +30,7 @@ export class TodoItem extends React.Component<ITodoItemProps, ITodoItemState> {
 
   public render() {
     return (
-      <li style={styles.lineItemStyle}>
+      <div>
         <Button
           disabled={this.state.loading}
           loading={this.state.loading}
@@ -41,7 +40,7 @@ export class TodoItem extends React.Component<ITodoItemProps, ITodoItemState> {
           icon={this.props.icon}
         />
         {this.props.text}
-      </li>
+      </div>
     );
   }
 }
