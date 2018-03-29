@@ -1,5 +1,5 @@
-import { Button, Icon, Timeline } from "antd";
-import * as React from "react";
+import { Button, Icon, Timeline } from 'antd';
+import * as React from 'react';
 
 interface ITodoItemProps {
   text: string;
@@ -36,7 +36,7 @@ export class TodoItem extends React.Component<ITodoItemProps, ITodoItemState> {
           loading={this.state.loading}
           onClick={this.markCompleteClick}
           style={{ color: this.props.iconColor, marginRight: 7 }}
-          shape="circle"
+          shape='circle'
           icon={this.props.icon}
         />
         {this.props.text}

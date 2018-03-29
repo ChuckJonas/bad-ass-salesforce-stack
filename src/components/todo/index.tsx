@@ -1,14 +1,14 @@
 // import actions
-import { addTodo, markDone } from "@src/actions";
-import { TodoItem } from "@src/components";
-import { TodoFields } from "@src/generated/sobs";
-import { GlobalState } from "@src/reducers";
-import { getTodo } from "@src/selectors/todoSelector";
-import { Card, List, Timeline } from "antd";
-import * as React from "react";
-import { connect } from "react-redux";
-import { Dispatch } from "redux";
-import { Add } from "./add";
+import { addTodo, markDone } from '@src/actions';
+import { TodoItem } from '@src/components';
+import { TodoFields } from '@src/generated/sobs';
+import { GlobalState } from '@src/reducers';
+import { getTodo } from '@src/selectors/todoSelector';
+import { Card, List, Timeline } from 'antd';
+import * as React from 'react';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { Add } from './add';
 
 interface ITodoProps {
   todoList: TodoFields[];
@@ -32,10 +32,10 @@ class Todo extends React.Component<ITodoProps, {}> {
   public render() {
     return (
       <div>
-        <Card className="add-header" title="Add new todo">
+        <Card className='add-header' title='Add new todo'>
           <Add onAdd={this.addTodo}  />
         </Card>
-        <Card title={`${this.props.todoList.length} todo${this.props.todoList.length > 1 ? "s" : ""} remaining`}>
+        <Card title={`${this.props.todoList.length} todo${this.props.todoList.length > 1 ? 's' : ''} remaining`}>
         <List
           dataSource={this.props.todoList}
           renderItem={this.renderTodo}
@@ -47,13 +47,13 @@ class Todo extends React.Component<ITodoProps, {}> {
 
   private renderTodo = (item) => {
     return (
-      <List.Item extra="">
+      <List.Item extra=''>
         <TodoItem
           text={item.task}
           key={item.id}
           id={item.id}
-          icon="check"
-          iconColor="#a3d666"
+          icon='check'
+          iconColor='#a3d666'
           onClick={this.markAsDone}
         />
       </List.Item>

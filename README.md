@@ -28,9 +28,11 @@
 ## GETTING STARTED
 
 ### Install SFDC-cli
+
 This workflow uses [sfdx-cli](https://www.npmjs.com/package/sfdx-cli) to manage authinication and deployment of meta data to orgs.   Run `npm install --global sfdx-cli`.  You don't need to authorize a hub org unless you plan on developing against "scratch orgs".
 
 ### Clone Starter Org
+
 1. `git clone https://github.com/ChuckJonas/bad-ass-salesforce-stack bass`
 1. `cd bass`
 1. `npm install`
@@ -41,6 +43,7 @@ To do much of anything you'll need to connect with one or more orgs. Use `sfdx f
 ### Setup Target Orgs
 
 Several commands take advantage of the following predefined "targets"
+
 * `dev`: to develop against a traditional salesforce org.  Developer or Sandbox
 * `scratch`: allows development against a "scratch org" using the Salesforce DX flow.  Must authenticate with a `hub org`
 * `prod`: to release your app.  Can also be used to hotfix with live production data.  Don't be dumb and develop against production!

@@ -1,6 +1,6 @@
-import * as norm from "@src/lib/normalized";
-import { GlobalState } from "@src/reducers";
-import { createSelector } from "reselect";
+import * as norm from '@src/lib/normalized';
+import { GlobalState } from '@src/reducers';
+import { createSelector } from 'reselect';
 
 export const getTodo = createSelector(
   (state: GlobalState) => state.todo,

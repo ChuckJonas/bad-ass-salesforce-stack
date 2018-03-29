@@ -1,16 +1,17 @@
 // entry to allow for HMR.
 //  DON'T TOUCH THIS UNLESS YOU KNOW WHAT YOURE DOING
-import { loadTodos } from "@src/actions";
-import * as React from "react";
-import * as ReactDOM from "react-dom";
-import { AppContainer } from "react-hot-loader";
-import { Provider } from "react-redux";
-import { Rest } from "ts-force";
-import { App } from "./app";
-import createGlobalStore from "./store";
+import { loadTodos } from '@src/actions';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import { AppContainer } from 'react-hot-loader';
+import { Provider } from 'react-redux';
+import { Rest } from 'ts-force';
+import { App } from './app';
+import createGlobalStore from './store';
 
 // add custom stylesheet
-require("@src/styles/styles.less");
+// tslint:disable-next-line:no-var-requires
+require('@src/styles/styles.less');
 
 // globals. set on page window
 declare var __RESTHOST__: string;
@@ -34,15 +35,15 @@ ReactDOM.render(
       </Provider>
     </AppContainer>
     ,
-    document.getElementById("root") as HTMLElement,
+    document.getElementById('root') as HTMLElement,
 );
 
 if (module.hot) {
     module.hot.accept();
 
     // reducers
-    module.hot.accept("./reducers/index", () => {
-      const nextRootReducer = require("./reducers/index");
+    module.hot.accept('./reducers/index', () => {
+      const nextRootReducer = require('./reducers/index');
       store.replaceReducer(nextRootReducer);
     });
 
