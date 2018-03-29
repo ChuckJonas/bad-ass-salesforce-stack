@@ -94,7 +94,7 @@
     "ts-jest": "^21.2.3",
     "tslint": "^5.1.0",
     "tslint-react": "^3.0.0",
-    "typescript": "^2.8.0-dev.20180220",
+    "typescript": "^2.7.0",
     "webpack": "^3.5.5",
     "webpack-dashboard": "^1.0.0",
     "webpack-dev-server": "^2.3.0"
