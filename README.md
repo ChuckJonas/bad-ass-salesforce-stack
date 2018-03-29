@@ -23,8 +23,9 @@
 * type safey and completion when working with SF objects
 * jest test framework
 * setup for Redux Developer tools ([browser extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en))
+* setup for debugging in [vscode chrome debugger](https://github.com/Microsoft/vscode-chrome-debug)
 
-## SETUP
+## GETTING STARTED
 
 ### Install SFDC-cli
 This workflow uses [sfdx-cli](https://developer.salesforce.com/tools/sfdxcli) to manage authinication and deployment of meta data to orgs.  Download and install.  You don't need to authorize a hub org unless you plan on developing against "scratch orgs".
@@ -35,7 +36,7 @@ This workflow uses [sfdx-cli](https://developer.salesforce.com/tools/sfdxcli) to
 1. `npm install`
 
 ### Authentication
-To do much of anything you'll need to connect to one or more orgs. Use `sfdx force:org:list` to see a list of orgs you're already authenticated with. Connect to an existing sandbox using `sfdx force:auth:web:login -sr http://test.salesforce.com -a client_dev_sandbox`. For production orgs, just drop the `r` param, `sfdx force:auth:web:login -sa my_prod_org`. And of course, you can create a scratch org using: `sfdx force:org:create -a test_new_feature`.
+To do much of anything you'll need to connect with one or more orgs. Use `sfdx force:org:list` to see a list of orgs you're already authenticated with. Connect to an existing sandbox using `sfdx force:auth:web:login -sr http://test.salesforce.com -a client_dev_sandbox`. For production orgs, just drop the `r` param, `sfdx force:auth:web:login -sa my_prod_org`. And of course, you can create a scratch org using: `sfdx force:org:create -a test_new_feature`.
 
 ### Setup Target Orgs
 
@@ -55,33 +56,35 @@ prod_alias=my_prod_org
 ```
 *NOTE: Don't track changes to `.npmrc`. Each contributor will manage this configuration separately and committing it could result in another user accidentally deploying to an unintended org.
 
-### Existing Apps
-Before you can run a new app that isn't in your target org, you'll fire need to do a deploy to get the dependent salesforce metdata over there using `npm run deploy-dev`
-
 #### Default Target
 
-Sever commands have a default target. Use the following commands to change the defaults to the desired alias listed in `.npmrc`
+While deployment command are env specific, some commands (eg: `npm start`) use the default DX user. Use the following commands to change the defaults to the desired alias listed in `.npmrc`
+
 ```
 npm run make-dev-default
 npm run make-scratch-default
 npm run make-prod-default
 ```
 
+### Deploy Meta-data
+
+Before you can run the example app, you need to get depedent metadata into your target org. You can easily do this by running `npm run deploy-dev` OR `npm run deploy-scratch`.
+
 ## DEVELOPMENT
-Once your salesforce dependencies exist in your target org things get a bit more interesting.
 
 ### Run Locally with HMR (hot module reloading)
-First you can host you're app on localhost and enjoy hot module reloading, and use salesforce data from the current default target. Any updates to your app will immediately show up without a pa ge refresh. Your state is also preserved in most cases.[See HMR in action](http://i.imgur.com/j9NBbmf.gif). This workflow is well suited for playing around with change without needing them to be live in your salesforce environment, i.e. if you're fixing a bug in sandbox while other users are current testing you app in different areas. By developing locally you don't have to worry about a mistake during your development impacting the users testing directly on Salesforce.
 
-1. `npm run deploy-dev` (deploy salesforce dependencies if needed)
-1. `npm run cors-enable` (whitelist localhost CORS on the default target org) DANGER (see "Danger Localhost CORS")*
+One of the biggest benifits of this stack is the ability to work locally with real salesforce data! HMR allows updates to show up within seconds without ever having to refresh the page. Your state is even also preserved in most cases. [See HMR in action](http://i.imgur.com/j9NBbmf.gif).
+
+One of the biggest benefits to local dev is the ability to keep your Sandbox in a UAT state, while you are activitly develping new features.
+
+1. `npm run cors-enable` (only need to run once. whitelists localhost CORS on the default target org) DANGER (see "Danger Localhost CORS")*
 1. `npm start` (start a local webserver with hot reload)
 
 ### Run Remotely With Local Assets
-Another option is to run you're app in Salesforce, but use local copies of the app assets. You'll be able to make changes to the app and test inside the salesforce container page, but your changes will only show for you and not impact any other users in that environment.
+Another option is to run your app in Salesforce, but using local copies of the app assets. You'll be able to make changes to the app and test inside the salesforce container page, but your changes will only show for you and not impact any other users in that environment.  This is very helpful in ensuring your app runs in the SF org before deploying.
 
-1. `npm run deploy-dev` (deploy salesforce dependencies if needed)
-1. `npm run cors-enable` (whitelist localhost CORS on the default target org) DANGER (see "Danger Localhost CORS")*
+1. `npm run cors-enable` (only need to run once. whitelists localhost CORS on the default target org) DANGER (see "Danger Localhost CORS")*
 1. `npm run start-remote`
 1. append `?local=1` to page query string
 1. browser may complain the first time.  Open up script url and tell browser to f-off
@@ -105,11 +108,12 @@ npm run deploy-prod
 
 If you want to use this project as a template for your own simply:
 
-1. `git checkout blank`
 1. `rm -r -f .git` (WARNING: no going back!)
 1. `git init`
 1. optionally add [git remote](https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/)
 1. configure & run ts-force gen
+1. rename page & resource bundle (optional)
+1. remove example files
 
 ### Renaming Page and Resource Bundle
 
@@ -122,7 +126,6 @@ To rename the Static Resource:
 1. rename `force-app/main/default/staticresource/App.resource-meta.xml`
 1. in package.json, find the `copy-bundle` and rename the copy target accordingly
 1. finally, just update your vf page to properly reference the new resource name
-
 
 ## OTHER CONFIGURATIONS
 
