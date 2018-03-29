@@ -1,3 +1,4 @@
-export { Counter } from "./counter/counter";
-export { Add } from "./todo/add";
-export { TodoItem } from "./todo/todoItem";
+export {default as Todo} from "./todo";
+export {default as Done} from "./done";
+
+export * from "./shared";

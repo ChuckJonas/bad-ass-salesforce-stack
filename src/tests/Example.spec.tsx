@@ -1,8 +1,7 @@
+import {TodoItem} from "@src/components/shared/todoItem";
 import {configure, mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import * as React from "react";
-import {Counter} from "../src/components/counter/counter";
-import {TodoItem} from "../src/components/todo/todoItem";
 
 configure({ adapter: new Adapter() });
 

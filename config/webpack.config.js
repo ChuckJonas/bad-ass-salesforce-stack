@@ -22,14 +22,6 @@ const DEV_SERVER = {
   historyApiFallback: true,
   overlay: true,
   port:8080 //should match ./config/sfdc-cors-enable
-
-  // stats: 'verbose',
-  // proxy: {
-  //   '/api': 'http://localhost:3000'
-  // },
-  // headers: {
-  //     'Access-Control-Allow-Origin': '*'
-  // }
 };
 
 module.exports = (env = {}) => {

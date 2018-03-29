@@ -8,10 +8,11 @@
 
     <div id="root"></div>
     <apex:outputPanel layout="none" rendered="{!$CurrentPage.parameters.local != '1'}">
-        <script src="{!$Resource.App}" />
+      <script type='text/javascript' src="{!URLFOR($Resource.app, 'app.js')}" />
+      <script type='application/json' src="{!URLFOR($Resource.app, 'app.js.map')}" />
     </apex:outputPanel>
 
     <apex:outputPanel layout="none" rendered="{!$CurrentPage.parameters.local == '1'}">
-        <script src="https://localhost:8080/app.js" />
+      <script src="https://localhost:8080/app.js" />
     </apex:outputPanel>
 </apex:page>

@@ -1,27 +1,30 @@
-import {AddTodoAction, LoadTodoAction, OtherAction, RemoveTodoAction, TypeKeys} from "@src/actions";
+import {ActionKeys, AddTodoAction, DeleteTodoAction, LoadTodoAction, MarkDoneAction} from "@src/actions";
 import { TodoFields } from "@src/generated/sobs";
-// type defnition for what the state should be
-export type TodoState = TodoFields[];
+import * as norm from "@src/lib/normalized";
+
+// interface to make it easier to work with a normalized state
+
+export type TodoState = Normalized<TodoFields>;
 
 type Action = AddTodoAction
-              | RemoveTodoAction
+              | MarkDoneAction
               | LoadTodoAction
-              | OtherAction; // other action is used for ensure default condition is present!;
+              | DeleteTodoAction;
 
-const initState: TodoState = [];
+const initState = norm.empty<TodoFields>();
 
-const todoReducer = (state: TodoFields[] = initState, action: Action): TodoFields[] => {
+const todoReducer = (state = initState, action: Action): TodoState => {
     switch (action.type) {
-        case TypeKeys.ADD_TODO:
-            // why not array push? because each state has to be a completely new object
-            // array push modifiys the current object (state) instead of generating a new one
-            // this is shorthand for state.concat([action.payload])2
-            return [...state, action.todo];
-        case TypeKeys.REMOVE_TODO:
-            const newTodos = state.filter((todo) => todo.id !== action.todo.id);
-            return newTodos;
-        case TypeKeys.LOAD_TODO:
-            return action.todos;
+        case ActionKeys.ADD_TODO:
+            return norm.addItem(state, "id", action.todo);
+        case ActionKeys.MARK_DONE:
+            // we could have passed the todo from the action, but this is meant to show an example of immutatability
+            const newTodo: TodoFields = {...state.byId[action.todoId], ...{done: true}};
+            return norm.addItem(state, "id", newTodo);
+        case ActionKeys.LOAD_TODOS:
+            return norm.fromArray(action.todos, ((item) => item.id));
+        case ActionKeys.DELETE_TODO:
+          return norm.removeItem(state, action.id);
         default:
             return state;
     }

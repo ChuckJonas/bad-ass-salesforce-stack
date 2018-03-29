@@ -1,22 +1,38 @@
 import { Todo, TodoFields } from "@src/generated/sobs";
 import { Dispatch } from "redux";
-import { PromiseThunk, TypeKeys } from "./";
+import { ActionKeys, PromiseThunk } from "./";
 
 // action reducer types
-export interface AddTodoAction {
-  type: TypeKeys.ADD_TODO;
-  todo: TodoFields;
-}
-
-export interface RemoveTodoAction {
-  type: TypeKeys.REMOVE_TODO;
-  todo: TodoFields;
-}
-
 export interface LoadTodoAction {
-  type: TypeKeys.LOAD_TODO;
+  type: ActionKeys.LOAD_TODOS;
   todos: TodoFields[];
 }
+
+export interface AddTodoAction {
+  type: ActionKeys.ADD_TODO;
+  todo: TodoFields;
+}
+
+export interface MarkDoneAction {
+  type: ActionKeys.MARK_DONE;
+  todoId: string;
+}
+
+export interface DeleteTodoAction {
+  type: ActionKeys.DELETE_TODO;
+  id: string;
+}
+
+// load all todos
+export const loadTodos = (): PromiseThunk<void> =>
+  async (dispatch) => {
+    const todos = await Todo.retrieve(`SELECT Id, Task__c, Done__c FROM Todo__c`);
+    const action: LoadTodoAction = {
+      type: ActionKeys.LOAD_TODOS,
+      todos,
+    };
+    dispatch(action);
+  };
 
 export const addTodo = (description: string): PromiseThunk<void> =>
   async (dispatch) => {
@@ -26,13 +42,13 @@ export const addTodo = (description: string): PromiseThunk<void> =>
 
     await todo.insert();
     const action: AddTodoAction = {
-      type: TypeKeys.ADD_TODO,
+      type: ActionKeys.ADD_TODO,
       todo,
     };
     dispatch(action);
   };
 
-export const removeTodo = (todo: TodoFields): PromiseThunk<void> =>
+export const markDone = (todo: TodoFields): PromiseThunk<void> =>
   async (dispatch) => {
     // don't mutate origional.... clone
     const newTodo = new Todo(todo);
@@ -40,21 +56,22 @@ export const removeTodo = (todo: TodoFields): PromiseThunk<void> =>
 
     // return promise so we can chain action
     await newTodo.update();
-    const action: RemoveTodoAction = {
-      type: TypeKeys.REMOVE_TODO,
-      todo: newTodo,
+    const action: MarkDoneAction = {
+      type: ActionKeys.MARK_DONE,
+      todoId: newTodo.id,
     };
     dispatch(action);
   };
 
-// load all todos
-export const getTodos = (): PromiseThunk<void> =>
+// for async calls use thunk.  A thunk is a function that returns a function.
+// The inner return type can be promise to help chain actions together
+export const deleteTodo = (id: string): PromiseThunk<void> =>
   async (dispatch) => {
-    const todos = await Todo.retrieve(`SELECT Id, Task__c
-              FROM Todo__c WHERE Done__c = false`);
-    const action: LoadTodoAction = {
-      type: TypeKeys.LOAD_TODO,
-      todos,
+    const newDone = new Todo({id});
+    await newDone.delete();
+    const action: DeleteTodoAction = {
+        type: ActionKeys.DELETE_TODO,
+        id,
     };
     dispatch(action);
   };

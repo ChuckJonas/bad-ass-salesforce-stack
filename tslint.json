@@ -13,7 +13,7 @@
     "jsdoc-format": false,
     "no-trailing-whitespace": false,
     "semicolon": [true, "always"],
-    "no-submodule-imports": [true, "antd", "@src/generated"],
+    "no-submodule-imports": [false],
     "interface-name": [false],
     "prefer-object-spread": false,
     "object-literal-sort-keys": false,

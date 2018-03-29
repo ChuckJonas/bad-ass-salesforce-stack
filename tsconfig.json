@@ -4,9 +4,6 @@
     "paths": {
       "@src/*": [
         "src/*"
-      ],
-      "@gen/*": [
-        "src/generated/*"
       ]
     },
     "outDir": "out/", // target for compiled files

@@ -1,5 +1,6 @@
 // entry to allow for HMR.
 //  DON'T TOUCH THIS UNLESS YOU KNOW WHAT YOURE DOING
+import { loadTodos } from "@src/actions";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { AppContainer } from "react-hot-loader";
@@ -20,6 +21,8 @@ Rest.config = {
 };
 
 const store = createGlobalStore();
+// load intial data
+store.dispatch(loadTodos());
 
 ReactDOM.render(
     <AppContainer>
