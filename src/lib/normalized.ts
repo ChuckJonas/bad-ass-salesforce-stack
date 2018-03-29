@@ -13,8 +13,8 @@ export const forEach = <T>(normalizedObjs: Normalized<T>, callback: (obj: T) => 
   });
 };
 
-export const map = <T>(normalizedObjs: Normalized<T>, callback: (obj: T) => T): T[] => {
-  const ret: T[] = [];
+export const map = <T>(normalizedObjs: Normalized<T>, callback: (obj: T) => any) => {
+  const ret = [];
   normalizedObjs.allIds.forEach((id) => {
     ret.push(callback(normalizedObjs.byId[id]));
   });
