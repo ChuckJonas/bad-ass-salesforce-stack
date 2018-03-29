@@ -28,7 +28,7 @@
 ## GETTING STARTED
 
 ### Install SFDC-cli
-This workflow uses [sfdx-cli](https://developer.salesforce.com/tools/sfdxcli) to manage authinication and deployment of meta data to orgs.  Download and install.  You don't need to authorize a hub org unless you plan on developing against "scratch orgs".
+This workflow uses [sfdx-cli](https://www.npmjs.com/package/sfdx-cli) to manage authinication and deployment of meta data to orgs.   Run `npm install --global sfdx-cli`.  You don't need to authorize a hub org unless you plan on developing against "scratch orgs".
 
 ### Clone Starter Org
 1. `git clone https://github.com/ChuckJonas/bad-ass-salesforce-stack bass`
