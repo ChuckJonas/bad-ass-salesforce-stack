@@ -35,13 +35,13 @@ This workflow uses [sfdx-cli](https://developer.salesforce.com/tools/sfdxcli) to
 1. `npm install`
 
 ### Authentication
-To do much of anything you'll need to connect to one or more orgs. Use `sfdx force:org:list` to see a list of orgs you're already authenticated with. Connect to an existing sandbox using `sfdx force:auth:web:login -sr http://test.salesforce.com -a client_dev_sandbox`. For production orgs, just drop the `r` param, `sfdx force:auth:web:login  -sa my_prod_org`. And of course, you can create a scratch org using: `sfdx force:org:create -a test_new_feature`.
+To do much of anything you'll need to connect to one or more orgs. Use `sfdx force:org:list` to see a list of orgs you're already authenticated with. Connect to an existing sandbox using `sfdx force:auth:web:login -sr http://test.salesforce.com -a client_dev_sandbox`. For production orgs, just drop the `r` param, `sfdx force:auth:web:login -sa my_prod_org`. And of course, you can create a scratch org using: `sfdx force:org:create -a test_new_feature`.
 
 ### Setup Target Orgs
 
 Several commands take advantage of the following predefined "targets"
 * `dev`: to develop against a traditional salesforce org.  Developer or Sandbox
-* `scratch` allows development against a "scratch org" using the Salesforce DX flow.  Must authenticate with a `hub org`
+* `scratch`: allows development against a "scratch org" using the Salesforce DX flow.  Must authenticate with a `hub org`
 * `prod`: to release your app.  Can also be used to hotfix with live production data.  Don't be dumb and develop against production!
 
 You'll need to specific the associated alias each target in the `.npmrc` config file.
@@ -113,13 +113,13 @@ If you want to use this project as a template for your own simply:
 
 ### Renaming Page and Resource Bundle
 
-Before you start, You'll probably want to rename the page & resource bundle from App to something more specific. 
+Before you start, You'll probably want to rename the page & resource bundle from App to something more specific.
 
 Renaming the page is as simple as navigating to `force-app/main/default/pages` and renaming the `.page` and `.page-meta.xml`.
 
 To rename the Static Resource:
 
-1. rename `force-app/main/default/staticresource/App.resource-meta.xml` 
+1. rename `force-app/main/default/staticresource/App.resource-meta.xml`
 1. in package.json, find the `copy-bundle` and rename the copy target accordingly
 1. finally, just update your vf page to properly reference the new resource name
 
