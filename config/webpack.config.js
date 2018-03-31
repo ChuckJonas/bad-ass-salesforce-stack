@@ -46,9 +46,9 @@ module.exports = (env = {}) => {
     //get access token from sfdx
     var child_process = require('child_process');
     orgInfo = JSON.parse(child_process.execSync("sfdx force:org:display --json").toString('utf8'));
+    console.log(`Running as: ${orgInfo.result.username}`);
     GLOBAL_DEFINES.__ACCESSTOKEN__ = JSON.stringify(orgInfo.result.accessToken);
     GLOBAL_DEFINES.__RESTHOST__ = JSON.stringify(orgInfo.result.instanceUrl);
-
     DEV_SERVER.hot = true;
     DEV_SERVER.hotOnly = true;
   }
@@ -62,7 +62,6 @@ module.exports = (env = {}) => {
 
     entry: {
       app: [
-        'react-hot-loader/patch',
         'babel-polyfill',
         './src/index.tsx',
       ],
@@ -90,7 +89,6 @@ module.exports = (env = {}) => {
           include: PATHS.src,
           use:
           [
-            { loader: 'react-hot-loader/webpack' },
             {
               loader: 'awesome-typescript-loader',
               options: {

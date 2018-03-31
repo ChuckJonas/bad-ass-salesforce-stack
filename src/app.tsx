@@ -1,9 +1,9 @@
-import {Done, Todo} from '@src/components';
-import { Card, Layout, Tabs } from 'antd';
-import enUS from 'antd/lib/locale-provider/en_US';
+import { Done, Todo } from '@src/components';
+import { Card, Layout } from 'antd';
 import * as React from 'react';
+import { hot } from 'react-hot-loader';
 
-export class App extends React.Component<{}, {}> {
+class App extends React.Component<{}, {}> {
 
   constructor(props) {
     super(props);
@@ -22,3 +22,5 @@ export class App extends React.Component<{}, {}> {
     );
   }
 }
+
+export default hot(module)(App);
