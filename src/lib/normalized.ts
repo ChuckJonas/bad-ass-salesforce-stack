@@ -1,4 +1,4 @@
-
+// helpers for Normalized Object
 export const empty = <T>() => {
   const obj: Normalized<T> = {
     byId: {},

@@ -1,4 +1,4 @@
-import { Button, Icon, Timeline } from 'antd';
+import { Button } from 'antd';
 import * as React from 'react';
 
 interface ITodoItemProps {

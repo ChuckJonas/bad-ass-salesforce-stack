@@ -1,4 +1,4 @@
-import {ActionKeys, AddTodoAction, DeleteTodoAction, LoadTodoAction, MarkDoneAction} from '@src/actions';
+import { ActionKeys, AddTodoAction, DeleteTodoAction, LoadTodoAction, MarkDoneAction } from '@src/actions';
 import { TodoFields } from '@src/generated/sobs';
 import * as norm from '@src/lib/normalized';
 

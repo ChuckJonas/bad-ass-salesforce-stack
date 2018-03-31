@@ -1,5 +1,4 @@
 import { Todo, TodoFields } from '@src/generated/sobs';
-import { Dispatch } from 'redux';
 import { ActionKeys, PromiseThunk } from './';
 
 // action reducer types

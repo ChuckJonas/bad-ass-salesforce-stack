@@ -4,10 +4,11 @@ import { TodoItem } from '@src/components';
 import { TodoFields } from '@src/generated/sobs';
 import { GlobalState } from '@src/reducers';
 import { getTodo } from '@src/selectors/todoSelector';
-import { Card, List, Timeline } from 'antd';
+import { Card, List } from 'antd';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+
 import { Add } from './add';
 
 interface ITodoProps {

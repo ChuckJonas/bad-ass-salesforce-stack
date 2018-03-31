@@ -1,7 +1,5 @@
-import { GlobalState } from '@src/reducers';
 import { Button, Form, Input, message } from 'antd';
 import * as React from 'react';
-import { Dispatch } from 'redux';
 
 interface IAddProps {
   onAdd: (descr: string) => Promise<void>;

@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+
 import todo, { TodoState } from './todo';
 
 export interface GlobalState {
