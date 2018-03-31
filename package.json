@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "React, Redux, Typescript, antd, ts-force, sfdx starter",
   "author": "Charlie Jonas",
-  "homepage": "",
+  "homepage": "https://github.com/ChuckJonas/bad-ass-salesforce-stack",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ChuckJonas/bad-ass-salesforce-stack.git"
