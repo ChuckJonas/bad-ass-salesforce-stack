@@ -19,7 +19,6 @@ declare var __ACCESSTOKEN__: string;
 Rest.config = {
   accessToken: __ACCESSTOKEN__,
   instanceUrl:  __RESTHOST__,
-  version: 40,
 };
 
 // setup redux

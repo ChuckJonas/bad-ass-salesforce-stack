@@ -54,6 +54,7 @@ module.exports = (env = {}) => {
   }
 
   return {
+    mode: isDev ? 'development': 'production',
     cache: true,
     devtool: isDev ? 'eval-source-map' : 'source-map',
     devServer: DEV_SERVER,
@@ -70,6 +71,18 @@ module.exports = (env = {}) => {
       path: PATHS.dist,
       filename: '[name].js',
       publicPath: '/',
+    },
+
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+            commons: {
+                test: /[\\/]node_modules[\\/]/,
+                name: "vendors",
+                chunks: "all"
+            }
+        }
+      }
     },
 
     resolve: {
@@ -169,26 +182,11 @@ module.exports = (env = {}) => {
     plugins: [
       ...(isDev ? [
         new DashboardPlugin(),
-        new webpack.HotModuleReplacementPlugin({
-          // multiStep: true, // better performance with many files
-        }),
         new webpack.NamedModulesPlugin(),
-        new webpack.DefinePlugin( //inject global
-          GLOBAL_DEFINES),
+        new webpack.DefinePlugin(GLOBAL_DEFINES),
       ] : []),
       ...(isBuild ? [
-        new webpack.LoaderOptionsPlugin({
-          minimize: true,
-          debug: false
-        }),
-        new webpack.optimize.UglifyJsPlugin({
-          beautify: false,
-          compress: {
-            screw_ie8: true
-          },
-          comments: false,
-          sourceMap: isSourceMap,
-        }),
+        new webpack.DefinePlugin(GLOBAL_DEFINES),
         new HtmlWebpackPlugin({
           template: './index.html',
         }),

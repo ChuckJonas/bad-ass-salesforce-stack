@@ -8,11 +8,14 @@
 
     <div id="root"></div>
     <apex:outputPanel layout="none" rendered="{!$CurrentPage.parameters.local != '1'}">
-      <script type='text/javascript' src="{!URLFOR($Resource.app, 'app.js')}"></script>
-      <script type='application/json' src="{!URLFOR($Resource.app, 'app.js.map')}"></script>
+        <script type='text/javascript' src="{!URLFOR($Resource.app, 'vendors.js')}"></script>
+        <script type='application/json' src="{!URLFOR($Resource.app, 'vendors.js.map')}"></script>
+        <script type='text/javascript' src="{!URLFOR($Resource.app, 'app.js')}"></script>
+        <script type='application/json' src="{!URLFOR($Resource.app, 'app.js.map')}"></script>
     </apex:outputPanel>
 
     <apex:outputPanel layout="none" rendered="{!$CurrentPage.parameters.local == '1'}">
-      <script src="https://localhost:8080/app.js" />
+        <script src="https://localhost:8080/vendors.js" ></script>
+        <script src="https://localhost:8080/app.js" ></script>
     </apex:outputPanel>
 </apex:page>

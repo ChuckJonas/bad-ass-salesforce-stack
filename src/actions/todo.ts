@@ -25,7 +25,12 @@ export interface DeleteTodoAction {
 // load all todos
 export const loadTodos = (): PromiseThunk<void> =>
   async (dispatch) => {
-    const todos = await Todo.retrieve(`SELECT Id, Task__c, Done__c FROM Todo__c`);
+    const todos = await Todo.retrieve(
+      `SELECT Id,
+        ${Todo.FIELDS.task.apiName},
+        ${Todo.FIELDS.done.apiName}
+      FROM ${Todo.API_NAME}`);
+
     const action: LoadTodoAction = {
       type: ActionKeys.LOAD_TODOS,
       todos,
