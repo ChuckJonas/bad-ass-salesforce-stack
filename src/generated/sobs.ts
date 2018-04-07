@@ -77,6 +77,10 @@ export class Todo extends RestObject implements TodoFields {
         return await RestObject.query<Todo>(Todo, qry);
     }
 
+    public static fromSFObject(sob: SObject): Todo {
+        return new Todo().mapFromQuery(sob);
+    }
+
     public toImmutable(): TodoFields {
         return this.clone();
     }
