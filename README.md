@@ -4,7 +4,7 @@
 
 ***BAD ASS SALESFORCE STACK***
 
-![bass like fish](https://raw.githubusercontent.com/ChuckJonas/bad-ass-salesforce-stack/master/images/bass-no-software.jpg)
+![bass like the fish](https://user-images.githubusercontent.com/5217568/38460726-edbf16aa-3a7c-11e8-80f9-58e109e652cf.jpg)
 
 * [react](https://facebook.github.io/react/): all the cool kids are doing it
 * [redux](http://redux.js.org/): wizard state managment
