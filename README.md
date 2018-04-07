@@ -31,14 +31,15 @@
 
 This workflow uses [sfdx-cli](https://www.npmjs.com/package/sfdx-cli) to manage authinication and deployment of meta data to orgs.   Run `npm install --global sfdx-cli`.  You don't need to authorize a hub org unless you plan on developing against "scratch orgs".
 
-### Clone Starter Org
+### Clone Starter
 
 1. `git clone https://github.com/ChuckJonas/bad-ass-salesforce-stack bass`
 1. `cd bass`
+1. optional: `git checkout` the `redux-example` or `react-example branches`
 1. `npm install`
 
 ### Authentication
-To do much of anything you'll need to connect with one or more orgs. Use `sfdx force:org:list` to see a list of orgs you're already authenticated with. Connect to an existing sandbox using `sfdx force:auth:web:login -sr http://test.salesforce.com -a client_dev_sandbox`. For production orgs, just drop the `r` param, `sfdx force:auth:web:login -sa my_prod_org`. And of course, you can create a scratch org using: `sfdx force:org:create -a test_new_feature`.
+To do much of anything you'll need to connect with one or more orgs. Use `sfdx force:org:list` to see a list of orgs you're already authenticated with. Connect to an existing sandbox using `sfdx force:auth:web:login -sr http://test.salesforce.com -a client_dev_sandbox`. For production orgs, just drop the `r` param, `sfdx force:auth:web:login -sa my_prod_org`. You can also create a scratch org using: `npm run new-scratch-org`.
 
 ### Setup Target Orgs
 
@@ -57,6 +58,7 @@ scratch_alias=test_new_feature
 prod_alias=my_prod_org
 
 ```
+
 *NOTE: Don't track changes to `.npmrc`. Each contributor will manage this configuration separately and committing it could result in another user accidentally deploying to an unintended org.
 
 #### Default Target
@@ -120,7 +122,7 @@ If you want to use this project as a template for your own simply:
 
 ### Renaming Page and Resource Bundle
 
-Before you start, You'll probably want to rename the page & resource bundle from App to something more specific.
+Before you start your own project, you'll probably want to rename the page & resource bundle from App to something more specific.
 
 Renaming the page is as simple as navigating to `force-app/main/default/pages` and renaming the `.page` and `.page-meta.xml`.
 
@@ -140,10 +142,9 @@ You can change the antd theme less varibles by editing `/styles/ant-theme-vars.l
 
 This project comes equiped with ts-force to allow you to access saleforce data in a typed manor.  To use ts-force, you must first generate classes for the SObjects you want to work with.
 
-You can do this by editing `ts-force-config.json`.  Make sure to `auth: {username: ""}` is set to the target org alias you want to use to generate classes.
+You can do this by editing `ts-force-config.json`.  Make sure `auth: {username: ""}` is set to the target org alias you want to use to generate classes. ***This should be the end user for the app!***
 
-For more details on configuration, see ts-force [documenation](https://github.com/ChuckJonas/ts-force).
-
+For more details on configuration, see the [ts-force documenation](https://github.com/ChuckJonas/ts-force).
 
 ### changing localhost port
 
@@ -158,13 +159,16 @@ if you change the port, don't forget to update salesforce w/ `npm run cors-enabl
 
 ### vscode
 
-Higly recommend using vcode (typescript code completion, in editor terminal, etc)
+Higly recommend using vcode (typescript code completion, in editor terminal, etc).
 
 plugins:
 
-* ts-lint: green squigglies everywhere!
-* sfdx plugins: gives your code completion on your `force-app` and ability to excute commands against the CLI
-* autoclose tag
+* [Debugger for Chrome](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome): Allows debugging in vscode
+* [TSlint](https://marketplace.visualstudio.com/items?itemName=eg2.tslint): green squigglies everywhere!
+* [Salesforce Extensions for VS Code](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode): gives your code completion on your `force-app` and ability to excute commands against the CLI
+* [Auto Close Tag](https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-close-tag)
+* [Typescript Hero](https://marketplace.visualstudio.com/items?itemName=rbbit.typescript-hero): auto-imports, etc
+* [Jest](https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest): run tests on save
 
 ### helpful linkies
 
