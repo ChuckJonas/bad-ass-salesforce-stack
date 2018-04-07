@@ -142,15 +142,6 @@ module.exports = (env = {}) => {
           include: [PATHS.src],
           use: { loader: 'json-loader' },
         },
-        // // less
-        // {
-        //   test: /\.less$/,
-        //   include: [PATHS.STYLES],
-        //   loader: ExtractTextPlugin.extract([
-        //     'css-loader?{modules: false}',
-        //     'less-loader',
-        //   ]),
-        // },
         // // images
         // {
         //   test: /\.(jpg|jpeg|png|gif|svg)$/,
