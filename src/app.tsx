@@ -1,25 +1,32 @@
-import { Done, Todo } from '@src/components';
-import { Card, Layout } from 'antd';
+import { AccountDisplay } from '@src/components/accountDisplay';
+import {Account, AccountFields} from '@src/generated/sobs';
+import { Layout } from 'antd';
 import * as React from 'react';
 import { hot } from 'react-hot-loader';
+import { generateSelect } from 'ts-force';
 
-class App extends React.Component<{}, {}> {
+interface AppState {
+  acc: AccountFields;
+}
+
+class App extends React.Component<{}, AppState> {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      acc: null,
+    };
+  }
+
+  public componentDidMount() {
+    // get all fields
+    Account.retrieve(`SELECT ${generateSelect(Object.values(Account.FIELDS))} FROM Account LIMIT 1`)
+    .then((accs) => this.setState({acc: accs[0]}));
   }
 
   public render() {
-    return (
-      <Layout>
-        <Layout.Content>
-          <Card title='B.A.S.S. Starter TODO Example'>
-              <Todo />
-              <Done />
-          </Card>
-        </Layout.Content>
-      </Layout>
-    );
+    return <AccountDisplay acc={this.state.acc} />;
   }
 }
 
