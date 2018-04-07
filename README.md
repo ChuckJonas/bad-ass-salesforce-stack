@@ -39,6 +39,7 @@ This workflow uses [sfdx-cli](https://www.npmjs.com/package/sfdx-cli) to manage 
 1. `npm install`
 
 ### Authentication
+
 To do much of anything you'll need to connect with one or more orgs. Use `sfdx force:org:list` to see a list of orgs you're already authenticated with. Connect to an existing sandbox using `sfdx force:auth:web:login -sr http://test.salesforce.com -a client_dev_sandbox`. For production orgs, just drop the `r` param, `sfdx force:auth:web:login -sa my_prod_org`. You can also create a scratch org using: `npm run new-scratch-org`.
 
 ### Setup Target Orgs
@@ -79,7 +80,7 @@ Before you can run the example app, you need to get depedent metadata into your 
 
 ### Run Locally with HMR (hot module reloading)
 
-One of the biggest benifits of this stack is the ability to work locally with real salesforce data! HMR allows updates to show up within seconds without ever having to refresh the page. Your state is even also preserved in most cases. [See HMR in action](http://i.imgur.com/j9NBbmf.gif).
+One of the biggest benefits of this stack is the ability to work locally with real salesforce data! HMR allows updates to show up within seconds without ever having to refresh the page. Your state is even also preserved in most cases. [See HMR in action](http://i.imgur.com/j9NBbmf.gif).
 
 One of the biggest benefits to local dev is the ability to keep your Sandbox in a UAT state, while you are activitly develping new features.
 
@@ -99,7 +100,8 @@ Another option is to run your app in Salesforce, but using local copies of the a
 * DANGER: while allowing salesforce to accept request from a localhost server is awesome for hot reloading it has security risks. It's best if you don't do this in a prodcution or org with sensitive data. But if you did, be sure to disable cors when done with `npm run cors-disable` to disable the security hole!!! [why?](https://stackoverflow.com/questions/39042799/cors-localhost-as-allowed-origin-in-production)*
 
 ### Deployment
-If you have changes to salesforce metadata, or you're ready to test everything fully hosted on salesforce do a deployment to the desired target with one of the following commands
+
+This starter offers 1 set build & deploy to each of the 3 targets.
 
 ```npm
 
@@ -108,6 +110,10 @@ npm run deploy-scratch
 npm run deploy-prod
 
 ```
+
+This diagram outlines the process.
+![build -> deploy process](https://user-images.githubusercontent.com/5217568/38460835-58583ecc-3a7f-11e8-994d-ce8694426493.png)
+
 
 ## Starting your own project
 
