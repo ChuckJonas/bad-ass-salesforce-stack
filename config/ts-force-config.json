@@ -1,6 +1,6 @@
 {
   "auth": {
-    "username": "demo@bass.starter"
+    "username": "example-user"
   },
   "sObjects": ["Account"],
   "outPath": "./src/generated/sobs.ts"
