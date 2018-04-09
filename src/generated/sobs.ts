@@ -82,7 +82,7 @@ export class Account extends RestObject implements AccountFields {
     public id: string;
     @sField({ apiName: 'IsDeleted', readOnly: true, required: false, reference: undefined, childRelationship: false, salesforceType: SalesforceFieldType.BOOLEAN, salesforceLabel: 'Deleted' })
     public isDeleted: boolean;
-    @sField({ apiName: 'MasterRecord', readOnly: true, required: false, reference: () => { return Account }, childRelationship: false, salesforceType: undefined, salesforceLabel: 'undefined' })
+    @sField({ apiName: 'MasterRecord', readOnly: true, required: false, reference: () => { return Account }, childRelationship: false, salesforceType: undefined, salesforceLabel: '' })
     public masterRecord: Account;
     @sField({ apiName: 'MasterRecordId', readOnly: true, required: false, reference: undefined, childRelationship: false, salesforceType: SalesforceFieldType.REFERENCE, salesforceLabel: 'Master Record ID' })
     public masterRecordId: string;
@@ -90,7 +90,7 @@ export class Account extends RestObject implements AccountFields {
     public name: string;
     @sField({ apiName: 'Type', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: SalesforceFieldType.PICKLIST, salesforceLabel: 'Account Type' })
     public type: string;
-    @sField({ apiName: 'Parent', readOnly: true, required: false, reference: () => { return Account }, childRelationship: false, salesforceType: undefined, salesforceLabel: 'undefined' })
+    @sField({ apiName: 'Parent', readOnly: true, required: false, reference: () => { return Account }, childRelationship: false, salesforceType: undefined, salesforceLabel: '' })
     public parent: Account;
     @sField({ apiName: 'ParentId', readOnly: false, required: false, reference: undefined, childRelationship: false, salesforceType: SalesforceFieldType.REFERENCE, salesforceLabel: 'Parent Account ID' })
     public parentId: string;
