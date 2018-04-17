@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Rest } from 'ts-force';
+import { Rest, setDefaultConfig } from 'ts-force';
 
 import App from './app';
 
@@ -13,10 +13,10 @@ declare var __RESTHOST__: string;
 declare var __ACCESSTOKEN__: string;
 
 // setup ts-force auth
-Rest.config = {
+setDefaultConfig({
   accessToken: __ACCESSTOKEN__,
   instanceUrl:  __RESTHOST__,
-};
+});
 
 
 ReactDOM.render(<App />, document.getElementById('root') as HTMLElement);
