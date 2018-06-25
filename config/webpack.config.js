@@ -131,7 +131,8 @@ module.exports = (env = {}) => {
             {
               loader: "less-loader",
               options: {
-                modifyVars: themeVariables
+                modifyVars: themeVariables,
+                javascriptEnabled: true
               }
             }
           ]
