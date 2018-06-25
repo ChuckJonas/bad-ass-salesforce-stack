@@ -11,7 +11,7 @@ class App extends React.Component<{}, {}> {
   public render() {
     return (
       <Card title='B.A.S.S. Blank!'>
-          Testingg le, check out the redux-example or react-example branches!
+        For more interesting examples, check out the redux-example or react-example branches!
       </Card>
     );
   }
