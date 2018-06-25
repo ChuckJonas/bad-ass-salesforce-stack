@@ -1,5 +1,6 @@
 // Place your settings in this file to overwrite default and user settings.
 {
 "tslint.exclude": "**/generated/**/*.ts",
-"typescript.tsdk": "node_modules/typescript/lib"
+"typescript.tsdk": "node_modules/typescript/lib",
+"typescriptHero.imports.disableImportsSorting": true
 }
