@@ -32,7 +32,7 @@ export class AccountDisplay extends React.Component<AccountDisplayProps, {}> {
     return Object.keys(this.props.acc).map((key: keyof AccountFields) => {
       const meta = Account.FIELDS[key];
       if (meta && this.props.acc[key]) {
-        return <Form.Item label={meta.salesforceLabel}>{this.props.acc[key].toString()}</Form.Item>;
+        return <Form.Item key={key} label={meta.salesforceLabel}>{this.props.acc[key].toString()}</Form.Item>;
       }
       return null;
     });
