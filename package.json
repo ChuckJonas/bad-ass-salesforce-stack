@@ -13,7 +13,7 @@
   "main": "dist/app.js",
   "scripts": {
     "start": "npm run start-sfdc",
-    "start-sfdc": "webpack-dev-server --config config/webpack.config.js --open --https --hot",
+    "start-sfdc": "webpack-dev-server --config config/webpack.config.js --https --hot",
     "start-local": "webpack-dev-server --config config/webpack.config.js --open --hot --env.local",
     "cors-enable": "sfdx force:mdapi:deploy -d ./config/sfdc-cors-enable -w 10000",
     "cors-disable": "sfdx force:mdapi:deploy -d ./config/sfdc-cors-disable -w 10000",
