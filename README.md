@@ -78,11 +78,10 @@ npm run make-prod-default
 The most flexible development setup is to use `localhost` to serve assets on your VF page in salesforce. You'll be able to make changes from your IDE and salesforce will automatically update on the fly.  Updates will only show for you and not impact any other users in that environment.  You will not be limited from using any salesforce features you might need.
 
 1. Deploy your application (step needs to happen whenever the contents of `force-app` change)
-2. `npm run cors-enable`: whitelist localhost CORS on the default target org.  Make sure your default sfdx org is properly set. Only needs to run once for each target (see "Danger Localhost CORS")*
-3. `npm run start-sfdc` (or just `npm start`)
-4. navigate to your page EG: `/apex/app`
-5. append `?local=1` to page query string
-6. browser may complain the first time.  Open the script URL and
+2. `npm run start-sfdc` (or just `npm start`)
+3. navigate to your page EG: `/apex/app`
+4. append `?local=1` to page query string
+5. browser may complain the first time.  Open the script URL and
 
 #### How it works
 
@@ -164,8 +163,8 @@ For more details on configuration, see the [ts-force documentation](https://gith
 Unfortunately the port isn't currently managed from a single point and must be updated in 2 places:
 
 1. In `/config/webpack.config.json` update the `PORT` constant
-2. In `/config/sfdc-cors-enable` update it on both files.
-3. in `/force-app/main/default/pages/App.Page`, update the "Local Dev" panel
+2. In `/config/sfdc-cors-enable` update it on both files
+3. in `/force-app/main/default/pages/App.Page`, update the "Local Asset" panel
 
 ```html
     <apex:outputPanel layout="none" rendered="{!$CurrentPage.parameters.local == '1'}">
