@@ -62,6 +62,7 @@ module.exports = (env = {}) => {
     context: PATHS.root,
     entry: {
       app: [
+        'babel-polyfill',
         './src/index.tsx'
       ],
     },
