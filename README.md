@@ -7,7 +7,7 @@
 ![bass like the fish](https://user-images.githubusercontent.com/5217568/38460726-edbf16aa-3a7c-11e8-80f9-58e109e652cf.jpg)
 
 * [react](https://facebook.github.io/react/): all the cool kids are doing it
-* [redux](http://redux.js.org/): wizard state managment
+* [redux](http://redux.js.org/): wizard state management
 * [typescript](https://www.typescriptlang.org/): business in the front, party in the back
 * [antd](https://ant.design/docs/react/introduce): the most useful thing to come out of China since [the fork](https://en.wikipedia.org/wiki/Fork)
 * [ts-force](https://www.npmjs.com/package/ts-force): generates massive files so you don't have toooo
@@ -16,11 +16,12 @@
 
 ## FEATURES
 
-* develop on localhost with Hot Module Reloading and "Real" salesforce data
-* develop w/ local asset on visualforce page
-* 1 step build & prompt to orgs
+* develop w/ local asset on VisualForce page
+* develop on localhost (REST API only)
+* Hot Module Reloading (HMR)!
+* 1 step build & deploy to orgs
 * works with for developer, sandbox, scratch and even production orgs
-* type safey and completion when working with SF objects
+* type safety and completion when working with SF objects
 * jest test framework
 * setup for Redux Developer tools ([browser extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en))
 * setup for debugging in [vscode chrome debugger](https://github.com/Microsoft/vscode-chrome-debug)
@@ -29,18 +30,18 @@
 
 ### Install SFDC-cli
 
-This workflow uses [sfdx-cli](https://www.npmjs.com/package/sfdx-cli) to manage authinication and deployment of meta data to orgs.   Run `npm install --global sfdx-cli`.  You don't need to authorize a hub org unless you plan on developing against "scratch orgs".
+This workflow uses [sfdx-cli](https://www.npmjs.com/package/sfdx-cli) to manage authentication and deployment of meta data to orgs.   Run `npm install --global sfdx-cli`.  You don't need to authorize a hub org unless you plan on developing against "scratch orgs".
 
 ### Clone Starter
 
 1. `git clone https://github.com/ChuckJonas/bad-ass-salesforce-stack bass`
-1. `cd bass`
-1. optional: `git checkout` the `redux-example` or `react-example branches`
-1. `npm install`
+2. `cd bass`
+3. optional: `git checkout` the `redux-example` or `react-example branches`
+4. `npm install`
 
 ### Authentication
 
-To do much of anything you'll need to connect with one or more orgs. Use `sfdx force:org:list` to see a list of orgs you're already authenticated with. Connect to an existing sandbox using `sfdx force:auth:web:login -sr http://test.salesforce.com -a client_dev_sandbox`. For production orgs, just drop the `r` param, `sfdx force:auth:web:login -sa my_prod_org`. You can also create a scratch org using: `npm run new-scratch-org`.
+To do much of anything you'll need to connect with one or more orgs. Use `sfdx force:org:list` to see a list of orgs you're already authenticated with. Connect to an existing sandbox using `sfdx force:auth:web:login -sr [ORG_URL] -a [ALIAS]`. You can also create a scratch org using: `npm run new-scratch-org`.
 
 ### Setup Target Orgs
 
@@ -50,81 +51,87 @@ Several commands take advantage of the following predefined "targets"
 * `scratch`: allows development against a "scratch org" using the Salesforce DX flow.  Must authenticate with a `hub org`
 * `prod`: to release your app.  Can also be used to hotfix with live production data.  Don't be dumb and develop against production!
 
-You'll need to specific the associated alias each target in the `.npmrc` config file.
+You'll need to specific the associated alias each target in the `.npmrc` config file.  You can use either the alias or the username here.
 
-```
-
-dev_alias=client_dev_sandbox
+```env
+dev_alias=dev_username
 scratch_alias=test_new_feature
-prod_alias=my_prod_org
-
+prod_alias=prod_user
 ```
 
-*NOTE: Don't track changes to `.npmrc`. Each contributor will manage this configuration separately and committing it could result in another user accidentally deploying to an unintended org.
+*NOTE: You might want to ignore `.npmrc` for your repo. Each contributor will manage this configuration separately and committing it could result in another user accidentally deploying to an unintended org.  This is especially true if you use the sfdx alias over the username
 
 #### Default Target
 
-While deployment command are env specific, some commands (eg: `npm start`) use the default DX user. Use the following commands to change the defaults to the desired alias listed in `.npmrc`
+While `deploy` scripts are env specific, some commands (eg: `npm start-local`, `npm enable-cors`) use the default DX user. You can use following scripts to switch the default user to the desired alias listed in `.npmrc`
 
-```
+```bash
 npm run make-dev-default
 npm run make-scratch-default
 npm run make-prod-default
 ```
 
-### Deploy Meta-data
-
-Before you can run the example app, you need to get depedent metadata into your target org. You can easily do this by running `npm run deploy-dev` OR `npm run deploy-scratch`.
-
 ## DEVELOPMENT
 
-### Run Locally with HMR (hot module reloading)
+### Salesforce w/ Local Assets
 
-One of the biggest benefits of this stack is the ability to work locally with real salesforce data! HMR allows updates to show up within seconds without ever having to refresh the page. Your state is even also preserved in most cases. [See HMR in action](http://i.imgur.com/j9NBbmf.gif).
+The most flexible development setup is to use `localhost` to serve assets on your VF page in salesforce. You'll be able to make changes from your IDE and salesforce will automatically update on the fly.  Updates will only show for you and not impact any other users in that environment.  You will not be limited from using any salesforce features you might need.
 
-One of the biggest benefits to local dev is the ability to keep your Sandbox in a UAT state, while you are activitly develping new features.
+1. Deploy your application (step needs to happen whenever the contents of `force-app` change)
+2. `npm run cors-enable`: whitelist localhost CORS on the default target org.  Make sure your default sfdx org is properly set. Only needs to run once for each target (see "Danger Localhost CORS")*
+3. `npm run start-sfdc` (or just `npm start`)
+4. navigate to your page EG: `/apex/app`
+5. append `?local=1` to page query string
+6. browser may complain the first time.  Open the script URL and
 
-1. `npm run cors-enable` (only need to run once. whitelists localhost CORS on the default target org) DANGER (see "Danger Localhost CORS")*
-1. `npm start` (start a local webserver with hot reload)
+#### How it works
 
-### Run Remotely With Local Assets
-Another option is to run your app in Salesforce, but using local copies of the app assets. You'll be able to make changes to the app and test inside the salesforce container page, but your changes will only show for you and not impact any other users in that environment.  This is very helpful in ensuring your app runs in the SF org before deploying.
+You can see how this is configured by looking at `force-app/main/default/pages/App.page`.  Basically, we have two output panels that render conditionally based on the url param `local == 1`.
 
-1. `npm run cors-enable` (only need to run once. whitelists localhost CORS on the default target org) DANGER (see "Danger Localhost CORS")*
-1. `npm run start-remote`
-1. append `?local=1` to page query string
-1. browser may complain the first time.  Open up script url and tell browser to f-off
+### Localhost
 
-### Danger Localhost CORS
+This starter is also configured with the ability to run completely on `localhost`.  While there are many benefits to local dev, **you will be limited to communicating with salesforce ONLY through the REST API** (`@RemoteAction`, Custom Controllers, Streaming API, etc will not run on locally host).
 
-* DANGER: while allowing salesforce to accept request from a localhost server is awesome for hot reloading it has security risks. It's best if you don't do this in a prodcution or org with sensitive data. But if you did, be sure to disable cors when done with `npm run cors-disable` to disable the security hole!!! [why?](https://stackoverflow.com/questions/39042799/cors-localhost-as-allowed-origin-in-production)*
+1. `npm run cors-enable` (only need to run once. whitelist localhost CORS on the default target org). See Warning[^1]
+2. `npm run start-local` (start a local webserver with hot reload)
 
-### Deployment
+Localhost dev is really helpful for prototyping and even full applications depending on the requirements.  If you are only using the REST API and your `App.page` doesn't change often, this might be the more convenient development setup.
 
-This starter offers 1 set build & deploy to each of the 3 targets.
+#### How it works
+
+- webpack will use SFDX to grab a session token & host from your current "default user" (can be changed via `npm run make-[target]-default`) and inject it into the global scope
+- the `config/index.html` file will act like the VF pages (this always needs to reflect your setup in `App.page`)
+  - if you inject any other variables into the global scope, you will also need to include these
+
+[^1] DANGER: while allowing salesforce to accept request from a localhost server is awesome for hot reloading it has security risks. It's best if you don't do this in a production or org with sensitive data. But if you did, be sure to disable cors when done with `npm run cors-disable` to disable the security hole!!! [why?](https://stackoverflow.com/questions/39042799/cors-localhost-as-allowed-origin-in-production)*
+
+## Hot Module Reloading (HMR)
+
+Regardless of which development setup you use, you can take advantage of Hot Module Reloading (HMR), which allows updates to show up within seconds without ever having to refresh the page. Your application state is even also preserved in many cases. [See HMR in action](http://i.imgur.com/j9NBbmf.gif).
+
+## Deployment
+
+This starter offers 1 step build & deploy to each of the 3 targets.
 
 ```npm
-
 npm run deploy-dev
 npm run deploy-scratch
 npm run deploy-prod
-
 ```
 
 This diagram outlines the process.
 ![build -> deploy process](https://user-images.githubusercontent.com/5217568/38460835-58583ecc-3a7f-11e8-994d-ce8694426493.png)
-
 
 ## Starting your own project
 
 If you want to use this project as a template for your own simply:
 
 1. `rm -r -f .git` (WARNING: no going back!)
-1. `git init`
-1. optionally add [git remote](https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/)
-1. configure & run ts-force gen
-1. rename page & resource bundle (optional)
-1. remove example files
+2. `git init`
+3. optionally add [git remote](https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/)
+4. configure & `npm run ts-force-generate`
+5. rename page & resource bundle (optional)
+6. remove example files
 
 ### Renaming Page and Resource Bundle
 
@@ -142,22 +149,30 @@ To rename the Static Resource:
 
 ### antd theming
 
-You can change the antd theme less varibles by editing `/styles/ant-theme-vars.less`.  Unforuntely changes require a webpack restart to show up :(
+You can change the antd theme less variables by editing `/styles/ant-theme-vars.less`.  Unfortunately changes require a webpack restart to show up :(
 
 ### ts-force configuration
 
-This project comes equiped with ts-force to allow you to access saleforce data in a typed manor.  To use ts-force, you must first generate classes for the SObjects you want to work with.
+This project comes equipped with ts-force to allow you to access Salesforce data in a typed manor.  To use ts-force, you must first generate classes for the SObjects you want to work with.
 
 You can do this by editing `ts-force-config.json`.  Make sure `auth: {username: ""}` is set to the target org alias you want to use to generate classes. ***This should be the end user for the app!***
 
-For more details on configuration, see the [ts-force documenation](https://github.com/ChuckJonas/ts-force).
+For more details on configuration, see the [ts-force documentation](https://github.com/ChuckJonas/ts-force).
 
 ### changing localhost port
 
-Unforuntely the port isn't currently managed from a single point and must be updated in 2 places:
+Unfortunately the port isn't currently managed from a single point and must be updated in 2 places:
 
-1. `/config/webpack.config.json` on the `DEV_SERVER` object
-1. in `/config/sfdc-cors-enable` update it on both files.
+1. In `/config/webpack.config.json` update the `PORT` constant
+2. In `/config/sfdc-cors-enable` update it on both files.
+3. in `/force-app/main/default/pages/App.Page`, update the "Local Dev" panel
+
+```html
+    <apex:outputPanel layout="none" rendered="{!$CurrentPage.parameters.local == '1'}">
+        <script src="https://localhost:8080/vendors.js" ></script>
+        <script src="https://localhost:8080/app.js" ></script>
+    </apex:outputPanel>
+```
 
 if you change the port, don't forget to update salesforce w/ `npm run cors-enable`
 
@@ -165,7 +180,7 @@ if you change the port, don't forget to update salesforce w/ `npm run cors-enabl
 
 ### vscode
 
-Higly recommend using vcode (typescript code completion, in editor terminal, etc).
+Highly recommend using vscode (typescript code completion, in editor terminal, etc).
 
 plugins:
 
@@ -175,6 +190,7 @@ plugins:
 * [Auto Close Tag](https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-close-tag)
 * [Typescript Hero](https://marketplace.visualstudio.com/items?itemName=rbbit.typescript-hero): auto-imports, etc
 * [Jest](https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest): run tests on save
+* [Webpack Dashboard App](https://www.google.com/search?q=webpack+dashboard+electron&oq=webpack+dashboard+e&aqs=chrome.1.69i57j0j69i60l3j0.6080j1j7&sourceid=chrome&ie=UTF-8): nice app for you webpack-dev-server status
 
 ### helpful linkies
 
