@@ -81,7 +81,7 @@ The most flexible development setup is to use `localhost` to serve assets on you
 2. `npm run start-sfdc` (or just `npm start`)
 3. navigate to your page EG: `/apex/app`
 4. append `?local=1` to page query string
-5. browser may complain the first time.  Open the script URL and
+5. your browser will likely fail to load your resources.  Follow [this guide on how to make your system trust the localhost cert](http://www.robpeck.com/2010/10/google-chrome-mac-os-x-and-self-signed-ssl-certificates/#.W05wP9hKjUJ).  Alternately, you can open the asset url, click advanced and then "proceed anyways".  However, you will have to repeat this step often.
 
 #### How it works
 
