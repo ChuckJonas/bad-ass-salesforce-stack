@@ -7,10 +7,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const PORT = 8080; //should match ./config/sfdc-cors-enable
 
+const STATIC_RESOURCE_NAME = 'app';
+
 const PATHS = {
   root: path.resolve(__dirname, '..'),
   nodeModules: path.resolve(__dirname, '../node_modules'),
   src: path.resolve(__dirname, '../src'),
+  assets: path.resolve(__dirname, '../src/assets'),
   dist: path.resolve(__dirname, '../dist'),
   styles: path.resolve(__dirname, '../src/styles'),
   localTemplate: path.resolve(__dirname, '../config/index.html'),
@@ -69,7 +72,7 @@ module.exports = (env = {}) => {
     output: {
       path: PATHS.dist,
       filename: '[name].js',
-      publicPath: (isBuild || isLocal ? '/' : `https://localhost:${PORT}/`) //setup for HMR when hosted with salesforce
+      publicPath: (isBuild ? `/resource/${STATIC_RESOURCE_NAME}/dist/` : isLocal ? '/' : `https://localhost:${PORT}/`) //setup for HMR when hosted with salesforce
     },
 
     optimization: {
@@ -142,31 +145,30 @@ module.exports = (env = {}) => {
           include: [PATHS.src],
           use: { loader: 'json-loader' },
         },
-        // // images
-        // {
-        //   test: /\.(jpg|jpeg|png|gif|svg)$/,
-        //   include: [PATHS.IMAGES],
-        //   use: {
-        //     loader: 'url-loader',
-        //     options: {
-        //       name: 'images/[hash].[ext]',
-        //       limit: 1000, // inline file data until size
-        //     },
-        //   },
-        // },
-        // // fonts
-        // {
-        //   test: /\.(woff|woff2|ttf|eot)$/,
-        //   include: [
-        //     PATHS.ASSETS,
-        //   ],
-        //   use: {
-        //     loader: 'file-loader',
-        //     options: {
-        //       name: 'fonts/[name].[hash].[ext]',
-        //     },
-        //   },
-        // },
+        // images
+        {
+          test: /\.(jpg|jpeg|png|gif|svg)$/,
+          include: [PATHS.assets],
+          use: {
+            loader: 'file-loader',
+            options: {
+              name: '[path][hash].[ext]',
+            },
+          },
+        },
+        // fonts
+        {
+          test: /\.(woff|woff2|ttf|eot)$/,
+          include: [
+            PATHS.assets,
+          ],
+          use: {
+            loader: 'file-loader',
+            options: {
+              name: 'fonts/[name].[hash].[ext]',
+            },
+          },
+        },
       ],
     },
 

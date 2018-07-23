@@ -27,7 +27,7 @@
     "make-prod-default": "sfdx force:config:set defaultusername=$npm_config_prod_alias",
     "bundle-app-dev": "npm run compile-dev && npm run copy-bundle",
     "bundle-app-prod": "npm run compile-prod && npm run copy-bundle",
-    "copy-bundle": "zip -j ./force-app/main/default/staticresources/app.zip ./dist/app.js ./dist/app.js.map ./dist/vendors.js ./dist/vendors.js.map && mv ./force-app/main/default/staticresources/app.zip ./force-app/main/default/staticresources/app.resource",
+    "copy-bundle": "zip  -r ./force-app/main/default/staticresources/app.zip ./dist && mv ./force-app/main/default/staticresources/app.zip ./force-app/main/default/staticresources/app.resource",
     "package-sfdc": "sfdx force:source:convert -d ./dist/sfdc-package",
     "build-dev": "npm run bundle-app-dev && npm run package-sfdc",
     "build-prod": "npm run bundle-app-prod && npm run package-sfdc",
@@ -44,7 +44,7 @@
     "reinstall:win": "rd /s /q node_modules && npm"
   },
   "dependencies": {
-    "antd": "^3.6.2",
+    "antd": "^3.7.0",
     "babel-jest": "^21.0.2",
     "babel-polyfill": "^6.26.0",
     "react": "^16.4.0",
@@ -72,6 +72,7 @@
     "css-loader": "^0.28.7",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
+    "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^22.2.2",
     "less": "^3.0.4",

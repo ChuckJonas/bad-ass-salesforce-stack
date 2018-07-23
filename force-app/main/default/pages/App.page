@@ -8,10 +8,10 @@
 
     <div id="root"></div>
     <apex:outputPanel layout="none" rendered="{!$CurrentPage.parameters.local != '1'}">
-        <script type='text/javascript' src="{!URLFOR($Resource.app, 'vendors.js')}"></script>
-        <script type='application/json' src="{!URLFOR($Resource.app, 'vendors.js.map')}"></script>
-        <script type='text/javascript' src="{!URLFOR($Resource.app, 'app.js')}"></script>
-        <script type='application/json' src="{!URLFOR($Resource.app, 'app.js.map')}"></script>
+        <script type='text/javascript' src="{!URLFOR($Resource.app, 'dist/vendors.js')}"></script>
+        <script type='application/json' src="{!URLFOR($Resource.app, 'dist/vendors.js.map')}"></script>
+        <script type='text/javascript' src="{!URLFOR($Resource.app, 'dist/app.js')}"></script>
+        <script type='application/json' src="{!URLFOR($Resource.app, 'dist/app.js.map')}"></script>
     </apex:outputPanel>
 
     <apex:outputPanel layout="none" rendered="{!$CurrentPage.parameters.local == '1'}">
