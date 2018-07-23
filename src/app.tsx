@@ -3,7 +3,7 @@ import { hot } from 'react-hot-loader'; // needs to be before react!
 import * as React from 'react';
 
 // example use of file loader to load image
-const bassLogo = require('@src/assets/images/bass-logo.jpg');
+import bassLogo from '@src/assets/images/bass-logo.jpg';
 
 interface AppState {
   drawerVisible: boolean;
