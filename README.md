@@ -138,12 +138,12 @@ Before you start your own project, you'll probably want to rename the page & res
 
 Renaming the page is as simple as navigating to `force-app/main/default/pages` and renaming the `.page` and `.page-meta.xml`.
 
-#### To rename the Static Resource
+#### To rename the generated Static Resource
 
-1. rename `force-app/main/default/staticresource/App.resource-meta.xml`
-1. in package.json, find the `copy-bundle` and rename the copy `.resource` target accordingly
-1. in `webpack.config.js` update the `STATIC_RESOURCE_NAME`
-1. finally, just update your vf page to properly reference the new resource name
+1. in `package.json` update `resource` under `config` section
+2. delete the old resource from `force-app/main/default/staticresource` (if it already exists)
+3. optionally, update your `.gitignore` to exclude these files
+4. finally, just update your vf page to properly reference the new resource name
 
 ## OTHER CONFIGURATIONS
 
