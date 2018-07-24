@@ -4,10 +4,7 @@ const DashboardPlugin = require('webpack-dashboard/plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-
 const PORT = 8080; //should match ./config/sfdc-cors-enable
-
-const STATIC_RESOURCE_NAME = 'app';
 
 const PATHS = {
   root: path.resolve(__dirname, '..'),
@@ -25,6 +22,7 @@ const lessToJs = require('less-vars-to-js');
 const themeVariables = lessToJs(fs.readFileSync(path.join(PATHS.styles, './ant-theme-vars.less'), 'utf8'));
 
 module.exports = (env = {}) => {
+  const resourceName = env.resource || 'app';
   const isBuild = !!env.build;
   const isLocal = env.local;
 
@@ -72,7 +70,7 @@ module.exports = (env = {}) => {
     output: {
       path: PATHS.dist,
       filename: '[name].js',
-      publicPath: (isBuild ? `/resource/${STATIC_RESOURCE_NAME}/dist/` : isLocal ? '/' : `https://localhost:${PORT}/`) //setup for HMR when hosted with salesforce
+      publicPath: (isBuild ? `/resource/${resourceName}/dist/` : isLocal ? '/' : `https://localhost:${PORT}/`) //setup for HMR when hosted with salesforce
     },
 
     optimization: {

@@ -1,6 +1,5 @@
 # Project
 dist/
-.npmrc
 
 ### https://raw.github.com/github/gitignore/77e29837cf03b59fc4d885ea011bbd683caaaf85/node.gitignore
 
@@ -34,7 +33,9 @@ node_modules
 
 # sfdx
 .sfdx
-# generated app
-force-app/main/default/staticresources/App.resource
+
+# generated app.  Update if changing name in .npmcrc
+force-app/main/default/staticresources/app.resource
+force-app/main/default/staticresources/app.resource-meta.xml
 
 
