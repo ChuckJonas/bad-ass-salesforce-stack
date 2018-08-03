@@ -29,7 +29,7 @@
     "bundle-app-dev": "npm run compile-dev && npm run copy-bundle",
     "bundle-app-prod": "npm run compile-prod && npm run copy-bundle",
     "zip-bundle" : "zip -r ./force-app/main/default/staticresources/app.zip ./dist",
-    "copy-bundle": "npm run zip-bundle && mv ./force-app/main/default/staticresources/app.zip ./force-app/main/default/staticresources/$npm_package_config_resource.resource && npm run copy-resource-meta",
+    "copy-bundle": "rm ./force-app/main/default/staticresources/* && npm run zip-bundle && mv ./force-app/main/default/staticresources/app.zip ./force-app/main/default/staticresources/$npm_package_config_resource.resource && npm run copy-resource-meta",
     "copy-resource-meta": "cp ./config/build-assets/temp.resource-meta.xml ./force-app/main/default/staticresources/$npm_package_config_resource.resource-meta.xml",
     "package-sfdc": "sfdx force:source:convert -d ./dist/sfdc-package",
     "build-dev": "npm run bundle-app-dev && npm run package-sfdc",

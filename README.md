@@ -141,9 +141,10 @@ Renaming the page is as simple as navigating to `force-app/main/default/pages` a
 #### To rename the generated Static Resource
 
 1. in `package.json` update `resource` under `config` section
-2. delete the old resource from `force-app/main/default/staticresource` (if it already exists)
-3. optionally, update your `.gitignore` to exclude these files
-4. finally, just update your vf page to properly reference the new resource name
+2. optionally, update your `.gitignore` to exclude these files
+3. finally, just update your vf page to properly reference the new resource name
+
+**NOTE: If you include other static resources in the `force-app/main/default/staticresources` folder they will get nuked by default. To prevent this, update the `copy-bundle` script **
 
 ## OTHER CONFIGURATIONS
 
