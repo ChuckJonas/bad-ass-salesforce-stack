@@ -11,7 +11,9 @@
   "bugs": "https://github.com/ChuckJonas/bad-ass-salesforce-stack/issues",
   "license": "MIT",
   "main": "dist/app.js",
-  "config" : { "resource" : "app" },
+  "config": {
+    "resource": "app"
+  },
   "scripts": {
     "start": "npm run start-sfdc",
     "start-sfdc": "webpack-dev-server --config config/webpack.config.js --https --hot",
@@ -28,7 +30,7 @@
     "make-prod-default": "sfdx force:config:set defaultusername=$npm_config_prod_alias",
     "bundle-app-dev": "npm run compile-dev && npm run copy-bundle",
     "bundle-app-prod": "npm run compile-prod && npm run copy-bundle",
-    "zip-bundle" : "zip -r ./force-app/main/default/staticresources/app.zip ./dist",
+    "zip-bundle": "zip -r ./force-app/main/default/staticresources/app.zip ./dist",
     "copy-bundle": "rm ./force-app/main/default/staticresources/* && npm run zip-bundle && mv ./force-app/main/default/staticresources/app.zip ./force-app/main/default/staticresources/$npm_package_config_resource.resource && npm run copy-resource-meta",
     "copy-resource-meta": "cp ./config/build-assets/temp.resource-meta.xml ./force-app/main/default/staticresources/$npm_package_config_resource.resource-meta.xml",
     "package-sfdc": "sfdx force:source:convert -d ./dist/sfdc-package",
@@ -53,7 +55,7 @@
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "reselect": "^3.0.1",
-    "ts-force": "^1.1.4",
+    "ts-force": "^1.1.8",
     "tslib": "^1.6.1",
     "typestyle": "^1.3.2"
   },
@@ -85,7 +87,7 @@
     "react-test-renderer": "^15.6.1",
     "rimraf": "^2.6.1",
     "style-loader": "^0.18.2",
-    "ts-force-gen": "^1.1.2",
+    "ts-force-gen": "^1.1.4",
     "ts-jest": "^22.4.6",
     "tslint": "^5.1.0",
     "tslint-react": "^3.0.0",
