@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Rest, setDefaultConfig } from 'ts-force';
+import { setDefaultConfig } from 'ts-force';
 
 import App from './app';
 

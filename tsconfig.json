@@ -28,7 +28,7 @@
     "noEmit": true, // no emit in dev, only when bundling for prod, which is usually handled by bundlers like webpack / fuse-box / jspm
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "strictNullChecks": false,

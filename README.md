@@ -7,7 +7,6 @@
 ![bass like the fish](https://user-images.githubusercontent.com/5217568/38460726-edbf16aa-3a7c-11e8-80f9-58e109e652cf.jpg)
 
 * [react](https://facebook.github.io/react/): all the cool kids are doing it
-* [redux](http://redux.js.org/): wizard state management
 * [typescript](https://www.typescriptlang.org/): business in the front, party in the back
 * [antd](https://ant.design/docs/react/introduce): the most useful thing to come out of China since [the fork](https://en.wikipedia.org/wiki/Fork)
 * [ts-force](https://www.npmjs.com/package/ts-force): generates massive files so you don't have toooo
