@@ -2,5 +2,14 @@
 {
 "tslint.exclude": "**/generated/**/*.ts",
 "typescript.tsdk": "node_modules/typescript/lib",
-"typescriptHero.imports.disableImportsSorting": true
+"typescriptHero.imports.disableImportsSorting": true,
+"terminal.integrated.env.osx": {
+    "SFDX_SET_CLIENT_IDS": "sfdx-vscode"
+},
+"terminal.integrated.env.linux": {
+    "SFDX_SET_CLIENT_IDS": "sfdx-vscode"
+},
+"terminal.integrated.env.windows": {
+    "SFDX_SET_CLIENT_IDS": "sfdx-vscode"
+}
 }

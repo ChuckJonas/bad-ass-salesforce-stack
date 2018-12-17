@@ -18,5 +18,5 @@ node_modules
 # generated app.  Update if changing name in .npmcrc
 force-app/main/default/staticresources/app.resource
 force-app/main/default/staticresources/app.resource-meta.xml
-
-
+config/cert/*.crt
+config/cert/*.key

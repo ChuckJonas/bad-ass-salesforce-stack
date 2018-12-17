@@ -77,10 +77,13 @@ npm run make-prod-default
 The most flexible development setup is to use `localhost` to serve assets on your VF page in salesforce. You'll be able to make changes from your IDE and salesforce will automatically update on the fly.  Updates will only show for you and not impact any other users in that environment.  You will not be limited from using any salesforce features you might need.
 
 1. Deploy your application (step needs to happen whenever the contents of `force-app` change)
-2. `npm run start-sfdc` (or just `npm start`)
-3. navigate to your page EG: `/apex/app`
-4. append `?local=1` to page query string
-5. your browser will likely fail to load your resources.  Follow [this guide on how to make your system trust the localhost cert](http://www.robpeck.com/2010/10/google-chrome-mac-os-x-and-self-signed-ssl-certificates/#.W05wP9hKjUJ).  Alternately, you can open the asset url, click advanced and then "proceed anyways".  However, you will have to repeat this step often.
+2. `npm run create-dev-crt`: this will using openssl to create a certificate
+3. install the `config/cert/server.crt` in [keychain and set trust to "Always"](https://www.youtube.com/watch?v=TGrX8XgSuZ4)
+4. `npm run start-sfdc` (or just `npm start`)
+5. navigate to your page EG: `/apex/app`
+6. append `?local=1` to page query string
+
+*NOTE:*: If the `create-dev-crt` cmd does not run (for example if you don't have `openssl` installed), then you can by-pass this step by removing `--cert ./config/cert/server.crt --key ./config/cert/server.key` from the `start-sfdc` command (+ skip step 3).  However, you will have to manually tell chrome to trust the served resources.
 
 #### How it works
 

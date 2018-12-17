@@ -16,8 +16,9 @@
   },
   "scripts": {
     "start": "npm run start-sfdc",
-    "start-sfdc": "webpack-dev-server --config config/webpack.config.js --https --hot",
     "start-local": "webpack-dev-server --config config/webpack.config.js --open --hot --env.local",
+    "start-sfdc": "webpack-dev-server --config config/webpack.config.js --https --hot --cert ./config/cert/server.crt --key ./config/cert/server.key",
+    "create-dev-crt": "openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes -keyout ./config/cert/server.key -out ./config/cert/server.crt -extensions san -config ./config/cert/dev.conf",
     "cors-enable": "sfdx force:mdapi:deploy -d ./config/sfdc-cors-enable -w 10000",
     "cors-disable": "sfdx force:mdapi:deploy -d ./config/sfdc-cors-disable -w 10000",
     "clean": "rimraf dist",
