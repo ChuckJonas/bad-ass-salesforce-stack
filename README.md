@@ -77,7 +77,7 @@ npm run make-prod-default
 The most flexible development setup is to use `localhost` to serve assets on your VF page in salesforce. You'll be able to make changes from your IDE and salesforce will automatically update on the fly.  Updates will only show for you and not impact any other users in that environment.  You will not be limited from using any salesforce features you might need.
 
 1. Deploy your application (step needs to happen whenever the contents of `force-app` change)
-2. `npm run create-dev-crt`: this will using openssl to create a certificate
+2. `npm run create-dev-crt`: this will using openssl to create a certificate (you only need to do this once).
 3. install the `config/cert/server.crt` in [keychain and set trust to "Always"](https://www.youtube.com/watch?v=TGrX8XgSuZ4)
 4. `npm run start-sfdc` (or just `npm start`)
 5. navigate to your page EG: `/apex/app`
