@@ -1,10 +1,11 @@
-const path = require('path');
-const webpack = require('webpack');
+import * as path from 'path';
+import * as webpack from 'webpack';
+import * as webpackDevServer from 'webpack-dev-server';
+import * as fs from 'fs';
+
 const DashboardPlugin = require('webpack-dashboard/plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
-const PORT = 8080; //should match ./config/sfdc-cors-enable
 
 const PATHS = {
   root: path.resolve(__dirname, '..'),
@@ -16,46 +17,50 @@ const PATHS = {
   localTemplate: path.resolve(__dirname, '../config/index.html'),
 };
 
-//for ant overrides
-const fs = require('fs');
+// for ant overrides
+
 const lessToJs = require('less-vars-to-js');
 const themeVariables = lessToJs(fs.readFileSync(path.join(PATHS.styles, './ant-theme-vars.less'), 'utf8'));
 
-module.exports = (env = {}) => {
+module.exports = (env: any = {}) => {
+  const PORT = env.port || 8080; // should match ./config/sfdc-cors-enable
   const resourceName = env.resource || 'app';
   const isBuild = !!env.build;
   const isLocal = env.local;
 
-  const mode = isBuild ? 'production': 'development';
+  console.log('isBuild:', isBuild, 'isLocal:', isLocal);
 
-  let GLOBAL_DEFINES = {
+  const mode = isBuild ? 'production' : 'development';
+
+  const GLOBAL_DEFINES: any = {
     'process.env': {
       NODE_ENV: JSON.stringify(mode),
-    }
+    },
   };
 
-  const DEV_SERVER = {
+  const DEV_SERVER: webpackDevServer.Configuration = {
     historyApiFallback: true,
     overlay: true,
-    port:PORT,
-    headers: { //enable CORS
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
-      "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+    port: PORT,
+    headers: { // enable CORS
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+      'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization',
     },
+    disableHostCheck: true,
   };
 
   // Setup variables for communications with Salesforce locally
   if (isLocal) {
-    //get access token from sfdx
-    var child_process = require('child_process');
-    orgInfo = JSON.parse(child_process.execSync("sfdx force:org:display --json").toString('utf8'));
+    // get access token from sfdx
+    const child_process = require('child_process');
+    const orgInfo = JSON.parse(child_process.execSync('sfdx force:org:display --json').toString('utf8'));
     console.log(`Running on ${orgInfo.result.instanceUrl} as ${orgInfo.result.username}`);
     GLOBAL_DEFINES.__ACCESSTOKEN__ = JSON.stringify(orgInfo.result.accessToken);
     GLOBAL_DEFINES.__RESTHOST__ = JSON.stringify(orgInfo.result.instanceUrl);
   }
 
-  return {
+  const config: webpack.Configuration = {
     mode,
     cache: true,
     devtool: isBuild ? 'source-map' : 'eval-source-map',
@@ -64,25 +69,24 @@ module.exports = (env = {}) => {
     entry: {
       app: [
         'babel-polyfill',
-        './src/index.tsx'
+        './src/index.tsx',
       ],
     },
     output: {
       path: PATHS.dist,
       filename: '[name].js',
-      publicPath: (isBuild ? `/resource/${resourceName}/dist/` : isLocal ? '/' : `https://localhost:${PORT}/`) //setup for HMR when hosted with salesforce
+      publicPath: (isBuild ? `/resource/${resourceName}/dist/` : isLocal ? '/' : `https://localhost:${PORT}/`), // setup for HMR when hosted with salesforce
     },
-
     optimization: {
       splitChunks: {
         cacheGroups: {
             commons: {
                 test: /[\\/]node_modules[\\/]/,
-                name: "vendors",
-                chunks: "all"
-            }
-        }
-      }
+                name: 'vendors',
+                chunks: 'all',
+            },
+        },
+      },
     },
 
     resolve: {
@@ -111,31 +115,31 @@ module.exports = (env = {}) => {
                 sourceMap: true,
               },
             },
-          ]
+          ],
         },
         // css
         {
           test: /\.css$/,
           include: PATHS.styles,
           use: [
-            { loader: "style-loader" },
-            { loader: "css-loader" },
-          ]
+            { loader: 'style-loader' },
+            { loader: 'css-loader' },
+          ],
         },
-        //antd
+        // antd
         {
           test: /\.less$/,
           use: [
-            { loader: "style-loader" },
-            { loader: "css-loader" },
+            { loader: 'style-loader' },
+            { loader: 'css-loader' },
             {
-              loader: "less-loader",
+              loader: 'less-loader',
               options: {
                 modifyVars: themeVariables,
-                javascriptEnabled: true
-              }
-            }
-          ]
+                javascriptEnabled: true,
+              },
+            },
+          ],
         },
         // json
         {
@@ -181,12 +185,14 @@ module.exports = (env = {}) => {
       ...(isLocal ? [
         new HtmlWebpackPlugin({
           template: PATHS.localTemplate,
-        })
+        }),
       ] : []),
       ...(env.analyze ? [
-        new BundleAnalyzerPlugin()
+        new BundleAnalyzerPlugin(),
       ] : []),
-    ]
+    ],
   };
+
+  return config;
 
 };
