@@ -1,7 +1,5 @@
 # B . A . S . S .
 
-[![travis](https://travis-ci.org/ChuckJonas/bad-ass-salesforce-stack.svg?branch=master)](https://travis-ci.org/ChuckJonas/bad-ass-salesforce-stack)
-
 ***BAD ASS SALESFORCE STACK***
 
 ![bass like the fish](https://user-images.githubusercontent.com/5217568/38460726-edbf16aa-3a7c-11e8-80f9-58e109e652cf.jpg)
