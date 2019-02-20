@@ -1,4 +1,4 @@
-<apex:page showHeader="true" sidebar="false">
+<apex:page showHeader="true" sidebar="false" standardStylesheets="false" docType="html-5.0">
     <script type="text/javascript">
         //rest details
         const __ACCESSTOKEN__ = '{!$Api.Session_ID}';
