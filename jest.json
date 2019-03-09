@@ -6,13 +6,13 @@
     "js"
   ],
   "transform": {
-    "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    "\\.(ts|tsx)$": "ts-jest"
   },
   "moduleNameMapper": {
+    "\\.(css|scss|less)$": "<rootDir>/config/__mocks__/styleMock.js",
+    "\\.(png|jpg|gif|ttf|eot|svg)$": "<rootDir>/config/__mocks__/fileMock.js",
     "@src/(.*)": "<rootDir>/src/$1",
-    "@gen/(.*)": "<rootDir>/src/generated/$1",
-    "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
-    "^.*\\.less$": "./src/shared/test/SCSSStub.js"
+    "@gen/(.*)": "<rootDir>/src/generated/$1"
   },
   "testRegex": "/tests/.*\\.(ts|tsx|js)$",
   "unmockedModulePathPatterns": []
