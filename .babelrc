@@ -1,6 +1,12 @@
 {
-    "presets": ["es2015"],
+    "presets": [
+        "@babel/env",
+        "@babel/typescript",
+        "@babel/react"
+
+    ],
     "plugins": [
+        ["@babel/plugin-proposal-decorators", { "legacy": true }],
         ["react-hot-loader/babel"],
         [
             "import",
@@ -9,6 +15,8 @@
                 "style": true,
                 "libraryDirectory": "es"
             }
-        ]
+        ],
+        ["@babel/plugin-proposal-class-properties", { "loose": true }],
+        ["@babel/proposal-object-rest-spread"]
     ]
 }

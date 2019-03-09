@@ -102,21 +102,27 @@ module.exports = (env: any = {}) => {
       rules: [
         // typescript
         {
-          test: /\.(ts|tsx)$/,
-          include: PATHS.src,
-          use:
-          [
-            {
-              loader: 'awesome-typescript-loader',
-              options: {
-                useBabel: true,
-                transpileOnly: true,
-                useTranspileModule: false,
-                sourceMap: true,
-              },
-            },
-          ],
+          // Include ts, tsx, js, and jsx files.
+          test: /\.(ts|js)x?$/,
+          exclude: /node_modules/,
+          loader: 'babel-loader',
         },
+        // {
+        //   test: /\.(ts|tsx)$/,
+        //   include: PATHS.src,
+        //   use:
+        //   [
+        //     {
+        //       loader: 'awesome-typescript-loader',
+        //       options: {
+        //         useBabel: true,
+        //         transpileOnly: true,
+        //         useTranspileModule: false,
+        //         sourceMap: true,
+        //       },
+        //     },
+        //   ],
+        // },
         // css
         {
           test: /\.css$/,
