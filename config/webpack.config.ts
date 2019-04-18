@@ -48,7 +48,7 @@ module.exports = (env: any = {}) => {
   const config: webpack.Configuration = {
     mode,
     cache: true,
-    devtool: isBuild ? 'source-map' : 'eval-source-map',
+    devtool: isBuild ? 'source-map' : 'source-map',
     devServer,
     context: PATHS.root,
     entry: {

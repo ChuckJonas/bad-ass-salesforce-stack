@@ -39,19 +39,6 @@ class App extends React.Component<{}, AppState> {
     if (accs.length > 0) {
       this.setState({ acc: accs[0] });
     }
-
-  }
-
-  private showDrawer = () => {
-    this.setState({
-      drawerVisible: true,
-    });
-  }
-
-  private hideDrawer = () => {
-    this.setState({
-      drawerVisible: false,
-    });
   }
 
   public render() {

@@ -144,6 +144,16 @@ Unfortunately the port isn't currently managed from a single point and must be u
 1. in `package.json`, under the `config` section, update `PORT` constant
 2. in `/force-app/main/default/pages/App.Page`, update the "Local Asset" panel: `https://localhost:XXXX/app.js`
 
+### vscode Chrome Debugger
+
+It is possible to debug right from vscode.  To do so:
+
+1. install [Debugger for Chrome](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome)
+2. update `.vscode/launch.json` -> `url` to reference the url you want to debug
+3. `npm start`
+4. `f5` or launch `debug locally` configuration
+5. you may need to Enable [Allow Insecure Localhost](chrome://flags/#allow-insecure-localhost) again if it opens in a different instance of chrome
+
 ## OTHER USEFUL STUFF
 
 ### vscode
@@ -152,12 +162,10 @@ Highly recommend using vscode (typescript code completion, in editor terminal, e
 
 plugins:
 
-* [Debugger for Chrome](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome): Allows debugging in vscode
+*
 * [Editor Config](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig): auto-set formatting options for everyone
 * [TSlint](https://marketplace.visualstudio.com/items?itemName=eg2.tslint): green squigglies everywhere!
 * [Salesforce Extensions for VS Code](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode): gives your code completion on your `force-app` and ability to excute commands against the CLI
-* [Auto Close Tag](https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-close-tag)
-* [Typescript Hero](https://marketplace.visualstudio.com/items?itemName=rbbit.typescript-hero): auto-imports, etc
 * [Jest](https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest): run tests on save
 
 ### helpful linkies
