@@ -9,15 +9,20 @@
         "type": "chrome",
         "request": "launch",
         "sourceMaps": true,
-        "url": "http://localhost:8080",
+        "url": "https://c.na73.visual.force.com/apex/app?local=1",
         "webRoot": "${workspaceRoot}",
         "internalConsoleOptions": "openOnSessionStart",
         "skipFiles": [
           "node_modules/**"
         ],
+        "runtimeArgs": [
+          "--remote-debugging-port=9222", //Open in port 9222 (standard chrome debug port)
+          "--allow-insecure-localhost=1"
+        ],
         "sourceMapPathOverrides": {
           "webpack:///*": "${webRoot}/*"
-        }
+        },
+        "smartStep": true
       }
     ]
 }
