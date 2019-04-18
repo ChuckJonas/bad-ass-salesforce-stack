@@ -4,22 +4,32 @@
     "tslint-react"
   ],
   "rules": {
-  "ter-indent": [
-      4,
+    "ter-indent": [
+      2,
       {
         "SwitchCase": 1
       }
     ],
     "jsdoc-format": false,
     "no-trailing-whitespace": false,
-    "semicolon": [true, "always"],
-    "no-submodule-imports": [false],
-    "interface-name": [false],
+    "semicolon": [
+      true,
+      "always"
+    ],
+    "no-submodule-imports": [
+      false
+    ],
+    "interface-name": [
+      false
+    ],
     "prefer-object-spread": false,
     "object-literal-sort-keys": false,
-    "quotemark": [true, "single"],
+    "quotemark": [
+      true,
+      "single"
+    ],
     "ordered-imports": false,
-    "jsx-no-lambda": true, //https://stackoverflow.com/questions/36677733/why-shouldnt-jsx-props-use-arrow-functions-or-bind
+    "jsx-no-lambda": false,
     "member-ordering": false,
     "no-implicit-dependencies": false,
     "no-var-requires": false

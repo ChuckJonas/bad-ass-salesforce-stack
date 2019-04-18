@@ -37,7 +37,7 @@ class App extends React.Component<{}, AppState> {
       };
     });
     if (accs.length > 0) {
-      this.setState({acc: accs[0]});
+      this.setState({ acc: accs[0] });
     }
 
   }
@@ -59,7 +59,7 @@ class App extends React.Component<{}, AppState> {
       <Card title='B.A.S.S.'>
         <Drawer
           visible={this.state.drawerVisible}
-          onClose={this.hideDrawer}
+          onClose={() => this.setState({drawerVisible: false})}
           title='An Account'
           width={600}
         >
@@ -67,13 +67,13 @@ class App extends React.Component<{}, AppState> {
         </Drawer>
         <img width={300} src={bassLogo} />
         <br />
-        <Button type='primary' onClick={this.showDrawer}>Click Me!</Button>
+        <Button type='primary' onClick={() => this.setState({drawerVisible: true})}>Click Me!</Button>
       </Card>
     );
   }
 
   private renderDrawerContent = () => {
-    const {acc} = this.state;
+    const { acc } = this.state;
 
     const contactsList = acc.contacts.map((c) => {
       return (

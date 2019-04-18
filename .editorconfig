@@ -1,4 +1,5 @@
 # EditorConfig is awesome: http://EditorConfig.org
+# vscode extension: https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig
 
 # top-most EditorConfig file
 root = true

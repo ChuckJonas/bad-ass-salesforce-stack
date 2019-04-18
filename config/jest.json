@@ -8,12 +8,13 @@
   "transform": {
     "\\.(ts|tsx)$": "ts-jest"
   },
+  "rootDir": "../",
   "moduleNameMapper": {
     "\\.(css|scss|less)$": "<rootDir>/config/__mocks__/styleMock.js",
     "\\.(png|jpg|gif|ttf|eot|svg)$": "<rootDir>/config/__mocks__/fileMock.js",
     "@src/(.*)": "<rootDir>/src/$1",
     "@gen/(.*)": "<rootDir>/src/generated/$1"
   },
-  "testRegex": "/tests/.*\\.(ts|tsx|js)$",
+  "testRegex": "/src/tests/.*\\.(ts|tsx|js)$",
   "unmockedModulePathPatterns": []
 }
