@@ -32,10 +32,15 @@ Make sure you have the following installed on your machine:
 
 #### Windows
 
-You will also need the following:
+You will also need the ability to execute the following bash commands: `zip`, `cp`, `mv`.
 
-* A `bash` enumerator (one comes with `git`) OR [linux](https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/).  Basiclly you need your shell to be able to run standard GNU commands like `cp`, `mv`, `zip`, etc.
-** You may also need to tell npm to use bash: `npm config set script-shell "C:\\Program Files\\Git\\bin\\bash.exe"`
+There are several options:
+
+* A `bash` enumerator (like the one included with `git`).  You may need to [install `zip` binaries](https://stackoverflow.com/questions/38782928/how-to-add-man-and-zip-to-git-bash-installation-on-windows/55749636#55749636)
+* [linux](https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/)
+* [mingw](http://www.mingw.org/wiki/Getting_Started)
+
+You may also need to tell npm to use bash: `npm config set script-shell "C:\\Program Files\\Git\\bin\\bash.exe"`
 
 ### Clone this Starter
 
