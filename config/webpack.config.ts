@@ -6,12 +6,15 @@ import lessToJs from 'less-vars-to-js';
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 /** Setup Paths */
+const root = path.resolve(__dirname, '..');
+const src = path.resolve(root, 'app');
 const PATHS = {
-  root: path.resolve(__dirname, '..'),
-  src: path.resolve(__dirname, '../src'),
-  assets: path.resolve(__dirname, '../src/assets'),
-  dist: path.resolve(__dirname, '../dist'),
-  styles: path.resolve(__dirname, '../src/styles')
+  root,
+  src,
+  index: path.resolve(src, 'index.tsx'),
+  assets: path.resolve(src, 'assets'),
+  styles: path.resolve(src, 'styles'),
+  dist: path.resolve(root, 'dist'),
 };
 
 // for ant style overrides
@@ -54,7 +57,7 @@ module.exports = (env: any = {}) => {
     entry: {
       app: [
         'babel-polyfill',
-        './src/index.tsx',
+        PATHS.index,
       ],
     },
     output: {
@@ -86,7 +89,6 @@ module.exports = (env: any = {}) => {
     // externals: {
     // },
 
-
     /*** LOADERS ***/
     module: {
       rules: [
@@ -96,7 +98,7 @@ module.exports = (env: any = {}) => {
           test: /\.(ts|js)x?$/,
           exclude: /node_modules/,
           loader: 'babel-loader',
-          options: require('./babelrc.json')
+          options: require('./babelrc.json'),
         },
         // css
         {

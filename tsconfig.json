@@ -3,7 +3,7 @@
     "baseUrl": "./", // enables relative imports to root
     "paths": {
       "@src/*": [
-        "src/*"
+        "app/*"
       ]
     },
     "outDir": "out/", // target for compiled files
@@ -37,7 +37,7 @@
     "sourceMap": true
   },
   "include": [
-    "src/**/*"
+    "app/**/*"
   ],
   "exclude": [
     "node_modules",

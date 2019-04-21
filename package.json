@@ -10,16 +10,14 @@
   },
   "bugs": "https://github.com/ChuckJonas/bad-ass-salesforce-stack/issues",
   "license": "MIT",
-  "main": "dist/app.js",
   "config": {
     "resource": "app",
     "package_path": "./force-app/main/default",
-    "port": 8080,
-    "TS_NODE_PROJECT": "config/webpack.tsconfig.json"
+    "port": 8080
   },
   "scripts": {
     "start": "npm run setup-ts-webpack -- webpack-dev-server --config config/webpack.config.ts --hot --https",
-    "setup-ts-webpack": "cross-env TS_NODE_PROJECT=$npm_package_config_TS_NODE_PROJECT",
+    "setup-ts-webpack": "cross-env TS_NODE_PROJECT=config/webpack.tsconfig.json",
     "clean": "rimraf dist",
     "compile": "npm run clean && npm run setup-ts-webpack -- webpack --config config/webpack.config.ts --env.build --env.resource $npm_package_config_resource",
     "compile-dev": "npm run compile",
@@ -43,10 +41,10 @@
     "generate-ts-force": "ts-force-gen -j ./config/ts-force-config.json",
     "test": "jest --no-cache --config ./config/jest.json",
     "test:update": "jest --no-cache --config jest.json -u",
-    "reinstall": "rimraf node_modules && npm install"
+    "reinstall": "rimraf node_modules dist && npm install"
   },
   "dependencies": {
-    "antd": "^3.15.0",
+    "antd": "^3.16.4",
     "babel-polyfill": "^6.26.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
@@ -96,7 +94,7 @@
     "tslint-react": "^3.6.0",
     "typescript": "^3.3.3",
     "webpack": "^4.29.6",
-    "webpack-bundle-analyzer": "^3.1.0",
+    "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.2.1"
   }

@@ -48,6 +48,13 @@ You may also need to tell npm to use bash: `npm config set script-shell "C:\\Pro
 2. `cd bass`
 3. `npm install`
 
+#### Project Structure
+
+* `app`: The react Application source Folder
+* `force-app`: The Salesforce DX package.  Store related metadata here
+* `config`: configurations for development, build & tests (some configuration files are in root)
+* `dist`: the build directory
+
 ### Authentication
 
 To do much of anything you'll need to connect with one or more orgs. Use `sfdx force:org:list` to see a list of orgs you're already authenticated with. Connect to an existing sandbox using `sfdx force:auth:web:login -sr [ORG_URL] -a [ALIAS]`. You can also create a scratch org using: `npm run new-scratch-org`.
@@ -69,7 +76,6 @@ prod_alias=john@acme.com
 ```
 
 *NOTE: You might want to ignore `.npmrc` for your repo. Each contributor will manage this configuration separately and committing it could result in another user accidentally deploying to an unintended org.  This is especially true if you use the sfdx alias over the username
-
 
 ## DEVELOPMENT
 

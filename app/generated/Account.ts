@@ -1,7 +1,7 @@
 import { Rest, RestObject, SObject, sField, SalesforceFieldType, SFLocation, SFieldProperties, FieldResolver, SOQLQueryParams, buildQuery, FieldProps } from "ts-force";
 import { Contact } from "./";
 
-export type AccountFields = FieldProps<Account>;
+export type AccountFields = Partial<FieldProps<Account>>;
 
 /**
  * Generated class for Account
@@ -217,16 +217,16 @@ export class Account extends RestObject {
         this.upsellOpportunity = void 0;
         this.sLASerialNumber = void 0;
         this.sLAExpirationDate = void 0;
-        Object.assign(this, fields);
+        this.initObject(fields);
         return new Proxy(this, this.safeUpdateProxyHandler);
     }
 
     public static API_NAME: 'Account' = 'Account';
     public readonly _TYPE_: 'Account' = 'Account';
-    private static _fields: { [P in keyof AccountFields]: SFieldProperties; };
+    private static _fields: { [P in keyof FieldProps<Account>]: SFieldProperties; };
 
     public static get FIELDS() {
-        return this._fields = this._fields ? this._fields : Account.getPropertiesMeta<AccountFields, Account>(Account)
+        return this._fields = this._fields ? this._fields : Account.getPropertiesMeta<FieldProps<Account>, Account>(Account)
     }
 
     public static async retrieve(qryParam: ((fields: FieldResolver<Account>) => SOQLQueryParams) | string): Promise<Account[]> {
