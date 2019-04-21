@@ -1,7 +1,7 @@
 import { Rest, RestObject, SObject, sField, SalesforceFieldType, SFLocation, SFieldProperties, FieldResolver, SOQLQueryParams, buildQuery, FieldProps } from "ts-force";
 import { Account } from "./";
 
-export type ContactFields = FieldProps<Contact>;
+export type ContactFields = Partial<FieldProps<Contact>>;
 
 /**
  * Generated class for Contact
@@ -199,16 +199,16 @@ export class Contact extends RestObject {
         this.cleanStatus = void 0;
         this.level = void 0;
         this.languages = void 0;
-        Object.assign(this, fields);
+        this.initObject(fields);
         return new Proxy(this, this.safeUpdateProxyHandler);
     }
 
     public static API_NAME: 'Contact' = 'Contact';
     public readonly _TYPE_: 'Contact' = 'Contact';
-    private static _fields: { [P in keyof ContactFields]: SFieldProperties; };
+    private static _fields: { [P in keyof FieldProps<Contact>]: SFieldProperties; };
 
     public static get FIELDS() {
-        return this._fields = this._fields ? this._fields : Contact.getPropertiesMeta<ContactFields, Contact>(Contact)
+        return this._fields = this._fields ? this._fields : Contact.getPropertiesMeta<FieldProps<Contact>, Contact>(Contact)
     }
 
     public static async retrieve(qryParam: ((fields: FieldResolver<Contact>) => SOQLQueryParams) | string): Promise<Contact[]> {

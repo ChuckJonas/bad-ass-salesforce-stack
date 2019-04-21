@@ -12,9 +12,9 @@
   "moduleNameMapper": {
     "\\.(css|scss|less)$": "<rootDir>/config/__mocks__/styleMock.js",
     "\\.(png|jpg|gif|ttf|eot|svg)$": "<rootDir>/config/__mocks__/fileMock.js",
-    "@src/(.*)": "<rootDir>/src/$1",
-    "@gen/(.*)": "<rootDir>/src/generated/$1"
+    "@src/(.*)": "<rootDir>/app/$1",
+    "@gen/(.*)": "<rootDir>/app/generated/$1"
   },
-  "testRegex": "/src/tests/.*\\.(ts|tsx|js)$",
+  "testRegex": "/app/tests/.*\\.(ts|tsx|js)$",
   "unmockedModulePathPatterns": []
 }

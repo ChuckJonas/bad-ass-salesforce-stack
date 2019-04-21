@@ -32,16 +32,28 @@ Make sure you have the following installed on your machine:
 
 #### Windows
 
-You will also need the following:
+You will also need the ability to execute the following bash commands: `zip`, `cp`, `mv`.
 
-* A `bash` enumerator (one comes with `git`) OR [linux](https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/).  Basiclly you need your shell to be able to run standard GNU commands like `cp`, `mv`, `zip`, etc.
-** You may also need to tell npm to use bash: `npm config set script-shell "C:\\Program Files\\Git\\bin\\bash.exe"`
+There are several options:
+
+* A `bash` enumerator (like the one included with `git`).  You may need to [install `zip` binaries](https://stackoverflow.com/questions/38782928/how-to-add-man-and-zip-to-git-bash-installation-on-windows/55749636#55749636)
+* [linux](https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/)
+* [mingw](http://www.mingw.org/wiki/Getting_Started)
+
+You may also need to tell npm to use bash: `npm config set script-shell "C:\\Program Files\\Git\\bin\\bash.exe"`
 
 ### Clone this Starter
 
 1. `git clone https://github.com/ChuckJonas/bad-ass-salesforce-stack bass`
 2. `cd bass`
 3. `npm install`
+
+#### Project Structure
+
+* `app`: The react Application source Folder
+* `force-app`: The Salesforce DX package.  Store related metadata here
+* `config`: configurations for development, build & tests (some configuration files are in root)
+* `dist`: the build directory
 
 ### Authentication
 
@@ -64,7 +76,6 @@ prod_alias=john@acme.com
 ```
 
 *NOTE: You might want to ignore `.npmrc` for your repo. Each contributor will manage this configuration separately and committing it could result in another user accidentally deploying to an unintended org.  This is especially true if you use the sfdx alias over the username
-
 
 ## DEVELOPMENT
 
@@ -153,6 +164,48 @@ It is possible to debug right from vscode.  To do so:
 3. `npm start`
 4. `f5` or launch `debug locally` configuration
 5. you may need to Enable [Allow Insecure Localhost](chrome://flags/#allow-insecure-localhost) again if it opens in a different instance of chrome
+
+## Upgrading to newer version of "BASS"
+
+Overtime, this project has gotten both simpler AND objectively better.
+
+Unfortunately upgrades are currently a very manual process.  Over the many different enhancements:
+
+* configuration files have been changed & moved around
+* Low Value / High Complexity: features have been removed
+* build scripts have changed
+* configuration files have changed
+* npm dependencies have been upgraded/added/removed
+
+I admit, I haven't done a very good job of documenting these changes very well.  My goal of keeping this everything as flexible as possible has also made it impossible to move parts of the configuration to upgradable packages.
+
+I've tried to go back and tag `Release` to give a sense of breaking changes, but it's very incomplete.
+
+### Things to consider when upgrading
+
+* Most changes have happened in the following areas:
+  * `package.json` (particularly the `scripts` & `config` sections)
+  * `webpack.config.ts`
+  * `tsconfig.json`
+
+For these files, it's best to first identify any customization of your own and then try to merge them into the latest version from `B.A.S.S.`.
+
+* Lots of files have been moved around.  In particular:
+  * many files have been moved to `config` folder.
+  * `src` has been renamed to `app`
+
+* Features & dependencies have been removed. Examples:
+  * there is no longer an `local` mode as it no longer has any advantages over using `Localhost assets on salesforce`
+  * Redux was removed from the core of this project
+  * Replaced `awesome-typescript-loader` with babel
+  * self-signed cert generation script has been removed (manual instructions are in `config/cert`)
+
+* Runtime dependencies have been upgraded to the latest and greatest. Which likely means breaking changes in these libraries:
+  * react
+  * antd
+  * ts-force
+
+In most cases you should just be able to continue using your runtime library versions with the latest version of `B.A.S.S.`.
 
 ## OTHER USEFUL STUFF
 
