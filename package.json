@@ -16,12 +16,12 @@
     "port": 8080
   },
   "scripts": {
-    "start": "npm run setup-ts-webpack -- webpack-dev-server --config config/webpack.config.ts --hot --https",
+    "start": "npm run setup-ts-webpack -- webpack-dev-server --config config/webpack.config.ts --hot --https --env.port $npm_package_config_port",
     "setup-ts-webpack": "cross-env TS_NODE_PROJECT=config/webpack.tsconfig.json",
     "clean": "rimraf dist",
     "compile": "npm run clean && npm run setup-ts-webpack -- webpack --config config/webpack.config.ts --env.build --env.resource $npm_package_config_resource",
     "compile-dev": "npm run compile",
-    "compile-prod": "npm run compile",
+    "compile-prod": "npm run compile -- --env.prod",
     "analyze-bundle": "npm run clean && npm run setup-ts-webpack -- webpack --config config/webpack.config.ts --env.build --env.analyze",
     "new-scratch-org": "sfdx force:org:create -f config/project-scratch-def.json -a $npm_config_scratch_alias",
     "bundle-app-dev": "npm run compile-dev && npm run copy-bundle",
@@ -48,7 +48,7 @@
     "babel-polyfill": "^6.26.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
-    "ts-force": "^2.1.23",
+    "ts-force": "^2.2.3",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
@@ -86,7 +86,7 @@
     "react-test-renderer": "^16.8.4",
     "rimraf": "^2.6.1",
     "style-loader": "^0.23.1",
-    "ts-force-gen": "^2.1.24",
+    "ts-force-gen": "^2.2.3",
     "ts-jest": "^24.0.0",
     "ts-node": "^7.0.1",
     "tsconfig-paths": "^3.8.0",
