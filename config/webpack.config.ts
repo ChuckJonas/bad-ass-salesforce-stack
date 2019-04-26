@@ -23,11 +23,12 @@ const themeVariables = lessToJs(fs.readFileSync(path.join(PATHS.styles, './ant-t
 module.exports = (env: any = {}) => {
   const PORT = env.port || 8080; // should match ./config/sfdc-cors-enable
   const resourceName = env.resource || 'app';
-  const isBuild = !!env.build;
+  const isBuild = !!env.build; // build vs dev-server
+  const isProd = !!env.prod;   // for Prod ENV optimizations
 
-  console.log(`Resource Name: ${resourceName} | isBuild: ${isBuild}`);
+  console.log(`Resource Name: ${resourceName} | isBuild: ${isBuild} | isProd: ${isProd}`);
 
-  const mode = isBuild ? 'production' : 'development';
+  const mode = isProd ? 'production' : 'development';
 
   // add things here to put in the global namespace
   const GLOBAL_DEFINES: any = {
@@ -164,6 +165,9 @@ module.exports = (env: any = {}) => {
       ],
       ...(!isBuild ? [
         new webpack.NamedModulesPlugin(),
+      ] : []),
+      ...(isProd ? [
+        // put production optimization plugins here
       ] : []),
       ...(env.analyze ? [
         new BundleAnalyzerPlugin(),
