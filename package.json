@@ -48,7 +48,7 @@
     "babel-polyfill": "^6.26.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
-    "ts-force": "^2.4.0-rc7",
+    "ts-force": "^2.4.0-rc8",
     "tslib": "^1.9.3"
   },
   "devDependencies": {

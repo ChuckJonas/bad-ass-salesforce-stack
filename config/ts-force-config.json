@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/ChuckJonas/ts-force/master/ts-force-gen/ts-force-config.schema.json",
   "auth": {
-    "username": "bass-scratch"
+    "username": "test-7swc9ldytzeq@example.com"
   },
   "sObjects": [
     "Account",
