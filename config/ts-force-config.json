@@ -1,8 +1,12 @@
 {
   "$schema": "https://raw.githubusercontent.com/ChuckJonas/ts-force/master/ts-force-gen/ts-force-config.schema.json",
   "auth": {
-    "username": "demo@bass.starter"
+    "username": "bass-scratch"
   },
-  "sObjects": ["Account", "Contact"],
+  "sObjects": [
+    "Account",
+    "Contact",
+    "PushTopic"
+  ],
   "outPath": "./app/generated"
 }

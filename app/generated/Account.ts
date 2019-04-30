@@ -107,8 +107,6 @@ export class Account extends RestObject {
     public readonly lastViewedDate: Date;
     @sField({ apiName: 'LastReferencedDate', createable: false, updateable: false, required: false, reference: undefined, childRelationship: false, salesforceType: SalesforceFieldType.DATETIME, salesforceLabel: 'Last Referenced Date', externalId: false })
     public readonly lastReferencedDate: Date;
-    @sField({ apiName: 'IsCustomerPortal', createable: false, updateable: true, required: true, reference: undefined, childRelationship: false, salesforceType: SalesforceFieldType.BOOLEAN, salesforceLabel: 'Customer Portal Account', externalId: false })
-    public isCustomerPortal: boolean;
     @sField({ apiName: 'Jigsaw', createable: true, updateable: true, required: false, reference: undefined, childRelationship: false, salesforceType: SalesforceFieldType.STRING, salesforceLabel: 'Data.com Key', externalId: false })
     public jigsaw: string;
     @sField({ apiName: 'JigsawCompanyId', createable: false, updateable: false, required: false, reference: undefined, childRelationship: false, salesforceType: SalesforceFieldType.STRING, salesforceLabel: 'Jigsaw Company ID', externalId: false })
@@ -131,20 +129,8 @@ export class Account extends RestObject {
     public sicDesc: string;
     @sField({ apiName: 'DandbCompanyId', createable: true, updateable: true, required: false, reference: undefined, childRelationship: false, salesforceType: SalesforceFieldType.REFERENCE, salesforceLabel: 'D&B Company ID', externalId: false })
     public dandbCompanyId: string;
-    @sField({ apiName: 'CustomerPriority__c', createable: true, updateable: true, required: false, reference: undefined, childRelationship: false, salesforceType: SalesforceFieldType.PICKLIST, salesforceLabel: 'Customer Priority', externalId: false })
-    public customerPriority: string;
-    @sField({ apiName: 'SLA__c', createable: true, updateable: true, required: false, reference: undefined, childRelationship: false, salesforceType: SalesforceFieldType.PICKLIST, salesforceLabel: 'SLA', externalId: false })
-    public sLA: string;
-    @sField({ apiName: 'Active__c', createable: true, updateable: true, required: false, reference: undefined, childRelationship: false, salesforceType: SalesforceFieldType.PICKLIST, salesforceLabel: 'Active', externalId: false })
-    public active: string;
-    @sField({ apiName: 'NumberofLocations__c', createable: true, updateable: true, required: false, reference: undefined, childRelationship: false, salesforceType: SalesforceFieldType.DOUBLE, salesforceLabel: 'Number of Locations', externalId: false })
-    public numberofLocations: number;
-    @sField({ apiName: 'UpsellOpportunity__c', createable: true, updateable: true, required: false, reference: undefined, childRelationship: false, salesforceType: SalesforceFieldType.PICKLIST, salesforceLabel: 'Upsell Opportunity', externalId: false })
-    public upsellOpportunity: string;
-    @sField({ apiName: 'SLASerialNumber__c', createable: true, updateable: true, required: false, reference: undefined, childRelationship: false, salesforceType: SalesforceFieldType.STRING, salesforceLabel: 'SLA Serial Number', externalId: false })
-    public sLASerialNumber: string;
-    @sField({ apiName: 'SLAExpirationDate__c', createable: true, updateable: true, required: false, reference: undefined, childRelationship: false, salesforceType: SalesforceFieldType.DATE, salesforceLabel: 'SLA Expiration Date', externalId: false })
-    public sLAExpirationDate: Date;
+    @sField({ apiName: 'OperatingHoursId', createable: true, updateable: true, required: false, reference: undefined, childRelationship: false, salesforceType: SalesforceFieldType.REFERENCE, salesforceLabel: 'Operating Hour ID', externalId: false })
+    public operatingHoursId: string;
 
     constructor(fields?: AccountFields, client?: Rest) {
         super('Account', client);
@@ -198,7 +184,6 @@ export class Account extends RestObject {
         this.lastActivityDate = void 0;
         this.lastViewedDate = void 0;
         this.lastReferencedDate = void 0;
-        this.isCustomerPortal = void 0;
         this.jigsaw = void 0;
         this.jigsawCompanyId = void 0;
         this.cleanStatus = void 0;
@@ -210,13 +195,7 @@ export class Account extends RestObject {
         this.yearStarted = void 0;
         this.sicDesc = void 0;
         this.dandbCompanyId = void 0;
-        this.customerPriority = void 0;
-        this.sLA = void 0;
-        this.active = void 0;
-        this.numberofLocations = void 0;
-        this.upsellOpportunity = void 0;
-        this.sLASerialNumber = void 0;
-        this.sLAExpirationDate = void 0;
+        this.operatingHoursId = void 0;
         this.initObject(fields);
         return new Proxy(this, this.safeUpdateProxyHandler);
     }

@@ -84,7 +84,7 @@ module.exports = (env: any = {}) => {
     resolve: {
       alias: { '@src': PATHS.src },
       extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
-      modules: ['src', 'node_modules'],
+      modules: ['app', 'node_modules'],
     },
 
     // externals: {
@@ -98,6 +98,7 @@ module.exports = (env: any = {}) => {
           // Include ts, tsx, js, and jsx files.
           test: /\.(ts|js)x?$/,
           exclude: /node_modules/,
+          include: [PATHS.src],
           loader: 'babel-loader',
           options: require('./babelrc.json'),
         },

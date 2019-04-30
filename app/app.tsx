@@ -1,14 +1,14 @@
-import { Card, Drawer, Button } from 'antd';
+import { Card, Drawer, Button, Divider } from 'antd';
 import { hot } from 'react-hot-loader'; // needs to be before react!
 import * as React from 'react';
 import { Account } from '@src/generated';
 
 // example use of file loader to load image
 import bassLogo from '@src/assets/images/bass-logo.jpg';
+import Steaming from './examples/steaming-api.ts';
 
 interface AppState {
-  acc: Account;
-  drawerVisible: boolean;
+  example: 'streaming' | 'other';
 }
 
 class App extends React.Component<{}, AppState> {
@@ -16,71 +16,26 @@ class App extends React.Component<{}, AppState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      acc: null,
-      drawerVisible: false,
+      example: 'streaming',
     };
   }
 
-  public async componentDidMount() {
-    // example account with contacts query
-    const accs = await Account.retrieve((fields) => {
-      return {
-        select: [
-          ...fields.select('id', 'name', 'website'),
-          fields.subQuery('contacts', (cFields) => {
-            return {
-              select: cFields.select('id', 'name', 'email', 'phone'),
-            };
-          }),
-        ],
-        limit: 1,
-      };
-    });
-    if (accs.length > 0) {
-      this.setState({ acc: accs[0] });
-    }
-  }
-
   public render() {
+    const {example} = this.state;
     return (
-      <Card title='B.A.S.S.'>
-        <Drawer
-          visible={this.state.drawerVisible}
-          onClose={() => this.setState({drawerVisible: false})}
-          title='An Account'
-          width={600}
-        >
-          {this.state.acc && this.renderDrawerContent()}
-        </Drawer>
-        <img width={300} src={bassLogo} />
-        <br />
-        <Button type='primary' onClick={() => this.setState({drawerVisible: true})}>Click Me!</Button>
+      <Card title='B.A.S.S.' extra={<img src={bassLogo} width={50}/>}>
+        <span>Select Example: </span>
+        <Button.Group>
+          <Button onClick={() => this.setState({example: 'streaming'})}>Streaming</Button>
+          <Button onClick={() => this.setState({example: 'other'})}>Other</Button>
+        </Button.Group>
+        <Divider />
+        {example === 'streaming' && <Steaming />}
+        {example === 'other' && <div>placeholder</div>}
       </Card>
     );
   }
 
-  private renderDrawerContent = () => {
-    const { acc } = this.state;
-
-    const contactsList = acc.contacts.map((c) => {
-      return (
-        <Card type='inner' key={c.id}>
-          <p><b>Name:</b> {c.name}</p>
-          <p><b>Email:</b> {c.email}</p>
-          <p><b>Phone:</b> {c.phone}</p>
-        </Card>
-      );
-    });
-    return (
-      <div>
-        <p><b>Name:</b> {acc.name}</p>
-        <p><b>Website:</b> {acc.website}</p>
-        <Card title='Contacts' extra={acc.contacts.length}>
-          {contactsList}
-        </Card>
-      </div>
-    );
-  }
 }
 
 export default hot(module)(App);

@@ -129,10 +129,6 @@ export class Contact extends RestObject {
     public readonly jigsawContactId: string;
     @sField({ apiName: 'CleanStatus', createable: true, updateable: true, required: false, reference: undefined, childRelationship: false, salesforceType: SalesforceFieldType.PICKLIST, salesforceLabel: 'Clean Status', externalId: false })
     public cleanStatus: string;
-    @sField({ apiName: 'Level__c', createable: true, updateable: true, required: false, reference: undefined, childRelationship: false, salesforceType: SalesforceFieldType.PICKLIST, salesforceLabel: 'Level', externalId: false })
-    public level: string;
-    @sField({ apiName: 'Languages__c', createable: true, updateable: true, required: false, reference: undefined, childRelationship: false, salesforceType: SalesforceFieldType.STRING, salesforceLabel: 'Languages', externalId: false })
-    public languages: string;
 
     constructor(fields?: ContactFields, client?: Rest) {
         super('Contact', client);
@@ -197,8 +193,6 @@ export class Contact extends RestObject {
         this.jigsaw = void 0;
         this.jigsawContactId = void 0;
         this.cleanStatus = void 0;
-        this.level = void 0;
-        this.languages = void 0;
         this.initObject(fields);
         return new Proxy(this, this.safeUpdateProxyHandler);
     }
