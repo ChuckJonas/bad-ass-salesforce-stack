@@ -4,8 +4,6 @@
         const __ACCESSTOKEN__ = '{!$Api.Session_ID}';
         const __RESTHOST__ = '';
 </script>
-<apex:stylesheet value="https://npmcdn.com/antd/dist/antd.css"/>
-
     <div id="root"></div>
     <apex:outputPanel layout="none" rendered="{!$CurrentPage.parameters.local != '1'}">
         <script type='text/javascript' src="{!URLFOR($Resource.app, 'dist/vendors.js')}"></script>
