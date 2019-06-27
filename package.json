@@ -48,7 +48,7 @@
     "babel-polyfill": "^6.26.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
-    "ts-force": "^2.2.3",
+    "ts-force": "^2.6.3",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
@@ -86,7 +86,7 @@
     "react-test-renderer": "^16.8.4",
     "rimraf": "^2.6.1",
     "style-loader": "^0.23.1",
-    "ts-force-gen": "^2.2.3",
+    "ts-force-gen": "^2.6.3",
     "ts-jest": "^24.0.0",
     "ts-node": "^7.0.1",
     "tsconfig-paths": "^3.8.0",
