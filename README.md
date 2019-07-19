@@ -123,32 +123,21 @@ npm run deploy-prod
 This diagram outlines the process.
 ![build -> deploy process](https://user-images.githubusercontent.com/5217568/38460835-58583ecc-3a7f-11e8-994d-ce8694426493.png)
 
-## Starting your own project
+## Further Configuration
 
-If you want to use this project as a template for your own simply:
-
-1. `rm -r -f .git` (WARNING: no going back!)
-2. `git init`
-3. optionally add [git remote](https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/)
-4. configure & `npm run ts-force-generate`
-5. rename page & resource bundle (optional; see below)
-6. remove example files
-
-### Renaming Page and Resource Bundle
-
-Before you start your own project, you'll probably want to rename the page & resource bundle from App to something more specific.
+### Renaming the VF Page
 
 Renaming the page is as simple as navigating to `force-app/main/default/pages` and renaming the `app.page` and `app.page-meta.xml` to whatever you want.
 
-#### To rename the generated Static Resource
+*Note: You can have multiple VF pages*
+
+### Renaming the Static Resource
 
 1. in `package.json`, under the `config` section, update `resource`
 2. optionally, update your `.gitignore` to exclude these files
 3. finally, just update `$Resource.app` in the vf page to properly reference the new resource name
 
 **NOTE: If you include other static resources in the `force-app/main/default/staticresources` folder they will get nuked by default. To prevent this, update the `copy-bundle` script **
-
-## Further Configurations
 
 ### antd theme
 
@@ -166,8 +155,10 @@ For more details on configuration, see the [ts-force documentation](https://gith
 
 Unfortunately the port isn't currently managed from a single point and must be updated in 2 places:
 
-1. in `package.json`, under the `config` section, update `PORT` constant
-2. in `/force-app/main/default/pages/App.Page`, update the "Local Asset" panel: `https://localhost:XXXX/app.js`
+1. in `.npmrc`, under the `devServerPort` section
+2. in `/force-app/main/default/pages/App.Page`, update the "Local Asset" panel: `https://localhost:XXXX/app.js`.  
+
+*TIP: If you need multiple devs working on different ports, update the page to pull port from a custom setting!*
 
 ### vscode Chrome Debugger
 
