@@ -42,16 +42,28 @@ There are several options:
 
 You may also need to tell npm to use bash: `npm config set script-shell "C:\\Program Files\\Git\\bin\\bash.exe"`
 
-### Clone this Starter
+### Install via Yeoman generator
 
-1. `git clone https://github.com/ChuckJonas/bad-ass-salesforce-stack bass`
-2. `cd bass`
-3. `npm install`
+First, install [Yeoman](http://yeoman.io) and generator-bass using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+
+```bash
+npm install -g yo
+npm install -g generator-bass
+```
+
+Then generate your new project:
+
+```bash
+yo bass my-project
+# ... answer questions
+cd my-project
+npm run deploy-dev # this will deploy code to your dev target org
+```
 
 #### Project Structure
 
 * `app`: The react Application source Folder
-* `force-app`: The Salesforce DX package.  Store related metadata here
+* `force-app`: The Salesforce DX package.  Store related metadata here. You can change this via yeoman prompt
 * `config`: configurations for development, build & tests (some configuration files are in root)
 * `dist`: the build directory
 
