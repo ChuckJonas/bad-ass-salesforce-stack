@@ -1,8 +1,10 @@
 # B . A . S . S .
 
-***BAD ASS SALESFORCE STACK***
+[![NPM version][npm-image]][npm-url]
 
-![bass: like the fish](https://user-images.githubusercontent.com/5217568/38460726-edbf16aa-3a7c-11e8-80f9-58e109e652cf.jpg)
+***BAD ASS SALESFORCE STACK***
+![bass... like the fish](https://user-images.githubusercontent.com/5217568/61548622-56d9fe80-aa0b-11e9-9a6f-d03e2c7e4f21.png)
+
 
 * [react](https://facebook.github.io/react/): all the cool kids are doing it
 * [typescript](https://www.typescriptlang.org/): business in the front, party in the back
@@ -44,7 +46,7 @@ You may also need to tell npm to use bash: `npm config set script-shell "C:\\Pro
 
 ### Install via Yeoman generator
 
-First, install [Yeoman](http://yeoman.io) and generator-bass using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+First, install [Yeoman](http://yeoman.io) and [generator-bass](https://www.npmjs.com/package/generator-bass#installation) using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
 
 ```bash
 npm install -g yo
@@ -251,3 +253,6 @@ Copyright (c) 2017 Charlie Jonas <charlie@callaway.cloud>
 Expanded from [react-redux-typescript-webpack-starter](https://raw.githubusercontent.com/piotrwitek/react-redux-typescript-webpack-starter)
 
 Copyright (c) 2016 Piotr Witek <piotrek.witek@gmail.com> (http://piotrwitek.github.io/)
+
+[npm-image]: https://badge.fury.io/js/generator-bass.svg
+[npm-url]: https://npmjs.org/package/generator-bass
