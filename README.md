@@ -95,7 +95,7 @@ prod_alias=john@acme.com
 
 1. Deploy your application by running `npm run deploy-dev` or `npm run deploy-scratch`.  This step needs to happen whenever the contents of `force-app` change.
 2. run `npm start`
-3. Enable [Allow Insecure Localhost](chrome://flags/#allow-insecure-localhost) setting in chrome.  If you don't want to enable this, or use a different browser, you can create your own self-signed certificate by following [these instructions](https://github.com/ChuckJonas/bad-ass-salesforce-stack/blob/master/config/cert/readme.md).
+3. Enable the `Allow Insecure Localhost` setting in chrome (chrome://flags/#allow-insecure-localhost).  If you don't want to enable this, or use a different browser, you can create your own self-signed certificate by following [these instructions](https://github.com/ChuckJonas/bad-ass-salesforce-stack/blob/master/config/cert/readme.md).
 4. navigate to your page in salesforce: EG: `/apex/app`
 5. append `?local=1` to page query string
 6. Start coding.  Your app will automatically update as you save changes.
