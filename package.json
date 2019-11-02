@@ -1,22 +1,12 @@
 {
-  "name": "bad-ass-salesforce-stack",
-  "version": "0.2.0",
-  "description": "React, Redux, Typescript, antd, ts-force, sfdx starter",
-  "author": "Charlie Jonas",
-  "homepage": "https://github.com/ChuckJonas/bad-ass-salesforce-stack",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ChuckJonas/bad-ass-salesforce-stack.git"
-  },
-  "bugs": "https://github.com/ChuckJonas/bad-ass-salesforce-stack/issues",
-  "license": "MIT",
+  "name": "bass-yo",
+  "version": "0.0.1",
   "config": {
     "resource": "app",
-    "package_path": "./force-app/main/default",
-    "port": 8080
+    "package_path": "force-app/main/default"
   },
   "scripts": {
-    "start": "npm run setup-ts-webpack -- webpack-dev-server --config config/webpack.config.ts --hot --https --env.port $npm_package_config_port",
+    "start": "npm run setup-ts-webpack -- webpack-dev-server --config config/webpack.config.ts --hot --https --env.port $npm_config_devPort",
     "setup-ts-webpack": "cross-env TS_NODE_PROJECT=config/webpack.tsconfig.json",
     "clean": "rimraf dist",
     "compile": "npm run clean && npm run setup-ts-webpack -- webpack --config config/webpack.config.ts --env.build --env.resource $npm_package_config_resource",
@@ -41,25 +31,26 @@
     "generate-ts-force": "ts-force-gen -j ./config/ts-force-config.json",
     "test": "jest --no-cache --config ./config/jest.json",
     "test:update": "jest --no-cache --config jest.json -u",
-    "reinstall": "rimraf node_modules dist && npm install"
+    "reinstall": "rimraf node_modules dist && npm install",
+    "start-chrome-for-debug": "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --remote-debugging-port=9222"
   },
   "dependencies": {
     "antd": "^3.16.4",
     "babel-polyfill": "^6.26.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
-    "ts-force": "^2.6.3",
+    "ts-force": "^2.7.0",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
-    "@babel/cli": "^7.2.0",
-    "@babel/core": "^7.2.0",
-    "@babel/plugin-proposal-class-properties": "^7.2.1",
-    "@babel/plugin-proposal-decorators": "^7.3.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
-    "@babel/preset-env": "^7.2.0",
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-decorators": "^7.4.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
-    "@babel/preset-typescript": "^7.1.0",
+    "@babel/preset-typescript": "^7.3.3",
     "@types/enzyme": "^3.9.0",
     "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/jest": "^24.0.11",
@@ -86,7 +77,7 @@
     "react-test-renderer": "^16.8.4",
     "rimraf": "^2.6.1",
     "style-loader": "^0.23.1",
-    "ts-force-gen": "^2.6.3",
+    "ts-force-gen": "^2.7.0",
     "ts-jest": "^24.0.0",
     "ts-node": "^7.0.1",
     "tsconfig-paths": "^3.8.0",

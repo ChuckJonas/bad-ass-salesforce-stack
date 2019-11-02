@@ -8,6 +8,7 @@ import App from './app';
 // tslint:disable-next-line:no-var-requires
 require('@src/styles/styles.less');
 
+
 // globals. set on page window
 declare var __RESTHOST__: string;
 declare var __ACCESSTOKEN__: string;
@@ -17,5 +18,6 @@ setDefaultConfig({
   accessToken: __ACCESSTOKEN__,
   instanceUrl:  __RESTHOST__,
 });
+
 
 ReactDOM.render(<App />, document.getElementById('root') as HTMLElement);

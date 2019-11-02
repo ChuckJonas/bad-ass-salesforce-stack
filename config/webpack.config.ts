@@ -21,7 +21,7 @@ const PATHS = {
 const themeVariables = lessToJs(fs.readFileSync(path.join(PATHS.styles, './ant-theme-vars.less'), 'utf8'));
 
 module.exports = (env: any = {}) => {
-  const PORT = env.port || 8080; // should match ./config/sfdc-cors-enable
+  const PORT = parseInt(env.port) || 8080;
   const resourceName = env.resource || 'app';
   const isBuild = !!env.build; // build vs dev-server
   const isProd = !!env.prod;   // for Prod ENV optimizations
