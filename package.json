@@ -6,7 +6,7 @@
     "package_path": "force-app/main/default"
   },
   "scripts": {
-    "start": "npm run setup-ts-webpack -- webpack-dev-server --config config/webpack.config.ts --hot --https --env.port $npm_config_devPort",
+    "start": "npm run setup-ts-webpack -- webpack-dev-server --config config/webpack.config.ts --hot --https --env.port $npm_config_devPort --cert ./config/cert/server.crt --key ./config/cert/server.key",
     "setup-ts-webpack": "cross-env TS_NODE_PROJECT=config/webpack.tsconfig.json",
     "clean": "rimraf dist",
     "compile": "npm run clean && npm run setup-ts-webpack -- webpack --config config/webpack.config.ts --env.build --env.resource $npm_package_config_resource",
@@ -37,7 +37,6 @@
   "dependencies": {
     "antd": "^3.16.4",
     "babel-polyfill": "^6.26.0",
-    "fsevents": "^2.3.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "ts-force": "^2.7.0",
