@@ -130,27 +130,15 @@ module.exports = (env: any = {}) => {
         },
         // images
         {
-          test: /\.(jpg|jpeg|png|gif|svg)$/,
+          test: /\.(png|svg|jpg|jpeg|gif)$/i,
+          type: 'asset/resource',
           include: [PATHS.assets],
-          use: {
-            loader: 'file-loader',
-            options: {
-              name: '[path][hash].[ext]',
-            },
-          },
         },
         // fonts
         {
-          test: /\.(woff|woff2|ttf|eot)$/,
-          include: [
-            PATHS.assets,
-          ],
-          use: {
-            loader: 'file-loader',
-            options: {
-              name: 'fonts/[name].[hash].[ext]',
-            },
-          },
+          test: /\.(woff|woff2|eot|ttf|otf)$/i,
+          type: 'asset/resource',
+          include: [PATHS.assets],
         },
       ],
     },

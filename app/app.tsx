@@ -1,10 +1,10 @@
-import { Card, Drawer, Button } from 'antd';
-import { hot } from 'react-hot-loader'; // needs to be before react!
-import * as React from 'react';
-import { Account } from '@src/generated';
+import { Card, Drawer, Button } from "antd";
+import { hot } from "react-hot-loader"; // needs to be before react!
+import * as React from "react";
+import { Account } from "@src/generated";
 
 // example use of file loader to load image
-import bassLogo from '@src/assets/images/bass-logo.jpg';
+import bassLogo from "@src/assets/images/bass-logo.jpg";
 
 interface AppState {
   acc: Account;
@@ -12,7 +12,6 @@ interface AppState {
 }
 
 class App extends React.Component<{}, AppState> {
-
   constructor(props: any) {
     super(props);
     this.state = {
@@ -26,10 +25,10 @@ class App extends React.Component<{}, AppState> {
     const accs = await Account.retrieve((fields) => {
       return {
         select: [
-          ...fields.select('id', 'name', 'website'),
-          fields.subQuery('contacts', (cFields) => {
+          ...fields.select("id", "name", "website"),
+          fields.subQuery("contacts", (cFields) => {
             return {
-              select: cFields.select('id', 'name', 'email', 'phone'),
+              select: cFields.select("id", "name", "email", "phone"),
             };
           }),
         ],
@@ -43,18 +42,23 @@ class App extends React.Component<{}, AppState> {
 
   public render() {
     return (
-      <Card title='B.A.S.S.'>
+      <Card title="B.A.S.S.">
         <Drawer
           visible={this.state.drawerVisible}
-          onClose={() => this.setState({drawerVisible: false})}
-          title='An Account'
+          onClose={() => this.setState({ drawerVisible: false })}
+          title="An Account"
           width={600}
         >
           {this.state.acc && this.renderDrawerContent()}
         </Drawer>
         <img width={300} src={bassLogo} />
         <br />
-        <Button type='primary' onClick={() => this.setState({drawerVisible: true})}>Click Me!</Button>
+        <Button
+          type="primary"
+          onClick={() => this.setState({ drawerVisible: true })}
+        >
+          Click Me!
+        </Button>
       </Card>
     );
   }
@@ -64,23 +68,33 @@ class App extends React.Component<{}, AppState> {
 
     const contactsList = acc.contacts.map((c) => {
       return (
-        <Card type='inner' key={c.id}>
-          <p><b>Name:</b> {c.name}</p>
-          <p><b>Email:</b> {c.email}</p>
-          <p><b>Phone:</b> {c.phone}</p>
+        <Card type="inner" key={c.id}>
+          <p>
+            <b>Name:</b> {c.name}
+          </p>
+          <p>
+            <b>Email:</b> {c.email}
+          </p>
+          <p>
+            <b>Phone:</b> {c.phone}
+          </p>
         </Card>
       );
     });
     return (
       <div>
-        <p><b>Name:</b> {acc.name}</p>
-        <p><b>Website:</b> {acc.website}</p>
-        <Card title='Contacts' extra={acc.contacts.length}>
+        <p>
+          <b>Name:</b> {acc.name}
+        </p>
+        <p>
+          <b>Website:</b> {acc.website}
+        </p>
+        <Card title="Contacts" extra={acc.contacts.length}>
           {contactsList}
         </Card>
       </div>
     );
-  }
+  };
 }
 
 export default hot(module)(App);
