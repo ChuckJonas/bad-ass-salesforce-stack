@@ -39,21 +39,18 @@ module.exports = (env: any = {}) => {
 
   const devServer: webpackDevServer.Configuration = {
     historyApiFallback: true,
-    overlay: true,
     port: PORT,
     headers: { // enable CORS
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
       'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization',
     },
-    disableHostCheck: true,
   };
 
   const config: webpack.Configuration = {
     mode,
     cache: true,
     devtool: isBuild ? 'source-map' : 'source-map',
-    devServer,
     context: PATHS.root,
     entry: {
       app: [
@@ -116,13 +113,13 @@ module.exports = (env: any = {}) => {
           use: [
             { loader: 'style-loader' },
             { loader: 'css-loader' },
-            {
-              loader: 'less-loader',
+            {loader: 'less-loader',
               options: {
-                modifyVars: themeVariables,
-                javascriptEnabled: true,
-              },
-            },
+              lessOptions:{
+              javascriptEnabled: true,
+              modifyVars: themeVariables,
+              }
+          }},
           ],
         },
         // json
@@ -133,27 +130,15 @@ module.exports = (env: any = {}) => {
         },
         // images
         {
-          test: /\.(jpg|jpeg|png|gif|svg)$/,
+          test: /\.(png|svg|jpg|jpeg|gif)$/i,
+          type: 'asset/resource',
           include: [PATHS.assets],
-          use: {
-            loader: 'file-loader',
-            options: {
-              name: '[path][hash].[ext]',
-            },
-          },
         },
         // fonts
         {
-          test: /\.(woff|woff2|ttf|eot)$/,
-          include: [
-            PATHS.assets,
-          ],
-          use: {
-            loader: 'file-loader',
-            options: {
-              name: 'fonts/[name].[hash].[ext]',
-            },
-          },
+          test: /\.(woff|woff2|eot|ttf|otf)$/i,
+          type: 'asset/resource',
+          include: [PATHS.assets],
         },
       ],
     },
@@ -163,9 +148,6 @@ module.exports = (env: any = {}) => {
       ...[
         new webpack.DefinePlugin(GLOBAL_DEFINES),
       ],
-      ...(!isBuild ? [
-        new webpack.NamedModulesPlugin(),
-      ] : []),
       ...(isProd ? [
         // put production optimization plugins here
       ] : []),

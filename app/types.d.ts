@@ -3,6 +3,6 @@ interface System {
 }
 declare var System: System;
 
-//allow importing of files with file-loader
+//declare any necessary imported file types
 declare module '*.png'
 declare module '*.jpg'
