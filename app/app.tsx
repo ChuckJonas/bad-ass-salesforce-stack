@@ -1,29 +1,18 @@
-import { Card, Drawer, Button } from 'antd';
-import { hot } from 'react-hot-loader'; // needs to be before react!
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Card } from 'antd';
+import bassLogo from "./assets/images/bass-logo.jpg";
+import "./App.css";
+
 import { Account } from '@src/generated';
 
-// example use of file loader to load image
-import bassLogo from '@src/assets/images/bass-logo.jpg';
 
-interface AppState {
-  acc: Account;
-  drawerVisible: boolean;
-}
+function App() {
+  const [count, setCount] = useState(0);
 
-class App extends React.Component<{}, AppState> {
 
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      acc: null,
-      drawerVisible: false,
-    };
-  }
-
-  public async componentDidMount() {
-    // example account with contacts query
-    const accs = await Account.retrieve((fields) => {
+  const [account, setAccount] = useState<Account>(null);
+  useEffect(() => {
+    Account.retrieve((fields) => {
       return {
         select: [
           ...fields.select('id', 'name', 'website'),
@@ -35,52 +24,38 @@ class App extends React.Component<{}, AppState> {
         ],
         limit: 1,
       };
+    }).then((accs) => {
+      if (accs.length > 0) {
+        setAccount( accs[0] );
+      }
     });
-    if (accs.length > 0) {
-      this.setState({ acc: accs[0] });
-    }
-  }
+  }, []);
 
-  public render() {
-    return (
-      <Card title='B.A.S.S.'>
-        <Drawer
-          visible={this.state.drawerVisible}
-          onClose={() => this.setState({drawerVisible: false})}
-          title='An Account'
-          width={600}
-        >
-          {this.state.acc && this.renderDrawerContent()}
-        </Drawer>
-        <img width={300} src={bassLogo} />
-        <br />
-        <Button type='primary' onClick={() => this.setState({drawerVisible: true})}>Click Me!</Button>
+
+  return (
+    <div className="App">
+      <Card>
+        <a href="https://github.com/ChuckJonas/bad-ass-salesforce-stack" target="_blank">
+          <img src={bassLogo} className="logo react" alt="isa-fiish" />
+        </a>
       </Card>
-    );
-  }
-
-  private renderDrawerContent = () => {
-    const { acc } = this.state;
-
-    const contactsList = acc.contacts.map((c) => {
-      return (
-        <Card type='inner' key={c.id}>
-          <p><b>Name:</b> {c.name}</p>
-          <p><b>Email:</b> {c.email}</p>
-          <p><b>Phone:</b> {c.phone}</p>
-        </Card>
-      );
-    });
-    return (
-      <div>
-        <p><b>Name:</b> {acc.name}</p>
-        <p><b>Website:</b> {acc.website}</p>
-        <Card title='Contacts' extra={acc.contacts.length}>
-          {contactsList}
-        </Card>
+      <h1>Hello B.A.S.S. App</h1>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Edit <code>src/App.tsx</code> and save to test HMR
+        </p>
       </div>
-    );
-  }
+      <p className="read-the-docs">
+        Click on the B.A.S.S.logo to learn more
+      </p>
+      
+      <p>Account: {account?.name}</p>
+      
+    </div>
+  );
 }
 
-export default hot(module)(App);
+export default App;

@@ -1,17 +1,13 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import App from './App';
+import './index.css'
+
 import { setDefaultConfig } from 'ts-force';
 
-import App from './app';
-
-// add custom stylesheet
-// tslint:disable-next-line:no-var-requires
-require('@src/styles/styles.less');
-
-
 // globals. set on page window
-declare var __RESTHOST__: string;
-declare var __ACCESSTOKEN__: string;
+declare let __RESTHOST__: string;
+declare let __ACCESSTOKEN__: string;
 
 // setup ts-force auth
 setDefaultConfig({

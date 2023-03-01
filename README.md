@@ -9,7 +9,7 @@
 - [typescript](https://www.typescriptlang.org/): business in the front, party in the back
 - [antd](https://ant.design/docs/react/introduce): the best thing to come out of China since [the fork](https://en.wikipedia.org/wiki/Fork)
 - [ts-force](https://www.npmjs.com/package/ts-force): generates massive files so you don't have toooo
-- [webpack](https://webpack.github.io/): Does a lot of stuff won't ever fully don't understand
+- [vite](https://vitejs.dev/): Does a lot of stuff won't ever fully don't understand, slightly better than webpack
 - [sfdx-cli](https://developer.salesforce.com/tools/sfdxcli): #nosoftware
 
 ## FEATURES
@@ -19,7 +19,7 @@
 - 1 step build & deploy to orgs
 - supports developer, sandbox, scratch and production orgs
 - type safety and code completion when working with SF objects
-- jest test framework
+- testing with vitest
 - setup for debugging in [vscode chrome debugger](https://github.com/Microsoft/vscode-chrome-debug)
 
 ## GETTING STARTED
@@ -103,9 +103,7 @@ prod_alias=john@acme.com
 
 ### How it works
 
-`webpack-dev-server` compiles and makes your app available @ `https//localhost:PORT`. It incrementally compiles your app as you make changes & [react-hot-loader](https://github.com/gaearon/react-hot-loader) allows modules to be hot reloaded without refreshing the page.
-
-Updates will only show for you and not impact any other users in that environment (until you deploy).
+`vite` compiles and makes your app available @ `https//localhost:PORT`. It incrementally compiles your app as you make changes allows modules to be hot reloaded without refreshing the page.
 
 You can see how this is configured by looking at [`force-app/main/default/pages/App.page`](https://github.com/ChuckJonas/bad-ass-salesforce-stack/blob/e7b7366ca2ad1e13bc9b3a1986ad6148097c2fa2/force-app/main/default/pages/App.page#L17). Basically, we just have two output panels that render conditionally based on the url param `local == 1`.
 
@@ -138,10 +136,6 @@ _Note: You can have multiple VF pages_
 
 **NOTE: If you include other static resources in the `force-app/main/default/staticresources` folder they will get nuked by default. To prevent this, update the `copy-bundle` script **
 
-### antd theme
-
-You can change the antd theme less variables by editing `/styles/ant-theme-vars.less`. Unfortunately, changes here require a webpack restart to show up :(
-
 ### ts-force configuration
 
 This project comes equipped with `ts-force` to allow you typed access to Salesforce Rest API. To use `ts-force`, you must first generate classes for the SObjects you want to work with.
@@ -173,7 +167,7 @@ It is possible to debug right from vscode. To do so:
 
 Overtime, this project has gotten both simpler AND objectively better.
 
-Unfortunately upgrades are currently a very manual process. Over the many different enhancements:
+Unfortunately upgrades are currently a very manual process. Overtime:
 
 - configuration files have been changed & moved around
 - Low Value / High Complexity: features have been removed
@@ -183,35 +177,16 @@ Unfortunately upgrades are currently a very manual process. Over the many differ
 
 I admit, I haven't done a very good job of documenting these changes very well. My goal of keeping this everything as flexible as possible has also made it impossible to move parts of the configuration to upgradable packages.
 
-I've tried to go back and tag `Release` to give a sense of breaking changes, but it's very incomplete.
+### Upgrading to 2.0.0
 
-### Things to consider when upgrading
+Version 2.0.0 is a major upgrade to the project. It includes the following changes:
 
-- Most changes have happened in the following areas:
-  - `package.json` (particularly the `scripts` & `config` sections)
-  - `webpack.config.ts`
-  - `tsconfig.json`
+- Upgrade to React18
+- Replace Webpack with Vite
+- Replacing Jest/Enzyme with Vitest/React Testing Library
+- Upgrade to antd v5 (changes to theming, removes LESS support by default)
 
-For these files, it's best to first identify any customization of your own and then try to merge them into the latest version from `B.A.S.S.`.
-
-- Lots of files have been moved around. In particular:
-
-  - many files have been moved to `config` folder.
-  - `src` has been renamed to `app`
-
-- Features & dependencies have been removed. Examples:
-
-  - there is no longer an `local` mode as it no longer has any advantages over using `Localhost assets on salesforce`
-  - Redux was removed from the core of this project
-  - Replaced `awesome-typescript-loader` with babel
-  - self-signed cert generation script has been removed (manual instructions are in `config/cert`)
-
-- Runtime dependencies have been upgraded to the latest and greatest. Which likely means breaking changes in these libraries:
-  - react
-  - antd
-  - ts-force
-
-In most cases you should just be able to continue using your runtime library versions with the latest version of `B.A.S.S.`.
+The easiest way to upgrade is to start a new project and copy over your files.  
 
 ## OTHER USEFUL STUFF
 
@@ -221,18 +196,18 @@ Highly recommend using vscode (typescript code completion, in editor terminal, e
 
 plugins:
 
-\*
 
 - [Editor Config](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig): auto-set formatting options for everyone
 - [TSlint](https://marketplace.visualstudio.com/items?itemName=eg2.tslint): green squigglies everywhere!
 - [Salesforce Extensions for VS Code](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode): gives your code completion on your `force-app` and ability to excute commands against the CLI
-- [Jest](https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest): run tests on save
+- [ViTest](https://marketplace.visualstudio.com/items?itemName=ZixuanChen.vitest-explorer): run tests in vscode
 
 ### helpful linkies
 
 - [typescript deep dive](https://basarat.gitbooks.io/typescript/content/)
 - [react-redux-typescript-guide](https://github.com/piotrwitek/react-redux-typescript-guide)
-- [jest reference](https://facebook.github.io/jest/docs/en/getting-started.html#content)
+- [vite reference](https://vitejs.dev/)
+- [vitest reference](https://vitest.dev/)
 - [sfdx cli reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
 - [Where to Hold React Component Data: state, store, static, and this](https://medium.freecodecamp.org/where-do-i-belong-a-guide-to-saving-react-component-data-in-state-store-static-and-this-c49b335e2a00)
 - [Redux: How to chain async actions](https://github.com/reactjs/redux/issues/1676)

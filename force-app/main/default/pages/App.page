@@ -6,14 +6,18 @@
     </script>
     <div id="root"></div>
     <apex:outputPanel layout="none" rendered="{!$CurrentPage.parameters.local != '1'}">
-        <script type='text/javascript' src="{!URLFOR($Resource.app, 'dist/vendors.js')}"></script>
-        <script type='application/json' src="{!URLFOR($Resource.app, 'dist/vendors.js.map')}"></script>
-        <script type='text/javascript' src="{!URLFOR($Resource.app, 'dist/app.js')}"></script>
-        <script type='application/json' src="{!URLFOR($Resource.app, 'dist/app.js.map')}"></script>
+        <script type='text/javascript' src="{!URLFOR($Resource.App, 'dist/app.js')}"></script>
+        <script type='application/json' src="{!URLFOR($Resource.App, 'dist/app.js.map')}"></script>
     </apex:outputPanel>
 
     <apex:outputPanel layout="none" rendered="{!$CurrentPage.parameters.local == '1'}">
-        <script src="https://localhost:8080/vendors.js" ></script>
-        <script src="https://localhost:8080/app.js" ></script>
+        <script type="module">
+            import RefreshRuntime from "http://localhost:8080/@react-refresh"
+            RefreshRuntime.injectIntoGlobalHook(window)
+            window.$RefreshReg$ = () => { }
+            window.$RefreshSig$ = () => (type) => type
+            window.__vite_plugin_react_preamble_installed__ = true
+        </script>
+        <script type="module" src="http://localhost:8080/index.tsx"></script>
     </apex:outputPanel>
 </apex:page>
